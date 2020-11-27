@@ -1,0 +1,14 @@
+.nav > ul > li{
+  width: 20%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nav a{
+  font-size: 24px;
+}
+
+.nav img{
+  width: 100px;
+  height: 100px;
+}
