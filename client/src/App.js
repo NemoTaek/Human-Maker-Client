@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Switch } from "react-router-dom";
-import Nav from './component/nav/nav'
+import Nav from './component/nav/Nav'
 import signup from './component/signup/Signup'
 
 function App() {
