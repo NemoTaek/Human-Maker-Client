@@ -4,7 +4,7 @@ import "./Nav.css"
 import logo from "../../img/dangoon.png"
 
 function Nav(props) {
-  console.log(props.isLogin)
+  console.log(props)
   return (
     <nav className="nav">
       <div className="logo">
