@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Nav from './component/nav/Nav'
@@ -9,18 +9,21 @@ import Main from './component/main/Main'
 
 
 function App() {
-  const [isLogin, setIsLogin] = useState("false");
+  const [isLogin, setIsLogin] = useState(false);
 
-  const login = () => setIsLogin(!isLogin);
+  const login = (e) => {
+    e.preventDefault();
+    setIsLogin(!isLogin);
+  }
 
 
-  const [isModalState, setIsModalState] = useState("false");
-  const [isModalClose, setIsModalClose] = useState("false")
+  const [isModalState, setIsModalState] = useState(false);
+  const [isModalClose, setIsModalClose] = useState(false)
 
   const onClickModalBtn = () => {
     setIsModalClose(!isModalClose);
     setIsModalState(!isModalState)
-}
+  }
 
 
   return (
@@ -45,7 +48,7 @@ function App() {
           </Route>
 
           <Route path="/logout" component={SignOut}>
-            <SignOut onClickClose={onClickModalBtn} isModalOpen={isModalState}  />
+            <SignOut onClickClose={onClickModalBtn} isModalOpen={isModalState} />
           </Route>
 
           <Route exact path="/" component={Main}>
