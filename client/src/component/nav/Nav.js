@@ -9,7 +9,7 @@ function Nav(props) {
     <nav className="nav">
       <div className="logo">
         <NavLink to="/">
-          <img src={logo}></img>
+          <img src={logo} alt=""></img>
         </NavLink>
       </div>
 

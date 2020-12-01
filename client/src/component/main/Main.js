@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Main.css"
 import guest from "../../img/ssook.png"
 import start from "../../img/garlic.png"
@@ -18,13 +18,13 @@ function Main() {
         </p>
         <div className="btn_wrap">
           <button className="guest_btn">
-            <img src={guest}></img>
+            <img src={guest} alt=""></img>
             <div>
               <span>체험해보기</span>
             </div>
           </button>
           <button className="start_btn">
-            <img src={start}></img>
+            <img src={start} alt=""></img>
             <div>
               <span>시작하기</span>
             </div>
@@ -34,7 +34,7 @@ function Main() {
 
       <div className="main2">
         <div className="left">
-          <img src={bear}></img>
+          <img src={bear} alt=""></img>
         </div>
         <div className="right">
           <p>
