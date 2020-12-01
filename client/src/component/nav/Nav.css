@@ -1,0 +1,27 @@
+.nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav .logo{
+  width: 100px;
+  height: 100px;
+}
+.nav .logo img{
+  width: 100%;
+  height: 100%;
+}
+
+.nav a{
+  font-size: 24px;
+}
+
+.nav .login_menu{
+  text-align: center;
+}
+.nav .login_menu > div{
+  display: inline-block;
+  width: 150px;
+  height: 100%;
+}

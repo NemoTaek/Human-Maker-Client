@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import { NavLink } from "react-router-dom";
-import '../signin/Signin'
 
-function Nav(props) {
-  const [isLogin, setIsLogin] = useState(props.isLogIn)
+
+function Nav({isLogIn}) {
+  const [isLogin, setIsLogin] = useState(isLogIn)
   console.log(props)
 
   const [isModalOpen, setIsModalOpen] = useState("false");

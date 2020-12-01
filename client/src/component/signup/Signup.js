@@ -15,7 +15,7 @@ function Signup() {
     const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
     const [pwDoubleCheck, setPwDoubleCheck] = useState("false");
 
-    const [sbuMessage, setSubMessage] = useState("");
+    const [subMessage, setSubMessage] = useState("");
 
     const idInput = useRef();
     const pwInput = useRef();
@@ -150,39 +150,45 @@ function Signup() {
 
     //아이디 한글입력 방지, 비밀번호 영문 우선 설정
     return (
-        <div>
-            <div className="signUpContainer">
-                <h2 className="signUpName " >회원가입</h2>
-                <hr/>
-                <div className ="idInputContainer">
-                    <label>아이디 
-                        <input className="signUpIdInput" type="text" onChange={onChangeId} autoFocus required />
-                    </label>
-                    <button className="idCheckBtn" onClick={onClickDoubleBtn}>중복확인</button>
-                    <p className="idCheckMsg">{idCheckMsg}</p>
-                </div>
-                <div className ="pwInputContainer">
-                    <label>비밀번호 
-                        <input className="signUpPwInput" type="password" onChange={onChangePw} required />
-                    </label>
-                    <p className="pwCheckMsg">{pwCheckMsg}</p>
-                </div>
-                <div className ="pwCheckInput_container">
-                    <label>비밀번호 확인
-                        <input className="signUpPwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
-                    </label>
-                    <p className="pwDoubleMsg">{pwDoubleMsg}</p>
-                </div>
-                <button className="signUpBtn" onClick={onClickSignUpBtn}>가입신청</button>
-                <p className="sbuMessage">{sbuMessage}</p>
-            </div>
-            <div className="oauthImg">
-                {/* <img className onClick={} ></img>
+		<div className="sign_up_wrap">
+			<div className="sign_up_container">
+				<p className="sign_up_name" >회원가입</p>
+				<div className="input_container_wrap">
+					<div className="input_container idInput_container">
+						<span>아이디</span>
+						<div className="input_btn_wrap">
+							<input className="sign_up_idInput" type="text" onChange={onChangeId} autoFocus required />
+							<button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
+						</div>
+						<p className="checkMsg">{idCheckMsg}</p>
+
+					</div>
+
+					<div className="input_container pwInput_container">
+						<span>비밀번호</span>
+						<input className="sign_up_pwInput" type="password" onChange={onChangePw} required />
+						<p className="checkMsg">{pwCheckMsg}</p>
+					</div>
+
+					<div className="input_container pwCheckInput_container">
+						<span>비밀번호 확인</span>
+						<input className="sign_up_pwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
+						<p className="checkMsg">{pwDoubleMsg}</p>
+					</div>
+				</div>
+
+				<button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
+				<p className="subMessage">{subMessage}</p>
+			</div>
+
+			<div className="oauthImg">
+				{/* <img className onClick={} ></img>
                 <img className onClick={} ></img>
-                <img className onClick={} ></img> */}
-            </div>
-        </div>
-    );
+                <img className onClick={} ></img>*/}
+ 
+			</div>
+		</div>
+	);
 }
 
 export default Signup;

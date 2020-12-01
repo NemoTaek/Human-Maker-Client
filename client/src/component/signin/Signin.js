@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import axios from 'axios'
 import './Signin.css'
 
-function Signin() {
-    const [isLogIn, setIsLogIn] = useState("false");
+function Signin(props) {
+    const [isLogIn, setIsLogIn] = useState(props.isLogin);
     const [isLogInMsg, setIsLogInMsg] =useState("");
+    console.log(props)
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -29,7 +30,7 @@ function Signin() {
             .post("http://54.180.120.81:5000/signin", userData)
             .then(data => {
                 if(data){
-                    setIsLogIn("true");
+                    setIsLogIn(!isLogIn);
                     document.location.replace("/user");
                 }
                 else{
@@ -53,18 +54,22 @@ function Signin() {
                     <label>아이디 
                         <input className="signInIdInput" type="text" onChange={onChangeId} autoFocus required />
                     </label>
-                    </div>
+                </div>
+                
                 <div className ="pwInputContainer">
                     <label>비밀번호 
                         <input className="signInPwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
                     </label>
                 </div>
+                
                 <div>
                     <p className="isLogInMsg">{isLogInMsg}</p>
                 </div>
+
                 <div>
-                <button className="signInBtn" onClick={onClickSignInBtn} isLogIn={isLogIn}  >로그인</button>
+                <button className="signInBtn" onClick={onClickSignInBtn}  >로그인</button>
                 </div>
+
                 <div>
                 <button className="signUpBtn" onClick={onClickSignUpBtn} >간편 회원가입</button>
                 </div>
