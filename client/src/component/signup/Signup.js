@@ -51,7 +51,7 @@ function Signup() {
     const onClickDoubleBtn = () => {
         if(idCheck){
             axios
-                .get("/signin/idDoubleCheck", {
+                .get("http://54.180.120.81:5000/signin/idDoubleCheck", {
                     params:{
                         id: id
                     }
@@ -121,7 +121,7 @@ function Signup() {
     const onClickSignUpBtn = () => {
         if(idCheck && pwCheck && pwDoubleCheck){
             axios
-                .post("/signup", userData)
+                .post("http://54.180.120.81:5000/signup", userData)
                 .then(() => {
                     alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
                     document.history.replace("/");
@@ -151,29 +151,29 @@ function Signup() {
     //아이디 한글입력 방지, 비밀번호 영문 우선 설정
     return (
         <div>
-            <div className="sign_up_container">
-                <h2 className="sign_up_name " >회원가입</h2>
+            <div className="signUpContainer">
+                <h2 className="signUpName " >회원가입</h2>
                 <hr/>
-                <div className ="idInput_container">
+                <div className ="idInputContainer">
                     <label>아이디 
-                        <input className="sign_up_idInput" type="text" onChange={onChangeId} autoFocus required />
+                        <input className="signUpIdInput" type="text" onChange={onChangeId} autoFocus required />
                     </label>
-                    <button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
+                    <button className="idCheckBtn" onClick={onClickDoubleBtn}>중복확인</button>
                     <p className="idCheckMsg">{idCheckMsg}</p>
                 </div>
-                <div className ="pwInput_container">
+                <div className ="pwInputContainer">
                     <label>비밀번호 
-                        <input className="sign_up_pwInput" type="password" onChange={onChangePw} required />
+                        <input className="signUpPwInput" type="password" onChange={onChangePw} required />
                     </label>
                     <p className="pwCheckMsg">{pwCheckMsg}</p>
                 </div>
                 <div className ="pwCheckInput_container">
                     <label>비밀번호 확인
-                        <input className="sign_up_pwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
+                        <input className="signUpPwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
                     </label>
                     <p className="pwDoubleMsg">{pwDoubleMsg}</p>
                 </div>
-                <button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
+                <button className="signUpBtn" onClick={onClickSignUpBtn}>가입신청</button>
                 <p className="sbuMessage">{sbuMessage}</p>
             </div>
             <div className="oauthImg">
