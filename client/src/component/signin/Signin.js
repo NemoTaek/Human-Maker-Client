@@ -30,7 +30,7 @@ function Signin(props) {
             .post("http://54.180.120.81:5000/signin", userData)
             .then(data => {
                 if(data){
-                    setIsLogIn(!isLogIn);
+                    setIsLogIn(!isLogIn);// 토큰값 쿠키에 추가 구현
                     document.location.replace("/user");
                 }
                 else{

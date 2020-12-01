@@ -5,15 +5,15 @@ import "./Signup.css"
 function Signup() {
     const [id , setId] = useState("");
     const [idCheckMsg, setIdCheckMsg] = useState(" ");
-    const [idCheck, setIdCheck] = useState("false");
+    const [idCheck, setIdCheck] = useState(false);
 
     const [password, setPassword] = useState("");
     const [pwCheckMsg, setPwCheckMsg] = useState(" ");
-    const [pwCheck, setPwCheck] = useState("false");
+    const [pwCheck, setPwCheck] = useState(false);
  
     const [pwDouble, setPwDouble] = useState("");
     const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
-    const [pwDoubleCheck, setPwDoubleCheck] = useState("false");
+    const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
 
     const [subMessage, setSubMessage] = useState("");
 
@@ -39,7 +39,7 @@ function Signup() {
         else if(id.search(/\s/) !== -1){
             setIdCheckMsg("공백은 사용 할 수 없습니다.");
         }
-        else if(test === true){ // 숫자도 특수문자로 검색된다....
+        else if(test === true){ 
             setIdCheckMsg("아이디에 특수문자는 사용 할 수 없습니다.");
         }
         else{
@@ -48,20 +48,17 @@ function Signup() {
 
     },[id])
 
-    const onClickDoubleBtn = () => {
+    const onClickDoubleBtn = (e) => {
+       
         if(idCheck){
             axios
-                .get("http://54.180.120.81:5000/signin/idDoubleCheck", {
-                    params:{
-                        id: id
-                    }
-                })
+                .post("http://54.180.120.81:5000/signup/idDoubleCheck", {id : id})
                 .then(data => {
                     if(data){
                         setIdCheckMsg("이미 사용중인 아이디 입니다.");
                     }
                     setIdCheckMsg("사용 가능한 아이디 입니다.");
-                    setIdCheck("true");
+                    setIdCheck(true);
                 }).catch(err => {
                     console.log(err);
                 })
@@ -89,13 +86,13 @@ function Signup() {
             setPwCheckMsg("공백없이 입력해 주세요.");
             
         }
-        else if(test === false){ // 작동 안하는듯..
+        else if(test === false){ 
             setPwCheckMsg("영문, 숫자, 특수문자를 조합해서 입력해주세요.");
             
         }
         else{
             setPwCheckMsg("사용가능한 비밀번호 입니다.");
-            setPwCheck("true");
+            setPwCheck(true);
         }
     },[password])
         
@@ -109,7 +106,7 @@ function Signup() {
         }
         else if(pwDouble === password){
             setPwDoubleMsg("비밀번호가 일치합니다.");
-            setPwDoubleCheck("true");
+            setPwDoubleCheck(true);
         }
         else{
             setPwDoubleMsg("비밀번호가 일치하지 않습니다.");
@@ -134,12 +131,12 @@ function Signup() {
         }
         if(!idCheck){
             setSubMessage("아이디를 확인해 주세요.");
-            idInput.focus();
+           
             return
         }
         if(!pwCheck){
             setSubMessage("비밀번호를 확인해 주세요.");
-            pwInput.focus();
+           
             return
         }
         if(!pwDoubleCheck){

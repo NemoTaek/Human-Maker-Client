@@ -9,13 +9,13 @@ import Main from './component/main/Main'
 
 
 function App() {
-  const [isLogin, setIsLogin] = useState("false");
+  const [isLogin, setIsLogin] = useState(false);
 
   const login = () => setIsLogin(!isLogin);
 
 
-  const [isModalState, setIsModalState] = useState("false");
-  const [isModalClose, setIsModalClose] = useState("false")
+  const [isModalState, setIsModalState] = useState(false);
+  const [isModalClose, setIsModalClose] = useState(false)
 
   const onClickModalBtn = () => {
     setIsModalClose(!isModalClose);
