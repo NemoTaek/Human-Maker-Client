@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Signup.css"
 
@@ -17,9 +17,6 @@ function Signup() {
 	const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
 
 	const [subMessage, setSubMessage] = useState("");
-
-	// const idInput = useRef();
-	// const pwInput = useRef();
 
 	const userData = { id: id, password: password }
 
@@ -58,23 +55,27 @@ function Signup() {
 		if (idAvailable) {
 			axios
 				.post("http://54.180.120.81:5000/signup/idDoubleCheck", { id: id })
-				.then(data => {
-					if (data) {
-						console.log(data);
+				.then(res => {
+					if (res.status === 200) {
+						console.log(res);
 						setIdCheckMsg("이미 사용중인 아이디 입니다.");
+						setIdCheck(false);
 					}
-					else {
-						console.log(data);
+					else if (res.status === 201) {
+						console.log(res);
 						setIdCheckMsg("사용 가능한 아이디 입니다.");
 						setIdCheck(true);
+						console.log(idCheck);
 					}
 				}).catch(err => {
 					console.log(err);
 					setIdCheckMsg("아이디를 다시 확인해 주세요.");
+					setIdCheck(false);
 				})
 		}
 		else {
 			setIdCheckMsg("아이디가 유효하지 않습니다.");
+			setIdCheck(false);
 		}
 	}
 
@@ -91,16 +92,16 @@ function Signup() {
 			setPwCheckMsg("")
 		}
 		else if (password.length < 8) {
-			setPwCheckMsg("비밀번호는 8자리 이상만 가능합니다.");;
-
+			setPwCheckMsg("비밀번호는 8자리 이상만 가능합니다.");
+			setPwCheck(false);
 		}
 		else if (password.search(/\s/) !== -1) {
 			setPwCheckMsg("공백없이 입력해 주세요.");
-
+			setPwCheck(false);
 		}
 		else if (test === false) { // 작동 안하는듯..
 			setPwCheckMsg("영문, 숫자, 특수문자를 조합해서 입력해주세요.");
-
+			setPwCheck(false);
 		}
 		else {
 			setPwCheckMsg("사용가능한 비밀번호 입니다.");
@@ -115,6 +116,7 @@ function Signup() {
 	useEffect(() => {
 		if (!password || !pwDouble) {
 			setPwDoubleMsg("")
+			setPwDoubleCheck(false);
 		}
 		else if (pwDouble === password) {
 			setPwDoubleMsg("비밀번호가 일치합니다.");
@@ -122,6 +124,7 @@ function Signup() {
 		}
 		else {
 			setPwDoubleMsg("비밀번호가 일치하지 않습니다.");
+			setPwDoubleCheck(false);
 		}
 
 	}, [password, pwDouble])
@@ -144,12 +147,10 @@ function Signup() {
 		}
 		if (!idCheck) {
 			setSubMessage("아이디를 확인해 주세요.");
-			// idInput.focus();
 			return
 		}
 		if (!pwCheck) {
 			setSubMessage("비밀번호를 확인해 주세요.");
-			// pwInput.focus();
 			return
 		}
 		if (!pwDoubleCheck) {
