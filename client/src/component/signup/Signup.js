@@ -4,7 +4,7 @@ import "./Signup.css"
 
 function Signup() {
 	const [id, setId] = useState("");
-	const [idCheckMsg, setIdCheckMsg] = useState(" ");
+	const [idCheckMsg, setIdCheckMsg] = useState("");
 	const [idAvailable, setIdAvailable] = useState(false);
 	const [idCheck, setIdCheck] = useState(false);
 
