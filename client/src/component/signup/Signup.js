@@ -5,66 +5,77 @@ import "./Signup.css"
 function Signup() {
 	const [id, setId] = useState("");
 	const [idCheckMsg, setIdCheckMsg] = useState(" ");
-	const [idCheck, setIdCheck] = useState("false");
+	const [idAvailable, setIdAvailable] = useState(false);
+	const [idCheck, setIdCheck] = useState(false);
 
 	const [password, setPassword] = useState("");
 	const [pwCheckMsg, setPwCheckMsg] = useState(" ");
-	const [pwCheck, setPwCheck] = useState("false");
+	const [pwCheck, setPwCheck] = useState(false);
 
 	const [pwDouble, setPwDouble] = useState("");
 	const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
-	const [pwDoubleCheck, setPwDoubleCheck] = useState("false");
+	const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
 
 	const [subMessage, setSubMessage] = useState("");
 
-	const idInput = useRef();
-	const pwInput = useRef();
+	// const idInput = useRef();
+	// const pwInput = useRef();
 
 	const userData = { id: id, password: password }
 
 	const onChangeId = e => {
 		setId(e.target.value);
+
 	}
 	useEffect(() => {
-		let spe = id.search(/[`~!@#$%^&*|'₩";:/?]/gi);
+		let spe = /[~!@#$%^&*()_+|<>?:{}]/gi;
+		let test = spe.test(id)
 
 		if (!id) {
-			setIdCheckMsg("아이디를 작성해주세요.")
+			setIdCheckMsg("")
 		}
 		else if (id.length < 4) {
 			setIdCheckMsg("아이디는 4글자 이상만 사용 가능합니다.");
+			setIdAvailable(false);
 		}
 		else if (id.search(/\s/) !== -1) {
 			setIdCheckMsg("공백은 사용 할 수 없습니다.");
+			setIdAvailable(false);
 		}
-		else if (!spe) { // 이것도 작동 안하는듯..
+		else if (test === true) { // 숫자도 특수문자로 검색된다....
 			setIdCheckMsg("아이디에 특수문자는 사용 할 수 없습니다.");
+			setIdAvailable(false);
 		}
 		else {
 			setIdCheckMsg("아이디 중복확인이 필요합니다.")
+			setIdAvailable(true);
 		}
 
 	}, [id])
 
-	const onClickDoubleBtn = () => {
-		if (idCheck) {
+	const onClickDoubleBtn = (e) => {
+		e.preventDefault();
+		if (idAvailable) {
 			axios
-				.get("/signin/idDoubleCheck", {
-					params: {
-						id: id
-					}
-				})
+				.post("http://54.180.120.81:5000/signup/idDoubleCheck", { id: id })
 				.then(data => {
 					if (data) {
+						console.log(data);
 						setIdCheckMsg("이미 사용중인 아이디 입니다.");
 					}
-					setIdCheckMsg("사용 가능한 아이디 입니다.");
-					setIdCheck("true");
+					else {
+						console.log(data);
+						setIdCheckMsg("사용 가능한 아이디 입니다.");
+						setIdCheck(true);
+					}
 				}).catch(err => {
 					console.log(err);
+					setIdCheckMsg("아이디를 다시 확인해 주세요.");
 				})
 		}
-		setIdCheckMsg("아이디를 다시 확인해 주세요.");
+		else {
+			setIdCheckMsg("아이디가 유효하지 않습니다.");
+		}
 	}
 
 	const onChangePw = e => {
@@ -73,10 +84,11 @@ function Signup() {
 	useEffect(() => {
 		// let num = password.search(/[0-9]/g);
 		// let eng = password.search(/[a-z]/ig);
-		let spe = password.search(/[`~!@#$%^&*|'₩";:/?]/gi);
+		let spe = /[~!@#$%^&*()_+|<>?:{}]/gi;
+		let test = spe.test(password)
 
 		if (!password) {
-			setPwCheckMsg("비밀번호를 작성해주세요.")
+			setPwCheckMsg("")
 		}
 		else if (password.length < 8) {
 			setPwCheckMsg("비밀번호는 8자리 이상만 가능합니다.");;
@@ -86,13 +98,13 @@ function Signup() {
 			setPwCheckMsg("공백없이 입력해 주세요.");
 
 		}
-		else if (!spe) { // 작동 안하는듯..
+		else if (test === false) { // 작동 안하는듯..
 			setPwCheckMsg("영문, 숫자, 특수문자를 조합해서 입력해주세요.");
 
 		}
 		else {
 			setPwCheckMsg("사용가능한 비밀번호 입니다.");
-			setPwCheck("true");
+			setPwCheck(true);
 		}
 	}, [password])
 
@@ -102,11 +114,11 @@ function Signup() {
 	}
 	useEffect(() => {
 		if (!password || !pwDouble) {
-			setPwDoubleMsg("비밀번호롤 한 번 더 입력해주세요.")
+			setPwDoubleMsg("")
 		}
 		else if (pwDouble === password) {
 			setPwDoubleMsg("비밀번호가 일치합니다.");
-			setPwDoubleCheck("true");
+			setPwDoubleCheck(true);
 		}
 		else {
 			setPwDoubleMsg("비밀번호가 일치하지 않습니다.");
@@ -115,10 +127,11 @@ function Signup() {
 	}, [password, pwDouble])
 
 
-	const onClickSignUpBtn = () => {
+	const onClickSignUpBtn = (e) => {
+		e.preventDefault();
 		if (idCheck && pwCheck && pwDoubleCheck) {
 			axios
-				.post("/signup", userData)
+				.post("http://54.180.120.81:5000/signup", userData)
 				.then(() => {
 					alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
 					document.history.replace("/");
@@ -131,12 +144,12 @@ function Signup() {
 		}
 		if (!idCheck) {
 			setSubMessage("아이디를 확인해 주세요.");
-			idInput.focus();
+			// idInput.focus();
 			return
 		}
 		if (!pwCheck) {
 			setSubMessage("비밀번호를 확인해 주세요.");
-			pwInput.focus();
+			// pwInput.focus();
 			return
 		}
 		if (!pwDoubleCheck) {
@@ -181,7 +194,8 @@ function Signup() {
 			<div className="oauthImg">
 				{/* <img className onClick={} ></img>
                 <img className onClick={} ></img>
-                <img className onClick={} ></img> */}
+                <img className onClick={} ></img>*/}
+
 			</div>
 		</div>
 	);
