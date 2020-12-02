@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios'
 import './Signin.css'
 
-function Signin(props) {
-	const [isLogIn, setIsLogIn] = useState(props.isLogin);
+function Signin({ value, onLogin, onLogout }) {
+	console.log(value)
+	const [isLogIn, setIsLogIn] = useState(false);
 	const [isLogInMsg, setIsLogInMsg] = useState("");
-	console.log(props)
 
 	const [id, setId] = useState("");
 	const [password, setPassword] = useState("");
@@ -72,6 +72,12 @@ function Signin(props) {
 
 				<div>
 					<button className="signUpBtn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+				</div>
+
+				<div>
+					<p>로그인 상태: {value.toString()}</p>
+					<button style={{ width: "30%", height: "30px" }} onClick={onLogin}>로그인</button>
+					<button style={{ width: "30%", height: "30px" }} onClick={onLogout}>로그아웃</button>
 				</div>
 
 			</div>

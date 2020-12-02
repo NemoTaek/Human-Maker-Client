@@ -7,14 +7,17 @@ import SignIn from './component/signin/Signin'
 import SignOut from './component/signout/Signout'
 import Main from './component/main/Main'
 
+import SignInContainer from './containers/loginContainer.js';
+import NavContainer from './containers/navContainer.js';
+
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
 
-  const login = (e) => {
-    e.preventDefault();
-    setIsLogin(!isLogin);
-  }
+  // const login = (e) => {
+  //   e.preventDefault();
+  //   setIsLogin(!isLogin);
+  // }
 
 
   const [isModalState, setIsModalState] = useState(false);
@@ -29,8 +32,9 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <button onClick={login} style={{ width: "100%", height: "30px" }}>{isLogin.toString()}</button>
-        <Nav isLogin={isLogin} />
+        {/* <button onClick={login} style={{ width: "100%", height: "30px" }}>{isLogin.toString()}</button> */}
+        {/* <Nav /> */}
+        <NavContainer />
       </header>
       {/* <Route path="/signup" component={signUp} />
       <Route path="/login" component={login} />
@@ -43,8 +47,11 @@ function App() {
             <SignUp />
           </Route>
 
-          <Route path="/login" component={SignIn}>
+          {/* <Route path="/login" component={SignIn}>
             <SignIn isLogin={isLogin} />
+          </Route> */}
+          <Route path="/login">
+            <SignInContainer />
           </Route>
 
           <Route path="/logout" component={SignOut}>
