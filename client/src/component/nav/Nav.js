@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import logo from "../../img/dangoon.png"
 
-function Nav(props) {
-  console.log(props)
+function Nav({ value }) {
   return (
     <nav className="nav">
       <div className="logo">
@@ -13,7 +12,7 @@ function Nav(props) {
         </NavLink>
       </div>
 
-      {props.isLogin ? (
+      {value ? (
         <div className="login_menu">
           <div className="menu">
             <NavLink to="/logout">로그아웃</NavLink>
