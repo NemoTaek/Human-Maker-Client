@@ -1,16 +1,16 @@
 import React, { useCallback } from "react";
 import SignIn from "../component/signin/Signin";
-import { login, logout } from "../modules/IsLogin"
-import { connect } from 'react-redux';
+import { login } from "../modules/User"
 import { useSelector, useDispatch } from 'react-redux';
 
 // react-hooks 써서 해보기
 const LoginContainer = () => {
-  const status = useSelector(state => state.IsLogin.isLogin);
+  const rememberId = useSelector(state => state.User.id);
+  const rememberPassword = useSelector(state => state.User.password);
   const dispatch = useDispatch();
   const onLogin = useCallback(() => dispatch(login()), [dispatch])
-  const onLogout = useCallback(() => dispatch(logout()), [dispatch])
-  return <SignIn value={status} onLogin={onLogin} onLogout={onLogout} />;
+
+  return <SignIn rememberId={rememberId} rememberPassword={rememberPassword} onLogin={onLogin} />;
 };
 export default LoginContainer
 

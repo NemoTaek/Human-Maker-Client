@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import './Signin.css'
+import { useDispatch } from 'react-redux';
+import { userid, userpassword } from "../../modules/User";
 
-function Signin({ value, onLogin, onLogout }) {
-	console.log(value)
-	const [isLogIn, setIsLogIn] = useState(false);
+function Signin({ rememberId, rememberPassword, onLogin }) {
+	// const [isLogIn, setIsLogIn] = useState(false);
 	const [isLogInMsg, setIsLogInMsg] = useState("");
 
-	const [id, setId] = useState("");
-	const [password, setPassword] = useState("");
+	const [id, setId] = useState(rememberId);
+	const [password, setPassword] = useState(rememberPassword);
 
 	const userData = { id: id, password: password };
+
+	const dispatch = useDispatch();
+	const onId = () => dispatch(userid(rememberId));
+	const onPassword = () => dispatch(userpassword(rememberPassword));
 
 	const onChangeId = e => {
 		setId(e.target.value);
@@ -30,7 +35,9 @@ function Signin({ value, onLogin, onLogout }) {
 			.post("http://54.180.120.81:5000/signin", userData)
 			.then(data => {
 				if (data) {
-					setIsLogIn(!isLogIn);
+					onId();
+					onPassword();
+					onLogin();
 					document.location.replace("/");
 				}
 				else {
@@ -52,13 +59,13 @@ function Signin({ value, onLogin, onLogout }) {
 				<hr />
 				<div className="idInputContainer">
 					<label>아이디
-                        <input className="signInIdInput" type="text" onChange={onChangeId} autoFocus required />
+						<input className="signInIdInput" type="text" defaultValue={rememberId} onChange={onChangeId} autoFocus required />
 					</label>
 				</div>
 
 				<div className="pwInputContainer">
 					<label>비밀번호
-                        <input className="signInPwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
+						<input className="signInPwInput" type="password" defaultValue={rememberPassword} onChange={onChangePw} onKeyPress={onKeyEnt} required />
 					</label>
 				</div>
 
@@ -72,12 +79,6 @@ function Signin({ value, onLogin, onLogout }) {
 
 				<div>
 					<button className="signUpBtn" onClick={onClickSignUpBtn} >간편 회원가입</button>
-				</div>
-
-				<div>
-					<p>로그인 상태: {value.toString()}</p>
-					<button style={{ width: "30%", height: "30px" }} onClick={onLogin}>로그인</button>
-					<button style={{ width: "30%", height: "30px" }} onClick={onLogout}>로그아웃</button>
 				</div>
 
 			</div>

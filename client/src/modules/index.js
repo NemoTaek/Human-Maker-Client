@@ -3,10 +3,10 @@
 // 그래서 combineReducers를 사용한다.
 
 import { combineReducers } from "redux";
-import IsLogin from "./IsLogin";
+import User from "./User";
 
 const rootReducer = combineReducers({
-  IsLogin
+  User
   // 리듀서가 추가되면 여기에 추가로 작성
 });
 
