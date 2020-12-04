@@ -8,11 +8,13 @@ function Signout({ id, onLogout }) {
 		document.location.href = "/";
 	}
 	return (
-		<div className="logoutModalOp">
-			<div className="logoutMsg">
-				<h3>{id}님이 로그아웃 되었습니다.</h3>
-				<div>목표를 위해 화이팅!!</div>
-				<button className="logoutModalBtn" onClick={logoutModal}>확인</button>
+		<div className="logout_modal_wrap">
+			<div className="logout_modal">
+				<div className="logout_modal_content">
+					<p><span>{id}</span>님이 로그아웃 되었습니다.</p>
+					<p>목표를 위해 화이팅!!</p>
+					<button className="logoutModalBtn" onClick={logoutModal}>아자!</button>
+				</div>
 			</div>
 		</div >
 	);

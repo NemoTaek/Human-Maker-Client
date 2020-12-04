@@ -6,11 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 // react-hooks 써서 해보기
 const LoginContainer = () => {
   const rememberId = useSelector(state => state.User.id);
-  const rememberPassword = useSelector(state => state.User.password);
+  const isRememberId = useSelector(state => state.User.isRememberId);
   const dispatch = useDispatch();
   const onLogin = useCallback(() => dispatch(login()), [dispatch])
 
-  return <SignIn rememberId={rememberId} rememberPassword={rememberPassword} onLogin={onLogin} />;
+  return <SignIn rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId} />;
 };
 export default LoginContainer
 

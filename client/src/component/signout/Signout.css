@@ -1,0 +1,37 @@
+.logout_modal_wrap{
+  width: 100%;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3;
+}
+
+.logout_modal_wrap .logout_modal{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6d0cf;
+  padding: 50px 30px;
+  border: #000000 solid 3px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logout_modal_wrap .logout_modal .logout_modal_content{
+  width: 100%;
+  text-align: center;
+}
+.logout_modal_wrap .logout_modal .logout_modal_content > p{
+  font-size: 30px;
+}
+.logout_modal_wrap .logout_modal .logout_modal_content > p > span{
+  font-size: 50px;
+  color: brown;
+}
+.logout_modal_wrap .logout_modal .logout_modal_content > button{
+  width: 100px;
+  margin-top: 30px;
+  font-size: 20px;
+}
