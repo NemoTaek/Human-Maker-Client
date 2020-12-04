@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import logo from "../../img/dangoon.png"
 
-function Nav(props) {
-  console.log(props)
+function Nav({isLogin}) {
+  console.log(isLogin)
+  // isLogin = true;
+  // console.log(isLogin)
   return (
     <nav className="nav">
       <div className="logo">
@@ -13,7 +15,7 @@ function Nav(props) {
         </NavLink>
       </div>
 
-      {props.isLogin ? (
+      {isLogin ? (
         <div className="login_menu">
           <div className="menu">
             <NavLink to="/logout">로그아웃</NavLink>
@@ -33,32 +35,6 @@ function Nav(props) {
           </div>
         )}
 
-      {/* <ul>
-        <li>
-          <NavLink to="/">
-            <img src={logo}></img>
-          </NavLink>
-        </li>
-        {props.isLogin ? (
-          <>
-            <li>
-              <NavLink to="/logout">로그아웃</NavLink>
-            </li>
-            <li>
-              <NavLink to="/mypage">마이페이지</NavLink>
-            </li>
-          </>
-        ) : (
-            <>
-              <li>
-                <NavLink to="/login">로그인</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">회원가입</NavLink>
-              </li>
-            </>
-          )}
-      </ul> */}
     </nav>
   );
 }

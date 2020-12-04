@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux'
 import axios from 'axios'
 import './Signin.css'
 
-function Signin(props) {
-    const [isLogIn, setIsLogIn] = useState(props.isLogin);
+function Signin({onLogin}) {
+    const isLogin = useSelector(state => state.login.isLogin)   
     const [isLogInMsg, setIsLogInMsg] =useState("");
-    console.log(props)
+   
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -27,18 +28,50 @@ function Signin(props) {
 
     const onClickSignInBtn = () =>{
         axios
-            .post("http://54.180.120.81:5000/signin", userData)
-            .then(data => {
-                if(data){
-                    setIsLogIn(!isLogIn);// 토큰값 쿠키에 추가 구현
+            .post("http://54.180.120.81:5000/signin", userData, 
+            // {
+            //     withCredentials: true,
+            //     crossDomain: true,
+            //     credentials: "include"
+            // }
+            )
+            .then(res => {
+                console.log(res)
+                if(res.status === 200){
+                    onLogin();
+                    console.log(isLogin)
                     document.location.replace("/user");
                 }
                 else{
                     setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
                 }
-            }).catch(err => {
-                console.log(err);
+                cookieSaveToken(res);
             })
+            .catch(err => {
+                console.log(err);
+            })        
+    }
+    const cookieSaveToken = res => {
+        console.log(res)
+        const accessToken = res.data;
+
+        if (document.cookie === "") {
+            document.cookie = `sid=${accessToken.token}`;
+        } 
+        else {
+            const compareToken = document.cookie.split("=");
+            if (accessToken.token !== compareToken[1]) {
+                document.cookie = `sid=${accessToken.token}`;
+                // console.log("로그인후토큰", accessToken.token);
+                // console.log("쿠키저장토큰", compareToken[1]);
+            } 
+            else {
+                // console.log("로그인후토큰", accessToken.token);
+                // console.log("쿠키저장토큰", compareToken[1]);
+                console.log("토큰 값이 동일하여 갱신하지 않습니다.");
+            }
+        }
+        axios.defaults.headers.common[ "Authorization" ] = `Bearer ${accessToken.token}`;
     }
    
     const onClickSignUpBtn = () => {
