@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import SignOut from "../component/signout/Signout";
-import { logout } from "../modules/User"
+import { logout } from "../modules/Toggle"
 import { useSelector, useDispatch } from 'react-redux';
 
 

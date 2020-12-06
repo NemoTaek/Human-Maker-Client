@@ -4,14 +4,16 @@ import './Signin.css'
 import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
 import { GoogleLogin } from 'react-google-login';
+import KakaoLogin from 'react-kakao-login';
 
 // https://electricburglar.tistory.com/150
 // https://velog.io/@claire-euni/React-hook-Social-Login-Kakaotalk-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%97%86%EC%9D%B4-%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
 // https://velog.io/@junghyunhao/kakao-login-react
 // 구글 OAuth 클라이언트 ID
 const googleAPI = "";
+const kakaoAPI = "432af1ddee6dfbbeacdda16934a5a8f1";
 
-function Signin({ rememberId, onLogin, isRememberId }) {
+function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId }) {
 	const [isLogInMsg, setIsLogInMsg] = useState("");
 
 	const [id, setId] = useState("");
@@ -37,13 +39,16 @@ function Signin({ rememberId, onLogin, isRememberId }) {
 	}
 
 	const onCheckboxChangeHandler = (e) => {
-		// setCheckRememberId(!checkRememberId);
-		setCheckRememberId(e.target.check);
-		console.log(e.target.check);
+		setCheckRememberId(!checkRememberId);
+
 		// 아이디 기억하기가 체크되어있으면
 		if (e.target.checked) {
 			// input값에 store에 저장되어있는 id 출력
+			onRememberId();
 			document.getElementsByClassName("sign_in_idInput")[0].value = rememberId;
+		}
+		else {
+			onForgotId();
 		}
 	};
 
@@ -86,6 +91,26 @@ function Signin({ rememberId, onLogin, isRememberId }) {
 		onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
 	}
 
+	const responseKakao = (res) => {
+		// console.log(res);
+		// setId(res.profile.id);	// 구글아이디로 로그인하면 그 id 값을 state에 설정
+		// onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
+
+		window.Kakao.API.request({
+			url: '/v2/user/me',
+			success: async res => {
+				console.log("getme : ", res);
+				console.log("getme : ", res.kakao_account);
+				const account = res.Kakao_account;
+			},
+			fail: error => {
+				console.log("error : ", error);
+			}
+		})
+		console.log(res)
+		console.log("success")
+	}
+
 	const responseFail = (err) => {
 		console.log(err);
 	}
@@ -120,6 +145,7 @@ function Signin({ rememberId, onLogin, isRememberId }) {
 				<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
 
 				<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+				<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
 
 			</div>
 		</div>

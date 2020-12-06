@@ -4,9 +4,11 @@
 
 import { combineReducers } from "redux";
 import User from "./User";
+import Toggle from "./Toggle";
 
 const rootReducer = combineReducers({
-  User
+  User,
+  Toggle
   // 리듀서가 추가되면 여기에 추가로 작성
 });
 
