@@ -1,0 +1,72 @@
+.sign_in_wrap{
+	width: 100%;
+	height: calc(100vh - 100px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sign_in_container{
+	width: 100%;
+	padding: 0 30vw;
+}
+
+.sign_in_name{
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.input_container_wrap{
+	margin-top: 50px;
+}
+
+.input_container{
+	margin-top: 20px;
+}
+
+.input_container > span{
+	display: inline-block;
+	width: 100%;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.input_container > input{
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+}
+
+.remember_id{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.remember_id > input{
+  width: 20px;
+  height: 20px;
+}
+.remember_id > input > p{
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.login_message{
+	width: 100%;
+	margin-top: 5px;
+}
+.login_message > p{
+	width: 100%;
+	font-size: 20px;
+	color: red;
+}
+
+.sign_in_btn{
+	margin-top: 30px;
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+}
+

@@ -2,8 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import logo from "../../img/dangoon.png"
+import Logout from "../signout/Signout"
 
-function Nav({ value }) {
+function Nav({ status }) {
+  const showLogout = () => {
+    let modal = document.getElementsByClassName("logout_modal_wrap")[0];
+    modal.style.display = 'flex';
+    return <Logout></Logout>
+  }
   return (
     <nav className="nav">
       <div className="logo">
@@ -12,10 +18,11 @@ function Nav({ value }) {
         </NavLink>
       </div>
 
-      {value ? (
+      {status ? (
         <div className="login_menu">
           <div className="menu">
-            <NavLink to="/logout">로그아웃</NavLink>
+            {/* <NavLink to="/">로그아웃</NavLink> */}
+            <button className="logout_btn" onClick={showLogout}>로그아웃</button>
           </div>
           <div className="menu">
             <NavLink to="/mypage">마이페이지</NavLink>
@@ -31,33 +38,6 @@ function Nav({ value }) {
             </div>
           </div>
         )}
-
-      {/* <ul>
-        <li>
-          <NavLink to="/">
-            <img src={logo}></img>
-          </NavLink>
-        </li>
-        {props.isLogin ? (
-          <>
-            <li>
-              <NavLink to="/logout">로그아웃</NavLink>
-            </li>
-            <li>
-              <NavLink to="/mypage">마이페이지</NavLink>
-            </li>
-          </>
-        ) : (
-            <>
-              <li>
-                <NavLink to="/login">로그인</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">회원가입</NavLink>
-              </li>
-            </>
-          )}
-      </ul> */}
     </nav>
   );
 }
