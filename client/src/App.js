@@ -17,6 +17,8 @@ function App() {
       </header>
 
       <div className="contents">
+        <SignOutContainer></SignOutContainer>
+
         <Switch>
 
           <Route path="/signup">
@@ -27,9 +29,9 @@ function App() {
             <SignInContainer />
           </Route>
 
-          <Route path="/logout">
+          {/* <Route path="/">
             <SignOutContainer />
-          </Route>
+          </Route> */}
 
           <Route exact path="/">
             <Main />

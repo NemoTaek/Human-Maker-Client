@@ -4,8 +4,7 @@
 
 .main1{
   width: 100%;
-  height: 90vh;
-  padding-top: 150px;
+  height: calc(100vh - 150px);
   display: flex;
   align-items: center;      /* cross-axis 정렬 */
   justify-content: center;  /* main-axis 정렬, default는 가로 */
@@ -13,7 +12,7 @@
 /* 배경만 투명 */
 .main1::after{
   width: 100%;
-  height: 90vh;
+  height: calc(100vh - 150px);
   content: "";
   opacity: 0.5;
   position: absolute;

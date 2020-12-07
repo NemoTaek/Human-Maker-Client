@@ -5,13 +5,15 @@ import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
+import NaverLogin from 'react-naver-login';
 
 // https://electricburglar.tistory.com/150
 // https://velog.io/@claire-euni/React-hook-Social-Login-Kakaotalk-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%97%86%EC%9D%B4-%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
 // https://velog.io/@junghyunhao/kakao-login-react
 // 구글 OAuth 클라이언트 ID
 const googleAPI = "";
-const kakaoAPI = "432af1ddee6dfbbeacdda16934a5a8f1";
+const kakaoAPI = "";
+const naverAPI = "";
 
 function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId }) {
 	const [isLogInMsg, setIsLogInMsg] = useState("");
@@ -111,6 +113,17 @@ function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId })
 		console.log("success")
 	}
 
+	// const responseNaver = new naver.LoginWithNaverId({
+	// 	clientId: naverAPI,
+	// 	callbackUrl: "127.0.0.1:3000",
+	// 	callbackHandle: true,
+	// 	loginButton: {
+	// 		color: "green",
+	// 		type: "3",
+	// 		height: "30"
+	// 	}
+	// });
+
 	const responseFail = (err) => {
 		console.log(err);
 	}
@@ -146,6 +159,8 @@ function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId })
 
 				<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
 				<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
+				{/* <NaverLogin clientId={naverAPI} callbackUrl="127.0.0.1:3000"
+					callbackHandle="true" onSuccess={(naverUser) => console.log(naverUser)} onFailure={responseFail}></NaverLogin> */}
 
 			</div>
 		</div>
