@@ -12,7 +12,7 @@ import Signup from "../signup/Signup"
 
 function Nav({ isLogin }) {
   // console.log(isLogin)
-  isLogin = true;
+  // isLogin = true;
 
   const logoutRef = useRef();
   const loginRef = useRef();
@@ -62,7 +62,6 @@ function Nav({ isLogin }) {
             </div>
           </div>
         )}
-
     </nav>
   );
 }

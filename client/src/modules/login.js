@@ -1,24 +1,41 @@
-import { createAction, handleActions } from "redux-actions"
+import { createAction, handleActions } from 'redux-actions'
 
-const LOGIN = 'isLogin/LOGIN';
-const LOGOUT = 'isLogin/LOGOUT';
+const LOGIN = "login/LOGIN";
+const LOGOUT = "login/LOGOUT";
+const REMEMBERID = "login/REMEMBERID"
+const FORGOTID = "login/FORGOTID"
 
+export const login = createAction(LOGIN);
+export const logout = createAction(LOGOUT);
+export const rememberid = createAction(REMEMBERID);
+export const forgotid = createAction(FORGOTID);
 
-export const login = createAction(LOGIN)
-export const logout = createAction(LOGOUT)
-
-
-const initialState ={
-    isLogin : false,  
+// 초기 상태 작성하기
+const initialState = {
+  isLogin: false,
+  isRememberId: false
 }
-// console.log(initialState)
-const loginState = handleActions({
-    [LOGIN] : (state, action) => ({
-       ...state, isLogin: true
+
+const loginState = handleActions(
+  {
+    [LOGIN]: (state, action) => ({
+      ...state,
+      isLogin: true
     }),
-    [LOGOUT] : (state, action) => ({
-        ...state, isLogin: false
+    [LOGOUT]: (state, action) => ({
+      ...state,
+      isLogin: false
+    }),
+    [REMEMBERID]: (state, action) => ({
+      ...state,
+      isRememberId: true
+    }),
+    [FORGOTID]: (state, action) => ({
+      ...state,
+      isRememberId: false
     })
-},initialState)
+  },
+  initialState
+);
 
 export default loginState;
