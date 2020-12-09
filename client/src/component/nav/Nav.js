@@ -30,7 +30,7 @@ function Nav({ isLogin }) {
 
 
 
- return (
+  return (
     <nav className="nav">
       <div className="logo">
         <NavLink to="/">
@@ -44,7 +44,7 @@ function Nav({ isLogin }) {
             <button onClick={logoutOpenModal} >로그아웃</button>
             <Signout isLogin={isLogin} ref={logoutRef} />
           </div>
-         
+
           <div className="menu">
             <NavLink to="/mypage">마이페이지</NavLink>
           </div>
