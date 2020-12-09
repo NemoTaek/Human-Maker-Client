@@ -6,17 +6,14 @@ import './Signout.css'
 
 
 const Signout = forwardRef((props, ref) => {
-    // const isLogin = useSelector(state => state.login.isLogin)
-    // console.log(isLogin)
-    console.log(props.isLogin)
-    
+
     const [display, setDisplay] = useState(false)
-    
-    useImperativeHandle(ref, ()=>{
-       return {
-        modalOpen : () => openModal(),
-        modalClose : () => closeModal() 
-       }
+
+    useImperativeHandle(ref, () => {
+        return {
+            modalOpen: () => openModal(),
+            modalClose: () => closeModal()
+        }
     })
 
     const openModal = () => {
@@ -32,21 +29,21 @@ const Signout = forwardRef((props, ref) => {
         setDisplay(false);
     }
 
-    
-    if(display){
+
+    if (display) {
         return ReactDOM.createPortal(
             <div className="modalWrapper">
                 <div className="modalBg" onClick={clickBg} ></div>
                 <div className="modalBox">
                     <div className="logoutMsg">
                         <h3>로그아웃 되었습니다.</h3>
-                        <hr/>
+                        <hr />
                         <div>목표를 위해 화이팅!!</div>
-                        <hr/>
+                        <hr />
                     </div>
-                <button className="logoutModalBtn" onClick={closeModal}>확인</button>
-            </div>
-        </div>, document.getElementById("modal_root")
+                    <button className="logoutModalBtn" onClick={closeModal}>확인</button>
+                </div>
+            </div>, document.getElementById("modal_root")
         )
     }
     return null;
