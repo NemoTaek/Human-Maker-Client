@@ -10,7 +10,7 @@ import Signup from "../signup/Signup"
 
 
 
-function Nav({ isLogin, onLogin }) {
+function Nav({ isLogin }) {
   // console.log(isLogin)
   isLogin = true;
 
@@ -53,7 +53,7 @@ function Nav({ isLogin, onLogin }) {
           <div className="login_menu">
             <div className="logout_btn">
               <button onClick={loginOpenModal} >로그인</button>
-              <Signin ref={loginRef} onLogin={onLogin} />
+              <Signin ref={loginRef} />
             </div>
 
             <div className="signupBtnContainerWrap">
