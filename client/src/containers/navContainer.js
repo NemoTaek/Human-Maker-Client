@@ -1,14 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Nav from '../component/nav/Nav';
+import { login } from '../modules/login'
 
 
 
 const NavContainer = () => {
     const isLogin = useSelector(state => state.login.isLogin)
-    console.log(isLogin)
+    
+    const dispatch = useDispatch();
+    const onLogin = React.useCallback(()=>
+        dispatch(login()),[dispatch]
+    )
+
     return (
-        <Nav isLogin={isLogin} />
+        <Nav isLogin={isLogin} onLogin={onLogin}/>
     )
 
 }

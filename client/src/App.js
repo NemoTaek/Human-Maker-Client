@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+// import LogoutContainer from "react-modal"
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
@@ -7,12 +8,13 @@ import Main from './component/main/Main'
 
 import LoginContainer from './containers/loginContainer'
 import NavContainer from "./containers/navContainer";
-import LogoutContainer from "./containers/logoutContainer";
+// import LogoutContainer from "./containers/logoutContainer";
 
 
 
 
 function App() {
+  
  
   return (
     <div className="App">
@@ -30,11 +32,9 @@ function App() {
             <LoginContainer />
           </Route>
 
-          <Route path="/logout">
-            <LogoutContainer/>
-          </Route>
+          
              
-
+        
           <Route exact path="/" >
             <Main />
           </Route>

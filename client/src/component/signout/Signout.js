@@ -1,28 +1,55 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import ReactDOM from "react-dom"
 // import {useSelector} from 'react-redux'
 import './Signout.css'
 
 
-function Signout({onLogout}) {
+
+const Signout = forwardRef((props, ref) => {
     // const isLogin = useSelector(state => state.login.isLogin)
     // console.log(isLogin)
+    console.log(props.isLogin)
+    
+    const [display, setDisplay] = useState(false)
+    
+    useImperativeHandle(ref, ()=>{
+       return {
+        modalOpen : () => openModal(),
+        modalClose : () => closeModal() 
+       }
+    })
 
-
-    const onClickLogout = (e) => {
-        e.preventDefault()
-        onLogout();
-        document.location.replace("/")
+    const openModal = () => {
+        setDisplay(true);
     }
 
-    return (
-        <div>
-            <div className="logoutMsg">
-                <h3>로그아웃 되었습니다.</h3>
-                <div>목표를 위해 화이팅!!</div>
-                <button className="logoutModalBtn" onClick={onClickLogout}>로그아웃</button>
+    const closeModal = () => {
+        setDisplay(false);
+        props.onLogout();
+        document.location.replace("/")
+    }
+    const clickBg = () => {
+        setDisplay(false);
+    }
+
+    
+    if(display){
+        return ReactDOM.createPortal(
+            <div className="modalWrapper">
+                <div className="modalBg" onClick={clickBg} ></div>
+                <div className="modalBox">
+                    <div className="logoutMsg">
+                        <h3>로그아웃 되었습니다.</h3>
+                        <hr/>
+                        <div>목표를 위해 화이팅!!</div>
+                        <hr/>
+                    </div>
+                <button className="logoutModalBtn" onClick={closeModal}>확인</button>
             </div>
-        </div>
-    );
-}
+        </div>, document.getElementById("modal_root")
+        )
+    }
+    return null;
+})
 
 export default Signout;

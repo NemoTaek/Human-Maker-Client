@@ -1,10 +1,31 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux'
+import React, { useState, forwardRef, useImperativeHandle} from 'react';
+// import {useSelector} from 'react-redux'
+import ReactDOM from "react-dom"
 import axios from 'axios'
 import './Signin.css'
 
-function Signin({onLogin}) {
-    const isLogin = useSelector(state => state.login.isLogin)   
+const Signin = forwardRef((props, ref) => {
+
+    const [display, setDisplay] = useState(false);
+
+    useImperativeHandle(ref, () => {
+        return {
+            loginOpen : () => openLogin(),
+            loginClick: () => closeLogin()
+        }
+    })
+    const openLogin = () => {
+        setDisplay(true)
+    }
+    const closeLogin = () => {
+        setDisplay(false)
+    }
+    const clickBg = () => {
+        setDisplay(false)
+    }
+
+
+    // const isLogin = useSelector(state => state.login.isLogin);
     const [isLogInMsg, setIsLogInMsg] =useState("");
    
 
@@ -36,10 +57,10 @@ function Signin({onLogin}) {
             // }
             )
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if(res.status === 200){
-                    onLogin();
-                    console.log(isLogin)
+                    props.onLogin();
+                    closeLogin();
                     document.location.replace("/user");
                 }
                 else{
@@ -78,38 +99,48 @@ function Signin({onLogin}) {
         document.location.replace("/signup");
     }
 
-    return (
-        <div>
-            <div className="signInContainer">
-                <h2>로그인</h2>
-                <hr/>
-                <div className ="idInputContainer">
-                    <label>아이디 
-                        <input className="signInIdInput" type="text" onChange={onChangeId} autoFocus required />
-                    </label>
-                </div>
-                
-                <div className ="pwInputContainer">
-                    <label>비밀번호 
-                        <input className="signInPwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
-                    </label>
-                </div>
-                
-                <div>
-                    <p className="isLogInMsg">{isLogInMsg}</p>
-                </div>
 
-                <div>
-                <button className="signInBtn" onClick={onClickSignInBtn}  >로그인</button>
-                </div>
-
-                <div>
-                <button className="signUpBtn" onClick={onClickSignUpBtn} >간편 회원가입</button>
-                </div>
-
-            </div>
-        </div>
-    );
-}
+    if(display){
+        return ReactDOM.createPortal(
+            <div className="modalWrapper" >
+                <div className="modalBg" onClick={clickBg} ></div>
+                <div className="modalBox">
+                    <div className="signInContainer">
+                        <h2>로그인</h2>
+                        <hr/>
+                        <div className ="idInputContainer">
+                            <label>아이디 
+                                <input className="signInIdInput" type="text" onChange={onChangeId} autoFocus required />
+                            </label>
+                        </div>
+                        
+                        <div className ="pwInputContainer">
+                            <label>비밀번호 
+                                <input className="signInPwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <p className="isLogInMsg">{isLogInMsg}</p>
+                        </div>
+        
+                        <div>
+                        <button className="signInBtn" onClick={onClickSignInBtn}  >로그인</button>
+                        </div>
+        
+                        <div>
+                        <button className="signUpBtn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+                        </div>
+        
+                    </div>
+                </div>                
+            </div>,document.getElementById("modal_root")
+        );
+    }
+    return null;
+    
+})
 
 export default Signin;
+
+                

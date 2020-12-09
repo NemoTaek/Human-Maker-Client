@@ -9,8 +9,7 @@ export const logout = createAction(LOGOUT)
 
 
 const initialState ={
-    isLogin : false,
-  
+    isLogin : false,  
 }
 // console.log(initialState)
 const loginState = handleActions({
