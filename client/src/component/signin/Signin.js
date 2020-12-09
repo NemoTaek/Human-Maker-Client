@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from "react-dom"
 import axios from 'axios'
 import './Signin.css'
@@ -12,8 +12,6 @@ const Signin = forwardRef((props, ref) => {
 	const googleAPI = "";
 	const kakaoAPI = "";
 	// const naverAPI = "";
-
-	console.log(props.onLogin)
 
 	const [display, setDisplay] = useState(false);
 
@@ -33,6 +31,13 @@ const Signin = forwardRef((props, ref) => {
 		setDisplay(false)
 	}
 
+	useEffect(() => {
+		if (display) {
+			if (props.isRememberId) {
+				document.getElementsByClassName("sign_in_idInput")[0].value = props.rememberId;
+			}
+		}
+	}, []);
 
 	// const isLogin = useSelector(state => state.login.isLogin);
 	const [isLogInMsg, setIsLogInMsg] = useState("");
@@ -66,7 +71,6 @@ const Signin = forwardRef((props, ref) => {
 		if (e.target.checked) {
 			// input값에 store에 저장되어있는 id 출력
 			props.onRememberId();
-			document.getElementsByClassName("sign_in_idInput")[0].value = props.rememberId;
 		}
 		else {
 			props.onForgotId();
@@ -187,8 +191,7 @@ const Signin = forwardRef((props, ref) => {
 
 							<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
 							<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
-							{/* <NaverLogin clientId={naverAPI} callbackUrl="127.0.0.1:3000"
-											callbackHandle="true" onSuccess={(naverUser) => console.log(naverUser)} onFailure={responseFail}></NaverLogin> */}
+
 
 						</div>
 					</div>
