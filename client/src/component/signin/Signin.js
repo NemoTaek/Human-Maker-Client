@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle} from 'react';
+import ReactDOM from "react-dom"
 import axios from 'axios'
 import './Signin.css'
 import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
-import NaverLogin from 'react-naver-login';
 
-// https://electricburglar.tistory.com/150
-// https://velog.io/@claire-euni/React-hook-Social-Login-Kakaotalk-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%97%86%EC%9D%B4-%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
-// https://velog.io/@junghyunhao/kakao-login-react
-// 구글 OAuth 클라이언트 ID
-const googleAPI = "";
-const kakaoAPI = "";
-const naverAPI = "";
+const Signin = forwardRef(({ rememberId, onLogin, isRememberId, onRememberId, onForgotId }, ref) => {
 
-function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId }) {
-	const [isLogInMsg, setIsLogInMsg] = useState("");
+	const googleAPI = "";
+	const kakaoAPI = "";
+	// const naverAPI = "";
+
+    const [display, setDisplay] = useState(false);
+
+    useImperativeHandle(ref, () => {
+        return {
+            loginOpen : () => openLogin(),
+            loginClick: () => closeLogin()
+        }
+    })
+    const openLogin = () => {
+        setDisplay(true)
+    }
+    const closeLogin = () => {
+        setDisplay(false)
+    }
+    const clickBg = () => {
+        setDisplay(false)
+    }
+
+
+    // const isLogin = useSelector(state => state.login.isLogin);
+    const [isLogInMsg, setIsLogInMsg] = useState("");
 
 	const [id, setId] = useState("");
 	const [password, setPassword] = useState("");
@@ -103,7 +120,7 @@ function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId })
 			success: async res => {
 				console.log("getme : ", res);
 				console.log("getme : ", res.kakao_account);
-				const account = res.Kakao_account;
+				// const account = res.Kakao_account;
 			},
 			fail: error => {
 				console.log("error : ", error);
@@ -128,43 +145,52 @@ function Signin({ rememberId, onLogin, isRememberId, onRememberId, onForgotId })
 		console.log(err);
 	}
 
-	return (
-		<div className="sign_in_wrap">
-			<div className="sign_in_container">
-				<p className="sign_in_name" >로그인</p>
+    if(display){
+        return ReactDOM.createPortal(
+					<div className="modalWrapper" >
+						<div className="modalBg" onClick={clickBg} ></div>
+						<div className="modalBox">
+							<div className="sign_in_wrap">
+								<div className="sign_in_container">
+									<p className="sign_in_name" >로그인</p>
 
-				<div className="input_container_wrap">
-					<div className="input_container">
-						<span>아이디</span>
-						<input className="sign_in_idInput" type="text" onChange={onChangeId} autoFocus required />
-					</div>
+									<div className="input_container_wrap">
+										<div className="input_container">
+											<span>아이디</span>
+											<input className="sign_in_idInput" type="text" onChange={onChangeId} autoFocus required />
+										</div>
 
-					<div className="input_container">
-						<span>비밀번호</span>
-						<input className="sign_in_pwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
-					</div>
-				</div>
+										<div className="input_container">
+											<span>비밀번호</span>
+											<input className="sign_in_pwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
+										</div>
+									</div>
 
-				<label className="remember_id">
-					<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
-				</label>
+									<label className="remember_id">
+										<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
+										</label>
 
-				<div className="login_message">
-					<p>{isLogInMsg}</p>
-				</div>
+									<div className="login_message">
+										<p>{isLogInMsg}</p>
+									</div>
 
-				<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+									<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
 
-				<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+									<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
 
-				<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
-				<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
-				{/* <NaverLogin clientId={naverAPI} callbackUrl="127.0.0.1:3000"
-					callbackHandle="true" onSuccess={(naverUser) => console.log(naverUser)} onFailure={responseFail}></NaverLogin> */}
+									<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+									<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
+									{/* <NaverLogin clientId={naverAPI} callbackUrl="127.0.0.1:3000"
+											callbackHandle="true" onSuccess={(naverUser) => console.log(naverUser)} onFailure={responseFail}></NaverLogin> */}
 
-			</div>
-		</div>
-	);
-}
+								</div>
+							</div>
+						</div>
+					</div> , document.getElementById("modal_root")               
+        );
+    }
+    return null;
+    
+})
 
-export default Signin;
+export default Signin;         

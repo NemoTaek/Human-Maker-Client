@@ -2,17 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-// import { BrowserRouter } from "react-router-dom";
-import { createStore } from "redux";
-import { Provider } from 'react-redux'
-import rootReducer from './modules';
-import { BrowserRouter } from 'react-router-dom';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import store from "./store/store";
-import { persistStore } from 'redux-persist';
+import { BrowserRouter } from "react-router-dom";
+import { createStore, applyMiddleware } from "redux"
+import { Provider } from "react-redux"
+import { persistStore,persistReducer } from "redux-persist"
 import { PersistGate } from 'redux-persist/integration/react';
+import storage from 'redux-persist/lib/storage'
+import rootReducer from "./modules"
+import logger from 'redux-logger';
 
-// react-redux에서는 Provider를 사용함으로써 props를 올리고 내려받는짓을 안해도 된다고 한다.
+const persistConfig = {
+  key: 'root',
+  storage
+}
+
+const enhancedReducer = persistReducer(persistConfig, rootReducer);
+const store = createStore(enhancedReducer,applyMiddleware(logger));
 const persistor = persistStore(store);
 
 ReactDOM.render(

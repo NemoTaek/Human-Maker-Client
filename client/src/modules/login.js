@@ -1,9 +1,9 @@
 import { createAction, handleActions } from 'redux-actions'
 
-const LOGIN = "Toggle/LOGIN";
-const LOGOUT = "Toggle/LOGOUT";
-const REMEMBERID = "Toggle/REMEMBERID"
-const FORGOTID = "Toggle/FORGOTID"
+const LOGIN = "login/LOGIN";
+const LOGOUT = "login/LOGOUT";
+const REMEMBERID = "login/REMEMBERID"
+const FORGOTID = "login/FORGOTID"
 
 export const login = createAction(LOGIN);
 export const logout = createAction(LOGOUT);
@@ -16,7 +16,7 @@ const initialState = {
   isRememberId: false
 }
 
-const toggle = handleActions(
+const loginState = handleActions(
   {
     [LOGIN]: (state, action) => ({
       ...state,
@@ -38,4 +38,4 @@ const toggle = handleActions(
   initialState
 );
 
-export default toggle;
+export default loginState;

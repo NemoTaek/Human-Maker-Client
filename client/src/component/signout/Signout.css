@@ -1,55 +1,33 @@
-.logout_modal_wrap{
-  width: 100%;
-  height: calc(100vh - 100px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-/* 배경만 투명 */
-.logout_modal_wrap::after{
-  width: 100%;
-  height: calc(100vh - 100px);
-  content: "";
-  opacity: 0.7;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #000000;
-  z-index: -1;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.logout_modal_wrap .logout_modal{
-  width: 50%;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  background-color: #e6d0cf;
-  padding: 50px 30px;
-  border: #000000 solid 3px;
-  border-radius: 5px;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 35vh;
-  left: 25vw;
+.modalWrapper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
-.logout_modal_wrap .logout_modal .logout_modal_content{
-  width: 100%;
-  text-align: center;
+.modalBg{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.3);
 }
-.logout_modal_wrap .logout_modal .logout_modal_content > p{
-  font-size: 30px;
-}
-.logout_modal_wrap .logout_modal .logout_modal_content > p > span{
-  font-size: 50px;
-  color: brown;
-}
-.logout_modal_wrap .logout_modal .logout_modal_content > button{
-  width: 100px;
-  margin-top: 30px;
-  font-size: 20px;
+.modalBox{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-height: 30%;
+    width: 40%;
+    background-color: white;
+    box-shadow: 0,0,10px rgba(0,0,0,0.25);
+    z-index: 100;
 }

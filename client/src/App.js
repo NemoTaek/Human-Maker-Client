@@ -1,13 +1,8 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import SignUp from './component/signup/Signup'
 import Main from './component/main/Main'
-
-import SignInContainer from './containers/loginContainer.js';
-import SignOutContainer from './containers/logoutContainer.js';
-import NavContainer from './containers/navContainer.js';
-
+import NavContainer from "./containers/navContainer";
 
 function App() {
   return (
@@ -15,28 +10,11 @@ function App() {
       <header className="header">
         <NavContainer />
       </header>
-
       <div className="contents">
-        <SignOutContainer></SignOutContainer>
-
         <Switch>
-
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-
-          <Route path="/login">
-            <SignInContainer />
-          </Route>
-
-          {/* <Route path="/">
-            <SignOutContainer />
-          </Route> */}
-
-          <Route exact path="/">
+          <Route exact path="/" >
             <Main />
           </Route>
-
         </Switch>
       </div>
     </div>

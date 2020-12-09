@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import logo from "../../img/dangoon.png"
-import Logout from "../signout/Signout"
+import Signout from "../signout/Signout";
+import Signin from "../signin/Signin";
+import Signup from "../signup/Signup"
 
-function Nav({ status }) {
-  const showLogout = () => {
-    let modal = document.getElementsByClassName("logout_modal_wrap")[0];
-    modal.style.display = 'flex';
-    return <Logout></Logout>
+
+
+
+
+function Nav({ isLogin }) {
+  // console.log(isLogin)
+  // isLogin = true;
+
+  const logoutRef = useRef();
+  const loginRef = useRef();
+  const signupRef = useRef();
+
+  const loginOpenModal = () => {
+    loginRef.current.loginOpen();
   }
-  return (
+  const logoutOpenModal = () => {
+    logoutRef.current.modalOpen();
+  }
+  const signupOpenModal = () => {
+    signupRef.current.signupOpen();
+  }
+
+
+
+ return (
     <nav className="nav">
       <div className="logo">
         <NavLink to="/">
@@ -18,23 +38,27 @@ function Nav({ status }) {
         </NavLink>
       </div>
 
-      {status ? (
+      {isLogin ? (
         <div className="login_menu">
-          <div className="menu">
-            {/* <NavLink to="/">로그아웃</NavLink> */}
-            <button className="logout_btn" onClick={showLogout}>로그아웃</button>
+          <div className="logout_btn">
+            <button onClick={logoutOpenModal} >로그아웃</button>
+            <Signout isLogin={isLogin} ref={logoutRef} />
           </div>
+         
           <div className="menu">
             <NavLink to="/mypage">마이페이지</NavLink>
           </div>
         </div>
       ) : (
           <div className="login_menu">
-            <div className="menu">
-              <NavLink to="/login">로그인</NavLink>
+            <div className="logout_btn">
+              <button onClick={loginOpenModal} >로그인</button>
+              <Signin ref={loginRef} />
             </div>
-            <div className="menu">
-              <NavLink to="/signup">회원가입</NavLink>
+
+            <div className="signupBtnContainerWrap">
+              <button onClick={signupOpenModal} >회원가입</button>
+              <Signup ref={signupRef} />
             </div>
           </div>
         )}

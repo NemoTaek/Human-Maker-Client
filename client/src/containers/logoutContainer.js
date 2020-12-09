@@ -1,14 +1,27 @@
-import React, { useCallback } from "react";
-import SignOut from "../component/signout/Signout";
-import { logout } from "../modules/Toggle"
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Signout from '../component/signout/Signout';
+import { logout } from '../modules/login';
+import { closeModal } from '../modules/signOutModal'
 
 
-// react-hooks 써서 해보기
+
 const LogoutContainer = () => {
-  const id = useSelector(state => state.User.id);
-  const dispatch = useDispatch();
-  const onLogout = useCallback(() => dispatch(logout()), [dispatch])
-  return <SignOut id={id} onLogout={onLogout} />;
-};
-export default LogoutContainer
+    const isModalOpen = useSelector(state => state.modal.isOpen);
+    const dispatch = useDispatch();
+
+    const onLogout = useCallback(()=>
+        dispatch(logout()),[dispatch]
+    );
+    const modalClose = useCallback(() => 
+        dispatch(closeModal()),[dispatch]
+    );
+
+   
+    return (
+        <Signout onLogout={onLogout} isModalOpen={isModalOpen} onRequestClose={modalClose} />
+    )
+
+}
+
+export default LogoutContainer;
