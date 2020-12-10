@@ -8,10 +8,7 @@ import Signout from "../signout/Signout";
 import Signin from "../signin/Signin";
 import Signup from "../signup/Signup"
 
-function Nav({ isLogin }) {
-  // console.log(isLogin)
-  // isLogin = true;
-
+function Nav() {
   const logoutRef = useRef();
   const loginRef = useRef();
   const signupRef = useRef();
@@ -26,6 +23,7 @@ function Nav({ isLogin }) {
     signupRef.current.signupOpen();
   }
 
+  const isLogin = useSelector(state => state.login.isLogin)
   const rememberId = useSelector(state => state.User.id);
   const isRememberId = useSelector(state => state.login.isRememberId);
   const dispatch = useDispatch();
@@ -33,7 +31,6 @@ function Nav({ isLogin }) {
   const onLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const onRememberId = useCallback(() => dispatch(rememberid()), [dispatch])
   const onForgotId = useCallback(() => dispatch(forgotid()), [dispatch])
-
 
   return (
     <nav className="nav">
@@ -47,7 +44,7 @@ function Nav({ isLogin }) {
         <div className="login_menu">
           <div className="logout_btn">
             <button onClick={logoutOpenModal} >로그아웃</button>
-            <Signout onLogout={onLogout} ref={logoutRef} />
+            <Signout id={rememberId} onLogout={onLogout} ref={logoutRef} />
           </div>
 
           <div className="menu">

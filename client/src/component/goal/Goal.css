@@ -1,0 +1,41 @@
+.goal{
+  width: 100%;
+  height: calc(100vh - 150px);
+}
+
+.goal .calendar_wrap{
+  width: 40%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+
+.goal .calendar_wrap .calendar_title{
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+
+.goal .calendar_wrap .calendar{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+/* .goal .calendar_wrap .calendar > tr{
+  
+} */
+.goal .calendar_wrap .calendar > tr > td{
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.goal .goal_wrap{
+  width: 50%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}

@@ -195,13 +195,19 @@ const Signin = forwardRef((props, ref) => {
 								<p>{isLogInMsg}</p>
 							</div>
 
-							<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+							<div className="sign_in_btn_wrap">
+								<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+								<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
 
-							<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+								<GoogleLogin className="google" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+								<KakaoLogin className="kakao" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true"
+									style={{
+										width: "100%", height: "50px", lineHeight: "50px", color: "rgb(60,30,30)", backgroundColor: "rgb(255,255,0)",
+										border: "1px solid transparent", borderRadius: "3px", fontSize: "16px", textAlign: "center"
+									}} />
+								<div className="naver" id="naverIdLogin" onClick={naverLogin}></div>
+							</div>
 
-							<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
-							<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
-							<div id="naverIdLogin" onClick={naverLogin}></div>
 
 						</div>
 					</div>

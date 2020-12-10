@@ -8,8 +8,8 @@ const Signup = forwardRef((props, ref) => {
 	const [display, setDisplay] = useState(false);
 	useImperativeHandle(ref, () => {
 		return {
-			signupOpen : () => openSignup(),
-			signupClose : () => closeSignup()
+			signupOpen: () => openSignup(),
+			signupClose: () => closeSignup()
 		}
 	})
 
@@ -176,52 +176,51 @@ const Signup = forwardRef((props, ref) => {
 		}
 	}
 
-	if(display){
+	if (display) {
 		return ReactDOM.createPortal(
 			<div className="modalWrapper">
 				<div className="modalBg" onClick={closeSignup}></div>
 				<div className="modalBox">
-					<div className="sign_up_container">
-						<p className="sign_up_name" >회원가입</p>
-						<div className="input_container_wrap">
-							
-							<div className="input_container idInput_container">
-								<span>아이디</span>
-								<div className="input_btn_wrap">
-									<input className="sign_up_idInput" type="text" onChange={onChangeId} autoFocus required />
-									<button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
+					<div className="sign_up_wrap">
+						<div className="sign_up_container">
+							<p className="sign_up_name" >회원가입</p>
+							<div className="input_container_wrap">
+
+								<div className="input_container idInput_container">
+									<span>아이디</span>
+									<div className="input_btn_wrap">
+										<input className="sign_up_idInput" type="text" onChange={onChangeId} autoFocus required />
+										<button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
+									</div>
+									<p className="checkMsg">{idCheckMsg}</p>
 								</div>
-								<p className="checkMsg">{idCheckMsg}</p>
+
+								<div className="input_container pwInput_container">
+									<span>비밀번호</span>
+									<input className="sign_up_pwInput" type="password" onChange={onChangePw} required />
+									<p className="checkMsg">{pwCheckMsg}</p>
+								</div>
+
+								<div className="input_container pwCheckInput_container">
+									<span>비밀번호 확인</span>
+									<input className="sign_up_pwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
+									<p className="checkMsg">{pwDoubleMsg}</p>
+								</div>
 							</div>
-		
-							<div className="input_container pwInput_container">
-								<span>비밀번호</span>
-								<input className="sign_up_pwInput" type="password" onChange={onChangePw} required />
-								<p className="checkMsg">{pwCheckMsg}</p>
-							</div>
-		
-							<div className="input_container pwCheckInput_container">
-								<span>비밀번호 확인</span>
-								<input className="sign_up_pwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
-								<p className="checkMsg">{pwDoubleMsg}</p>
-							</div>
+
+							<button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
+							<p className="subMessage">{subMessage}</p>
 						</div>
-		
-						<button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
-						<p className="subMessage">{subMessage}</p>
 					</div>
+
+					{/* <div className="oauthImg">
 		
-					<div className="oauthImg">
-						{/* <img className onClick={} ></img>
-										<img className onClick={} ></img>
-										<img className onClick={} ></img>*/}
-		
-					</div>
+					</div> */}
 				</div>
 			</div>, document.getElementById("modal_root")
 		);
 	}
-	return null ;
+	return null;
 
 })
 
