@@ -6,11 +6,46 @@ import Plan from '../plan/Plan'
 
 function Goal() {
 
-  const rememberId = useSelector(state => state.User.id);
+  // const viewGoal = useSelector(state => state.plan.goalTitle);
+  // const viewPlan = useSelector(state => state.plan.planContents);
 
   const goalRef = useRef();
   const goalOpenModal = () => {
     goalRef.current.goalOpen();
+  }
+
+  let input = document.getElementsByClassName("plan_detail");
+  let count = 0;
+  let completed = 0;
+  const completedGoal = (e) => {
+    if (e.target.checked) {
+      count++;
+      completed += (1 / input.length) * 100;
+      completed = Math.round(completed);
+      if (completed === 99) {
+        completed = 100;
+      }
+      document.getElementsByClassName("completed_rate")[0].textContent = "달성률: " + completed + "%";
+    }
+    else {
+      count--;
+      if (completed === 100) {
+        completed = 99;
+      }
+      completed -= (1 / input.length) * 100;
+      completed = Math.round(completed);
+      document.getElementsByClassName("completed_rate")[0].textContent = "달성률: " + completed + "%";
+    }
+    completedBtn();
+  }
+
+  const completedBtn = () => {
+    if (count === input.length) {
+      document.getElementsByClassName("completed_btn")[0].disabled = false;
+    }
+    else {
+      document.getElementsByClassName("completed_btn")[0].disabled = true;
+    }
   }
 
 
@@ -144,8 +179,45 @@ function Goal() {
 
       <div className="goal_wrap">
         <button className="goal_btn" onClick={goalOpenModal} >목표 설정하기</button>
-        <Plan id={rememberId} ref={goalRef}></Plan>
+        <Plan ref={goalRef}></Plan>
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+
+        <div className="view_plan_wrap">
+          <div className="view_plan_title_wrap">
+            <p className="plan_title">&lt; 오늘의 목표 &gt;</p>
+            <p className="view_plan_title">모달에서 목표 적으면 DB에서 가져와서 출력될 것이다</p>
+          </div>
+
+          <div className="plan_detail_wrap">
+            <label className="plan_detail">
+              <input type="checkbox" onChange={e => completedGoal(e)} />모달에서 세부목표 적으면 DB에서 가져와서 출력될 것이다.
+            </label>
+            <label className="plan_detail">
+              <input type="checkbox" onChange={e => completedGoal(e)} />모달에서 세부목표 적으면 DB에서 가져와서 출력될 것이다.
+            </label>
+            <label className="plan_detail">
+              <input type="checkbox" onChange={e => completedGoal(e)} />모달에서 세부목표 적으면 DB에서 가져와서 출력될 것이다.
+            </label>
+          </div>
+
+          <div className="completed_wrap">
+            <button className="completed_btn" disabled>달성했다!</button>
+            <span className="completed_rate">달성률: 0%</span>
+          </div>
+        </div>
+
       </div>
+
     </div>
   );
 }

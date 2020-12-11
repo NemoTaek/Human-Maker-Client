@@ -190,7 +190,7 @@ const Signin = forwardRef((props, ref) => {
 
 							<label className="remember_id">
 								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
-										</label>
+							</label>
 
 							<div className="login_message">
 								<p>{isLogInMsg}</p>

@@ -39,3 +39,47 @@
   margin: 20px;
   float: left;
 }
+
+.view_plan_wrap{
+  text-align: center;
+}
+
+.view_plan_wrap .view_plan_title_wrap{
+  margin-bottom: 30px;
+}
+
+.view_plan_wrap .view_plan_title_wrap .plan_title{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.view_plan_wrap .view_plan_title_wrap .view_plan_title{
+  font-size: 30px;
+}
+
+.view_plan_wrap .plan_detail_wrap{
+  margin-bottom: 30px;
+}
+
+.view_plan_wrap .plan_detail_wrap .plan_detail{
+  display: block;
+  font-size: 20px;
+}
+.view_plan_wrap .plan_detail_wrap .plan_detail > input{
+  margin-right: 10px;
+}
+
+.view_plan_wrap .completed_wrap{
+  width: 100%;
+  height: 30px;
+}
+
+.view_plan_wrap .completed_wrap .completed_btn{
+  width: 100px;
+  height: 30px;
+  float: left;
+}
+.view_plan_wrap .completed_wrap .completed_rate{
+  float: right;
+  line-height: 30px;
+  font-size: 30px;
+}
