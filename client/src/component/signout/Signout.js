@@ -1,5 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactDOM from "react-dom"
+import '../modal.css'
 import './Signout.css'
 
 const Signout = forwardRef((props, ref) => {

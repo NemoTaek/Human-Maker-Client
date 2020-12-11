@@ -1,5 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from "react-dom"
+import '../modal.css'
 import './Plan.css'
 
 const Plan = forwardRef((props, ref) => {
@@ -50,7 +51,29 @@ const Plan = forwardRef((props, ref) => {
       <div className="modalWrapper" >
         <div className="modalBg" onClick={clickBg} ></div>
         <div className="modalBox">
-          <div>{props.id}</div>
+
+          <div className="input_plan_wrap">
+            <div className="plan_title_wrap">
+              <p className="plan_title">&lt; 오늘의 목표 &gt;</p>
+              <input className="input_plan_title"></input>
+            </div>
+
+            <div className="plan_detail_wrap">
+              <span className="plan_detail">세부 목표 1: </span>
+              <input className="input_plan_detail"></input>
+            </div>
+            <div className="plan_detail_wrap">
+              <span className="plan_detail">세부 목표 2: </span>
+              <input className="input_plan_detail"></input>
+            </div>
+            <div className="plan_detail_wrap">
+              <span className="plan_detail">세부 목표 3: </span>
+              <input className="input_plan_detail"></input>
+            </div>
+
+            <button className="plan_btn" onClick={closeGoal}>목표 추가!</button>
+          </div>
+
         </div>
       </div>, document.getElementById("modal_root")
     );
