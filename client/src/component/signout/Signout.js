@@ -34,14 +34,16 @@ const Signout = forwardRef((props, ref) => {
         return ReactDOM.createPortal(
             <div className="modalWrapper">
                 <div className="modalBg" onClick={clickBg} ></div>
-                <div className="modalBox">
+                <div className="sign_out_modalBox">
                     <div className="logoutMsg">
                         <h3>로그아웃 되었습니다.</h3>
-                        <hr />
-                        <div>목표를 위해 화이팅!!</div>
-                        <hr />
-                    </div>
-                    <button className="logoutModalBtn" onClick={closeModal}>확인</button>
+                        <div className="todayMsg">
+                            <p>인간이 되는 그날까지....</p>
+                        </div>
+                        <div className="logoutBtnContainer">
+                         <button className="logoutModalBtn" onClick={closeModal}>화이팅!!</button>
+                        </div>
+                    </div>   
                 </div>
             </div>, document.getElementById("modal_root")
         )

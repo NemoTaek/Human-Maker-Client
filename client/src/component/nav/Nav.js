@@ -4,9 +4,9 @@ import { login, logout, rememberid, forgotid } from "../../modules/login"
 import { useSelector, useDispatch } from 'react-redux';
 import "./Nav.css"
 import logo from "../../img/dangoon.png"
-import Signout from "../signout/Signout";
-import Signin from "../signin/Signin";
-import Signup from "../signup/Signup"
+import SignOut from "../signout/Signout";
+import SignIn from "../signin/Signin";
+import SignUp from "../signup/Signup"
 
 function Nav({ isLogin }) {
   // console.log(isLogin)
@@ -45,9 +45,10 @@ function Nav({ isLogin }) {
 
       {isLogin ? (
         <div className="login_menu">
-          <div className="logout_btn">
-            <button onClick={logoutOpenModal} >로그아웃</button>
-            <Signout onLogout={onLogout} ref={logoutRef} />
+
+          <div className="nav_btn_container">
+            <button className="nav_btn" onClick={logoutOpenModal} >로그아웃</button>
+            <SignOut onLogout={onLogout} ref={logoutRef} />
           </div>
 
           <div className="menu">
@@ -56,14 +57,16 @@ function Nav({ isLogin }) {
         </div>
       ) : (
           <div className="login_menu">
-            <div className="logout_btn">
-              <button onClick={loginOpenModal} >로그인</button>
-              <Signin rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId} onRememberId={onRememberId} onForgotId={onForgotId} ref={loginRef} />
+
+            <div className="nav_btn_container">
+              <button className="nav_btn" onClick={loginOpenModal} >로그인</button>
+              <SignIn rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId} 
+                      onRememberId={onRememberId} onForgotId={onForgotId} ref={loginRef} />
             </div>
 
-            <div className="signupBtnContainerWrap">
-              <button onClick={signupOpenModal} >회원가입</button>
-              <Signup ref={signupRef} />
+            <div className="nav_btn_container">
+              <button className="nav_btn" onClick={signupOpenModal} >회원가입</button>
+              <SignUp ref={signupRef} />
             </div>
           </div>
         )}

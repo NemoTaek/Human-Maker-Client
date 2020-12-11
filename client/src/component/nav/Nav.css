@@ -13,23 +13,44 @@
   height: 100%;
 }
 
-.nav a{
-  font-size: 24px;
+.login_menu{
+  text-align: center;
+  display: flex;
+  width: 200px;
+ 
+}
+.menu{
+  height: 32px;
+  width: 64px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+}
+.menu:hover{
+  color: white;
+  background-color: #000;
+}
+.nav_btn_container{
+  width: 90px;
 }
 
-.nav .login_menu{
-  text-align: center;
-}
-.nav .login_menu > div{
-  display: inline-block;
-  width: 150px;
-  height: 100%;
-}
-.nav .login_menu .logout_btn{
+
+.nav_btn{
   border: none;
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 24px;
-  text-decoration: none;
-  cursor: pointer;
+  background-color: white;
+  height: 32px;
+  width: 64px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+/* .nav_btn::after{
+  padding-left: 10px;
+  content: "|";
+}
+button:last-child::after{
+  content: "";
+} */
+.nav_btn:hover{
+  color: white;
+  background-color: #000;
 }

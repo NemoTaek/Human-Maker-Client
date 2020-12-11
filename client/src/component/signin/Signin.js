@@ -160,37 +160,42 @@ const Signin = forwardRef((props, ref) => {
 		return ReactDOM.createPortal(
 			<div className="modalWrapper" >
 				<div className="modalBg" onClick={clickBg} ></div>
-				<div className="modalBox">
+				<div className="sign_in_modalBox">
 					<div className="sign_in_wrap">
 						<div className="sign_in_container">
+							
 							<p className="sign_in_name" >로그인</p>
-
+							
 							<div className="input_container_wrap">
 								<div className="input_container">
-									<span>아이디</span>
-									<input className="sign_in_idInput" type="text" onChange={onChangeId} autoFocus required />
+									<div className="input_name">
+										<span>아이디</span>
+									</div>
+									<input className="sign_in_idInput" type="text" onChange={onChangeId} tabIndex="1" autoFocus required />
 								</div>
 
 								<div className="input_container">
-									<span>비밀번호</span>
-									<input className="sign_in_pwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
+									<div className="input_name">
+										<span> 비밀번호</span>
+									</div>
+									<input className="sign_in_pwInput" type="password" onChange={onChangePw} tabIndex="2" onKeyPress={onKeyEnt} required />
 								</div>
 							</div>
 
 							<label className="remember_id">
-								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
+								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} tabIndex="3" />아이디 기억하기
 										</label>
 
 							<div className="login_message">
 								<p>{isLogInMsg}</p>
 							</div>
 
-							<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+							<button className="btn" onClick={onClickSignInBtn} tabIndex="4" >로그인</button>
 
-							<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+							<button className="btn" onClick={onClickSignUpBtn} tabIndex="5" >간편 회원가입</button>
 
-							<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
-							<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
+							<GoogleLogin className="oauth_btn" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+							<KakaoLogin className="oauth_btn" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
 
 
 						</div>
