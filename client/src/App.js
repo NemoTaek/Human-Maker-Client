@@ -4,6 +4,7 @@ import './App.css';
 import Main from './component/main/Main'
 import Goal from './component/goal/Goal'
 import Nav from './component/nav/Nav'
+import Mypage from './component/mypage/Mypage'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           </Route>
 
           <Route path="/mypage" >
-            {/* <Mypage /> */}
+            <Mypage />
           </Route>
 
           <Route exact path="/" >
