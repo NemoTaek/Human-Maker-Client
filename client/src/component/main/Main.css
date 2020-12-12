@@ -32,7 +32,7 @@
   width: 30%;
   text-align: center;
 }
-.main1 .btn_wrap > button{
+.main1 .btn_wrap button{
   width: 70%;
   height: 100px;
   text-align: center;
@@ -40,17 +40,17 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.main1 .btn_wrap > button > img{
+.main1 .btn_wrap .btn > img{
   width: 30%;
   height: 100%;
 }
-.main1 .btn_wrap > button > div{
+.main1 .btn_wrap .btn > div{
   display: inline-block;
   width: 70%;
   height: 100%;
   vertical-align: top;
 }
-.main1 .btn_wrap > button > div > span{
+.main1 .btn_wrap .btn > div > span{
   line-height: 100px;
   font-size: 20px;
 }

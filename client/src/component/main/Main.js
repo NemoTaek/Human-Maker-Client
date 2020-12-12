@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./Main.css"
 import guest from "../../img/ssook.png"
 import start from "../../img/garlic.png"
@@ -17,18 +18,21 @@ function Main() {
           사람이 되어봅시다아ㅏㅏㅏㅏ!!!!
         </p>
         <div className="btn_wrap">
-          <button className="guest_btn">
+          <button className="btn guest_btn">
             <img src={guest} alt=""></img>
             <div>
               <span>체험해보기</span>
             </div>
           </button>
-          <button className="start_btn">
-            <img src={start} alt=""></img>
-            <div>
-              <span>시작하기</span>
-            </div>
-          </button>
+
+          <Link to="/goal">
+            <button className="btn start_btn">
+              <img src={start} alt=""></img>
+              <div>
+                <span>시작하기</span>
+              </div>
+            </button>
+          </Link>
         </div>
       </div>
 

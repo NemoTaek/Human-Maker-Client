@@ -1,6 +1,7 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from "react-dom"
 import axios from 'axios'
+import '../modal.css'
 import './Signin.css'
 import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
@@ -11,7 +12,8 @@ const Signin = forwardRef((props, ref) => {
 
 	const googleAPI = "";
 	const kakaoAPI = "";
-	// const naverAPI = "";
+	const naverAPI = "";
+	const { naver } = window;
 
 	const [display, setDisplay] = useState(false);
 
@@ -37,12 +39,17 @@ const Signin = forwardRef((props, ref) => {
 				document.getElementsByClassName("sign_in_idInput")[0].value = props.rememberId;
 			}
 		}
-	}, []);
+	}, [display]);
+	useEffect(() => {
+		if (display) {
+			naverLogin();
+		}
+	}, [display]);
 
 	// const isLogin = useSelector(state => state.login.isLogin);
 	const [isLogInMsg, setIsLogInMsg] = useState("");
 
-	const [id, setId] = useState("");
+	const [id, setId] = useState(props.rememberId);
 	const [password, setPassword] = useState("");
 
 	const [checkRememberId, setCheckRememberId] = useState(props.isRememberId);
@@ -122,7 +129,7 @@ const Signin = forwardRef((props, ref) => {
 	}
 
 	const responseKakao = (res) => {
-		// console.log(res);
+		console.log(res);
 		// setId(res.profile.id);	// 구글아이디로 로그인하면 그 id 값을 state에 설정
 		// onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
 
@@ -141,16 +148,20 @@ const Signin = forwardRef((props, ref) => {
 		console.log("success")
 	}
 
-	// const responseNaver = new naver.LoginWithNaverId({
-	// 	clientId: naverAPI,
-	// 	callbackUrl: "127.0.0.1:3000",
-	// 	callbackHandle: true,
-	// 	loginButton: {
-	// 		color: "green",
-	// 		type: "3",
-	// 		height: "30"
-	// 	}
-	// });
+	const naverLogin = () => {
+		const responseNaver = new naver.LoginWithNaverId({
+			clientId: naverAPI,
+			callbackUrl: "http://localhost:3000/",
+			isPopup: false,
+			loginButton: {
+				color: "green",
+				type: "3",
+				height: "30"
+			}
+		});
+		responseNaver.init();
+	}
+
 
 	const responseFail = (err) => {
 		console.log(err);
@@ -179,18 +190,24 @@ const Signin = forwardRef((props, ref) => {
 
 							<label className="remember_id">
 								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
-										</label>
+							</label>
 
 							<div className="login_message">
 								<p>{isLogInMsg}</p>
 							</div>
 
-							<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+							<div className="sign_in_btn_wrap">
+								<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
+								<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
 
-							<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
-
-							<GoogleLogin clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
-							<KakaoLogin clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
+								<GoogleLogin className="google" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+								<KakaoLogin className="kakao" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true"
+									style={{
+										width: "100%", height: "50px", lineHeight: "50px", color: "rgb(60,30,30)", backgroundColor: "rgb(255,255,0)",
+										border: "1px solid transparent", borderRadius: "3px", fontSize: "16px", textAlign: "center"
+									}} />
+								<div className="naver" id="naverIdLogin" onClick={naverLogin}></div>
+							</div>
 
 
 						</div>

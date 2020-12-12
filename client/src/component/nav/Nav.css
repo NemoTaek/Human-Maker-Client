@@ -25,6 +25,13 @@
   width: 150px;
   height: 100%;
 }
+.nav .login_menu > div > button{
+  border: none;
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 24px;
+}
 .nav .login_menu .logout_btn{
   border: none;
   background-color: #ffffff;

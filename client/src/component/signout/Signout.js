@@ -1,52 +1,52 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactDOM from "react-dom"
-// import {useSelector} from 'react-redux'
+import '../modal.css'
 import './Signout.css'
-
-
 
 const Signout = forwardRef((props, ref) => {
 
-    const [display, setDisplay] = useState(false)
+	const [display, setDisplay] = useState(false)
 
-    useImperativeHandle(ref, () => {
-        return {
-            modalOpen: () => openModal(),
-            modalClose: () => closeModal()
-        }
-    })
+	useImperativeHandle(ref, () => {
+		return {
+			modalOpen: () => openModal(),
+			modalClose: () => closeModal()
+		}
+	})
 
-    const openModal = () => {
-        setDisplay(true);
-    }
+	const openModal = () => {
+		setDisplay(true);
+	}
 
-    const closeModal = () => {
-        setDisplay(false);
-        props.onLogout();
-        document.location.replace("/")
-    }
-    const clickBg = () => {
-        setDisplay(false);
-    }
+	const closeModal = () => {
+		setDisplay(false);
+		props.onLogout();
+		document.location.replace("/")
+	}
+	const clickBg = () => {
+		setDisplay(false);
+	}
 
 
-    if (display) {
-        return ReactDOM.createPortal(
-            <div className="modalWrapper">
-                <div className="modalBg" onClick={clickBg} ></div>
-                <div className="modalBox">
-                    <div className="logoutMsg">
-                        <h3>로그아웃 되었습니다.</h3>
-                        <hr />
-                        <div>목표를 위해 화이팅!!</div>
-                        <hr />
-                    </div>
-                    <button className="logoutModalBtn" onClick={closeModal}>확인</button>
-                </div>
-            </div>, document.getElementById("modal_root")
-        )
-    }
-    return null;
+	if (display) {
+		return ReactDOM.createPortal(
+			<div className="modalWrapper">
+				<div className="modalBg" onClick={clickBg} ></div>
+				<div className="modalBox">
+					<div className="logout_modal_wrap">
+						<button className="ok" onClick={closeModal}>X</button>
+						<div className="logout_modal_content">
+							<p><span>{props.id}</span>님이 로그아웃 되었습니다.</p>
+							<p>목표를 위해 화이팅!!</p>
+							<button className="logoutModalBtn" onClick={closeModal}>아자!</button>
+						</div>
+						<div className="margin"></div>
+					</div >
+				</div>
+			</div>, document.getElementById("modal_root")
+		)
+	}
+	return null;
 })
 
 export default Signout;
