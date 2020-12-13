@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './Mypage.css';
 import bear from "../../img/bear.png"
 import ChangePassword from "./changePassword/ChangePassword"
+import MyGoals from "./myGoals/MyGoals"
+import MyCharacters from "./myCharacters/MyCharacters"
 
 function Mypage() {
   const viewChangePassword = () => {
@@ -10,9 +12,15 @@ function Mypage() {
     ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
   }
 
-  const viewMyGoals = () => { }
+  const viewMyGoals = () => {
+    const viewComponent = (<MyGoals></MyGoals>);
+    ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
+  }
 
-  const viewMyCharacters = () => { }
+  const viewMyCharacters = () => {
+    const viewComponent = (<MyCharacters></MyCharacters>);
+    ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
+  }
 
   return (
     <div className="mypage_wrap">
@@ -24,8 +32,8 @@ function Mypage() {
       <div className="mypage_contents_wrap">
         <div className="mypage_menu">
           <button className="change_pw_btn" onClick={viewChangePassword}>비밀번호 변경</button>
-          <button className="my_goals_btn">나의 연대기</button>
-          <button className="my_characters_btn">진화의 역사</button>
+          <button className="my_goals_btn" onClick={viewMyGoals}>나의 연대기</button>
+          <button className="my_characters_btn" onClick={viewMyCharacters}>진화의 역사</button>
         </div>
 
         <div className="mypage_contents">

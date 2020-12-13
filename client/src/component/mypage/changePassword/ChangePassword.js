@@ -5,20 +5,26 @@ function ChangePassword() {
   return (
     <div className="change_pw_wrap">
 
-      <div className="id">
-        <span>아이디: </span>
-        <input type="text" autoFocus required></input>
+      <div className="input_wrap id">
+        <p>아이디: </p>
+        <input type="text" autoFocus required readOnly></input>
       </div>
-      <div className="change_pw">
-        <span>변경할 비밀번호: </span>
+      <div className="input_wrap current_pw">
+        <p>현재 비밀번호: </p>
         <input type="password" required></input>
       </div>
-      <div className="change_pw_check">
-        <span>비밀번호 확인: </span>
+      <div className="input_wrap change_pw">
+        <p>변경할 비밀번호: </p>
+        <input type="password" required></input>
+      </div>
+      <div className="input_wrap change_pw_check">
+        <p>비밀번호 확인: </p>
         <input type="password" required></input>
       </div>
 
-      <button className="change_btn">변경하기</button>
+      <div className="change_btn_wrap">
+        <button className="change_btn">변경하기</button>
+      </div>
 
     </div>
   );
