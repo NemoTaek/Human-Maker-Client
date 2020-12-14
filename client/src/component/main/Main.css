@@ -1,85 +1,195 @@
-.wrap{
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main_container{
   width: 100%;
+}
+.main_intro_container{
+  width: 100%;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.main_string_wrap{
+  position: relative;
+  top: 230px;
+  left: 300px;
+  float: left;
+  height: 320px;
+  width: 550px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+.main_name{
+  margin-bottom: 10px;
+  width: 360px;
+  border-left: 5px solid #000;
+  transition: all 4s ease;
+  transform: rotateY(360deg);
+  perspective: 500px;
+  transition-duration: 0.5;
+}
+.main_name_main{
+  font-size: 50px; 
+}
+.main_name_subName{
+  margin-left: 16px;
+  font-size: 16px;
+  letter-spacing: 10px;
+}
+.main_info_container{
+  width: 520px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: seashell;
+}
+.main_info_wrap > p {
+  line-height: 1.7;
+  font-size: 24px;
+  width: 520px;
+}
+strong{
+  font-size: 24px;
+}
+.main_btn_wrap{
+  position: relative;
+  top: 550px;
+  left: -210px;
+}
+.guest_btn, .start_btn{
+  margin: 16px;
+  width: 160px;
+  height: 50px;
+}
+.guest_start {
+  margin: 6px;
+  padding: 5px;
+}
+.guest_start > span{
+  font-size: 16px;
+}
+.main_btn_img{
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+.main_2_char > img{
+  height: 200px;
+  width:  200px;
+}
+.main_img_container{
+  overflow: hidden;
 }
 
-.main1{
-  width: 100%;
-  height: calc(100vh - 150px);
-  display: flex;
-  align-items: center;      /* cross-axis 정렬 */
-  justify-content: center;  /* main-axis 정렬, default는 가로 */
+.main_img_wrap{
+  margin-left: 30px;
+  position: relative;
+  left: 380px;
+  width: 650px;
+  height: 700px;
+ 
 }
-/* 배경만 투명 */
-.main1::after{
-  width: 100%;
-  height: calc(100vh - 150px);
-  content: "";
-  opacity: 0.5;
+.danGoon_img{
+  position: relative;
+  top: 50px;
+  left: 130px;
+  
+}
+.tiger_img{
   position: absolute;
-  top: 0;
-  left: 0;
-  background-image: url("../../img/bg.jpeg");
-  background-size: cover;
+  top: 220px;
+  left: 30px;
+ 
+}
+.bear_img{
+  position: absolute;
+  top: 250px;
+  left: 380px;
+  
+}
+.cloud1_img{
+  position: absolute;
+  top: 290px;
+  left: 410px;
+  z-index: -1;
+}
+.cloud2_img{
+  position: absolute;
+  top: 330px;
+  left: 20px;
+  z-index: -1;
+}
+.cloud3_img{
+  position: absolute;
+  top: 400px;
+  left: 240px;
   z-index: -1;
 }
 
-.main1 > p{
-  width: 70%;
-  font-size: 30px;
-  padding: 0 20px;
+.danGoon{
+  width: 450px;
+  height: 500px;
 }
-.main1 .btn_wrap{
-  width: 30%;
-  text-align: center;
+.tiger{
+  width: 200px;
+  height: 300px;
 }
-.main1 .btn_wrap > button{
-  width: 70%;
-  height: 100px;
-  text-align: center;
-  background: none;
-  border-radius: 10px;
-  cursor: pointer;
+.bear{
+  width: 250px;
+  height: 300px;
 }
-.main1 .btn_wrap > button > img{
-  width: 30%;
-  height: 100%;
+.cloud1{
+  width: 250px;
+  height: 300px;
 }
-.main1 .btn_wrap > button > div{
-  display: inline-block;
-  width: 70%;
-  height: 100%;
-  vertical-align: top;
+.cloud2{
+  width: 200px;
+  height: 300px;
 }
-.main1 .btn_wrap > button > div > span{
-  line-height: 100px;
-  font-size: 20px;
+.cloud3{
+  width: 200px;
+  height: 300px;
 }
-.main1 .btn_wrap .guest_btn{
-  margin-bottom: 20px;
-}
-
-.main2{
-  width: 100%;
-  height: 50vh;
-  padding: 20px;
+.maim_2{
   display: flex;
-  align-items: center;      /* cross-axis 정렬 */
-  justify-content: center;  /* main-axis 정렬, default는 가로 */
-  background-color: #f3e9df;
-  /* #e6d0cf #cfc1b8 */
-}
-.main2 .left{
-  width: 30%;
-  height: 100%;
-}
-.main2 .left > img{
   width: 100%;
-  height: 100%;
+  height: 35vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 218, 197);
 }
-.main2 .right{
-  width: 50%;
+.main_2_char{
+  position: relative;
+  left: -250px;
 }
-.main2 .right > p{
+.main_2_char >img{
+  height: 400px;
+  width: 400px;
+  margin: 0;
+  padding: 0;
+}
+.maim_2_string > p{
+  font-size: x-large;
+}
+.main_3{
   width: 100%;
-  font-size: 30px;
+  height: 100vw;
+}
+.footer_container{
+  width: 100%;
+  height: 10vw;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(235, 218, 197);;
+}
+.copyright{
+  position: relative;
+  top: 16px;
+  font-size: small;
+  margin: 10px;
 }

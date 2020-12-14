@@ -36,7 +36,7 @@ const Signout = forwardRef((props, ref) => {
                 <div className="modalBg" onClick={clickBg} ></div>
                 <div className="sign_out_modalBox">
                     <div className="logoutMsg">
-                        <h3>로그아웃 되었습니다.</h3>
+                        <h3>정말.. 로그아웃 합니까 Human??</h3>
                         <div className="todayMsg">
                             <p>인간이 되는 그날까지....</p>
                         </div>

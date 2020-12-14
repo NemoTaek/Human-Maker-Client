@@ -102,7 +102,9 @@
 	font-size: 20px;
 	color: red;
 }
-
+.btn_wrap{
+  text-align: center;
+}
 .btn{
   margin-top: 24px;
 	width: 80%;
@@ -111,10 +113,13 @@
   border-radius: 10px;
 }
 .btn:hover {
-  background-color: rgb(132, 206, 235);
+  cursor: pointer;
+	background-color: #000;
+	color: #fff
 }
 .btn:active {
   background-color: rgb(243, 171, 89);
+	color: #000
 }
 
 .oauth_btn{

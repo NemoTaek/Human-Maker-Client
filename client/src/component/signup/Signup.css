@@ -78,17 +78,46 @@
 	height: 38px;
 	font-size: 16px;
 	margin-right: 20px;
+	border: 2px solid #f0f0f0;
 }
-.sign_up_input_container > input{
+.sign_up_idInput_container > input:focus{
+	background-color: rgb(190, 231, 238);
+}
+.sign_up_pwInput{
 	width: 88%;
 	height: 38px;
-  font-size: 16px;
+	font-size: 16px;
+	border: 2px solid #f0f0f0;
 }
 .sign_up_input_container > input:focus{
   background-color: rgb(190, 231, 238);
 }
-.sign_up_idInput_container > input:focus{
-	background-color: rgb(190, 231, 238);
+
+.successPwInput{
+	width: 88%;
+	height: 38px;
+	font-size: 16px;
+	border-color: #2ecc71;
+}
+.falsePwInput{
+	width: 88%;
+	height: 38px;
+	font-size: 16px;
+	border-color: #e74c3c;
+}
+.successInput{
+	width: 75%;
+	height: 38px;
+	font-size: 16px;
+	margin-right: 20px;
+	border-color: #2ecc71;
+}
+.falseInput{
+	width: 75%;
+	height: 38px;
+	font-size: 16px;
+	margin-right: 20px;
+	border-color: #e74c3c;
 }
 
 .idCheck_btn{
@@ -98,8 +127,9 @@
 	border-radius: 10px;
 }
 .idCheck_btn:hover{
-	background-color: rgb(132, 206, 235);
-	color: #000
+	cursor: pointer;
+	background-color: #000;
+	color: #fff
 }
 .idCheck_btn:active{
 	background-color: rgb(243, 171, 89);
@@ -114,10 +144,25 @@
 	border-radius: 10px;
 }
 .sign_up_btn:hover{
-	background-color: rgb(132, 206, 235);
-	color: #000;
+	cursor: pointer;
+	background-color: #000;
+	color: #fff
 }
 .sign_up_btn:active{
 	background-color: rgb(243, 171, 89);
 	color: #000
+}
+.none_checkMsg{
+	visibility: hidden;
+	font-size: 14px;
+}
+.successMsg{
+	visibility: visible;
+	font-size: 14px;
+	color: #2ecc71;
+}
+.falseMsg{
+	visibility: visible;
+	font-size: 14px;
+	color: #e74c3c;
 }

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { login, logout, rememberid, forgotid } from "../../modules/login"
 import { useSelector, useDispatch } from 'react-redux';
 import "./Nav.css"
-import logo from "../../img/dangoon.png"
+import logo from "../../img/mainlogo.png"
 import SignOut from "../signout/Signout";
 import SignIn from "../signin/Signin";
 import SignUp from "../signup/Signup"
@@ -18,12 +18,16 @@ function Nav({ isLogin }) {
 
   const loginOpenModal = () => {
     loginRef.current.loginOpen();
+    signupRef.current.signupClose();
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
   const logoutOpenModal = () => {
     logoutRef.current.modalOpen();
   }
   const signupOpenModal = () => {
     signupRef.current.signupOpen();
+    loginRef.current.loginClose();
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
   const rememberId = useSelector(state => state.User.id);

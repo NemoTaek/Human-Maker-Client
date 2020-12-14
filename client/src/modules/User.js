@@ -8,7 +8,7 @@ const USERPASSWORD = "User/USERPASSWORD";
 
 // export const login = () => ({ type: LOGIN });
 // export const logout = () => ({ type: LOGOUT });
-export const userid = (id) => ({ type: USERID, payload: id });
+export const userid = (id) => createAction({ type: USERID, payload: id });
 export const userpassword = (password) => ({ type: USERPASSWORD, payload: password });
 
 // 초기 상태 작성하기

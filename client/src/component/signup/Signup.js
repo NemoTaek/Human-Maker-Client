@@ -18,22 +18,23 @@ const Signup = forwardRef((props, ref) => {
 	}
 	const closeSignup = () => {
 		setDisplay(false);
+		document.getElementsByTagName('body')[0].style.overflow = 'scroll';
 	}
 
 	const [id, setId] = useState("");
-	const [idCheckMsg, setIdCheckMsg] = useState("");
+	const [idCheckMsg, setIdCheckMsg] = useState("error");
 	const [idAvailable, setIdAvailable] = useState(false);
 	const [idCheck, setIdCheck] = useState(false);
 
 	const [password, setPassword] = useState("");
-	const [pwCheckMsg, setPwCheckMsg] = useState(" ");
+	const [pwCheckMsg, setPwCheckMsg] = useState("error");
 	const [pwCheck, setPwCheck] = useState(false);
 
 	const [pwDouble, setPwDouble] = useState("");
-	const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
+	const [pwDoubleMsg, setPwDoubleMsg] = useState("error");
 	const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
 
-	const [subMessage, setSubMessage] = useState("");
+	const [subMessage, setSubMessage] = useState("error");
 
 	const userData = { id: id, password: password }
 
@@ -46,7 +47,7 @@ const Signup = forwardRef((props, ref) => {
 		let test = spe.test(id)
 
 		if (!id) {
-			setIdCheckMsg("")
+			setIdCheckMsg("error")
 		}
 		else if (id.length < 4) {
 			setIdCheckMsg("아이디는 4글자 이상만 사용 가능합니다.");
@@ -106,7 +107,7 @@ const Signup = forwardRef((props, ref) => {
 		let test = spe.test(password)
 
 		if (!password) {
-			setPwCheckMsg("")
+			setPwCheckMsg("error")
 		}
 		else if (password.length < 8) {
 			setPwCheckMsg("비밀번호는 8자리 이상만 가능합니다.");
@@ -132,7 +133,7 @@ const Signup = forwardRef((props, ref) => {
 	}
 	useEffect(() => {
 		if (!password || !pwDouble) {
-			setPwDoubleMsg("")
+			setPwDoubleMsg("error")
 			setPwDoubleCheck(false);
 		}
 		else if (pwDouble === password) {
@@ -190,9 +191,10 @@ const Signup = forwardRef((props, ref) => {
 								
 								<div className="sign_up_idInput_container">
 									<span>아이디</span>
-									<input className="sign_up_idInput" type="text" onChange={onChangeId} autoFocus required />
+									<input className={idCheckMsg==="error" ? "sign_up_idInput" : (idCheck ? "successInput" :"falseInput")} 
+													type="text" onChange={onChangeId} autoFocus required />
 									<button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
-									<div className="checkMsg">
+									<div className={idCheckMsg==="error" ? "none_checkMsg" :(idCheckMsg === "사용 가능한 아이디 입니다." ? "successMsg" : "falseMsg")}>
 										<p>{idCheckMsg}</p>
 									</div>
 								</div>
@@ -200,25 +202,28 @@ const Signup = forwardRef((props, ref) => {
 		
 								<div className="sign_up_input_container">
 									<span>비밀번호</span>
-									<input className="sign_up_input" type="password" onChange={onChangePw} required />
-									<div className="checkMsg">
+									<input className={pwCheckMsg==="error" ? "sign_up_pwInput" : (pwCheck ? "successPwInput" : "falsePwInput")} 
+													type="password" onChange={onChangePw} required />
+									<div className={pwCheckMsg==="error" ? "none_checkMsg" :(pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg" : "falseMsg")}>
 										<p>{pwCheckMsg}</p>
 									</div>
 								</div>
 			
 								<div className="sign_up_input_container">
 									<span>비밀번호 확인</span>
-									<input className="sign_up_pwCheckInput" type="password" onChange={onChangePwDoubleCk} required />
-									<div className="checkMsg">
+									<input className={pwDoubleMsg==="error" ? "sign_up_pwInput" : (pwDoubleCheck ? "successPwInput" :"falsePwInput")}
+													type="password" onChange={onChangePwDoubleCk} required />
+									<div className={pwDoubleMsg==="error" ? "none_checkMsg" :(pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg" : "falseMsg")}>
 										<p>{pwDoubleMsg}</p>
 									</div>
 								</div>
 
 							</div>
-
-							<button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
-							<div className="checkMsg">
-								<p>{subMessage}</p>
+							<div className="btn_wrap">
+								<button className="sign_up_btn" onClick={onClickSignUpBtn}>가입신청</button>
+								<div className={subMessage === "error" ? "none_checkMsg" : "falseMsg"} >
+									<p>{subMessage}</p>
+								</div>
 							</div>
 						</div>
 					</div>

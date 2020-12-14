@@ -1,13 +1,16 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from "react-dom"
 import axios from 'axios'
 import './Signin.css'
+import Signup from "../signup/Signup";
 import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 
 const Signin = forwardRef((props, ref) => {
+
+	const signupRef = useRef();
 
 	const googleAPI = "";
 	const kakaoAPI = "";
@@ -18,9 +21,16 @@ const Signin = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => {
 		return {
 			loginOpen: () => openLogin(),
-			loginClick: () => closeLogin()
+			loginClose: () => closeLogin()
 		}
 	})
+
+
+	const signupOpenModal = () => {
+		signupRef.current.signupOpen();
+  }
+
+
 	const openLogin = () => {
 		setDisplay(true)
 	}
@@ -29,6 +39,7 @@ const Signin = forwardRef((props, ref) => {
 	}
 	const clickBg = () => {
 		setDisplay(false)
+		document.getElementsByTagName('body')[0].style.overflow = 'scroll';
 	}
 
 	useEffect(() => {
@@ -86,7 +97,7 @@ const Signin = forwardRef((props, ref) => {
 		// 			onId();	// input에 있는 id를 store에 저장
 		// 			onPassword();	// input에 있는 password를 store에 저장
 		// 			onLogin();	// isLogin을 true로 변환
-		// 			document.location.replace("/");
+		// 			document.location.replace("/user");
 		// 		}
 		// 		else {
 		// 			setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
@@ -111,14 +122,10 @@ const Signin = forwardRef((props, ref) => {
 		closeLogin();
 	}
 
-	const onClickSignUpBtn = () => {
-		document.location.replace("/signup");
-	}
-
 	const responseGoogle = (res) => {
 		console.log(res);
 		setId(res.profileObj.name);	// 구글아이디로 로그인하면 그 id 값을 state에 설정
-		onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
+		// onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
 	}
 
 	const responseKakao = (res) => {
@@ -189,11 +196,11 @@ const Signin = forwardRef((props, ref) => {
 							<div className="login_message">
 								<p>{isLogInMsg}</p>
 							</div>
-
-							<button className="btn" onClick={onClickSignInBtn} tabIndex="4" >로그인</button>
-
-							<button className="btn" onClick={onClickSignUpBtn} tabIndex="5" >간편 회원가입</button>
-
+							<div className="btn_wrap">
+								<button className="btn" onClick={onClickSignInBtn} tabIndex="4" >로그인</button>
+								<button className="btn" onClick={signupOpenModal} tabIndex="5" >간편 회원가입</button>
+								<Signup ref={signupRef} />
+							</div>
 							<GoogleLogin className="oauth_btn" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
 							<KakaoLogin className="oauth_btn" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
 
