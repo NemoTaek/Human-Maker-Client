@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useSelector } from 'react-redux';
 import './Goal.css';
-import Plan from '../plan/Plan'
+import Plan from './plan/Plan'
 
 
 function Goal() {

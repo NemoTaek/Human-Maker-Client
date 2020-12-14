@@ -1,0 +1,34 @@
+.my_characters_wrap{
+  width: 100%;
+  padding: 2vh 2vw;
+}
+
+.my_characters_wrap .my_character{
+  display: inline-block;
+  width: 30%;
+  padding: 2%;
+  margin-right: 5%;
+}
+.my_characters_wrap .my_character:last-child{
+  margin-right: 0;
+}
+
+.my_characters_wrap .my_character .my_calendar{
+  width: 100%;
+}
+.my_characters_wrap .my_character .my_calendar > img{
+  width: 100%;
+}
+
+.my_characters_wrap .my_character .character_title{
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+.my_characters_wrap .my_character .character_title > p{
+  width: 100%;
+  font-size: 15px;
+}
+.my_characters_wrap .my_character .character_title .rate{
+  margin-top: 10px;
+}

@@ -1,0 +1,31 @@
+.my_goals_wrap{
+  width: 100%;
+  padding: 2vh 2vw;
+}
+
+.my_goals_wrap .my_goal{
+  display: inline-block;
+  width: 30%;
+  padding: 2%;
+  margin-right: 5%;
+}
+.my_goals_wrap .my_goal:last-child{
+  margin-right: 0;
+}
+
+.my_goals_wrap .my_goal .my_calendar{
+  width: 100%;
+}
+.my_goals_wrap .my_goal .my_calendar > img{
+  width: 100%;
+}
+
+.my_goals_wrap .my_goal .goal_title{
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+.my_goals_wrap .my_goal .goal_title > p{
+  width: 100%;
+  font-size: 15px;
+}

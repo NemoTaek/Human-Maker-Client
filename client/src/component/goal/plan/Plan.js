@@ -1,9 +1,9 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactDOM from "react-dom"
-import '../modal.css'
+import '../../modal.css'
 import './Plan.css'
-import { makeGoal, makePlan } from "../../modules/plan"
+import { makeGoal, makePlan } from "../../../modules/plan"
 
 const Plan = forwardRef((props, ref) => {
 
