@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from 'react-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import './Mypage.css';
 import bear from "../../img/bear.png"
 import ChangePassword from "./changePassword/ChangePassword"
@@ -7,8 +8,11 @@ import MyGoals from "./myGoals/MyGoals"
 import MyCharacters from "./myCharacters/MyCharacters"
 
 function Mypage() {
+  const rememberId = useSelector(state => state.User.id);
+  const rememberPw = useSelector(state => state.User.password);
+
   const viewChangePassword = () => {
-    const viewComponent = (<ChangePassword></ChangePassword>);
+    const viewComponent = (<ChangePassword id={rememberId} pw={rememberPw}></ChangePassword>);
     ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
   }
 
