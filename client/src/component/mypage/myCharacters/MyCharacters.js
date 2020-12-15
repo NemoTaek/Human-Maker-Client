@@ -5,6 +5,24 @@ import tiger from "../../../img/tiger.png"
 import dangoon from "../../../img/dangoon.png"
 
 function MyCharacters() {
+
+  // const id = useSelector(state => state.User.id);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://54.180.120.81:5000/myCharacterCards", {
+  //       params: {
+  //         userId: id
+  //       }
+  //     })
+  //     .then(data => {
+  //       if (data) {
+  //         console.log(data);
+  //       }
+  //     }).catch(err => {
+  //       console.log(err);
+  //     })
+  // })
+
   return (
     <div className="my_characters_wrap">
 

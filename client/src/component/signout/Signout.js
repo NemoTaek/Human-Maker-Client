@@ -20,8 +20,16 @@ const Signout = forwardRef((props, ref) => {
 
 	const closeModal = () => {
 		setDisplay(false);
-		props.onLogout();
-		document.location.replace("/")
+		axios
+			.get("http://54.180.120.81:5000/signOut")
+			.then(res => {
+				if (res.status === 205) {
+					props.onLogout();
+					document.location.replace("/")
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 	}
 	const clickBg = () => {
 		setDisplay(false);

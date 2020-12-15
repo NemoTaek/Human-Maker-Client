@@ -8,6 +8,7 @@ import { makeGoal, makePlan } from "../../../modules/plan"
 const Plan = forwardRef((props, ref) => {
 
   const [display, setDisplay] = useState(false);
+  const id = useSelector(state => state.User.id);
 
   useImperativeHandle(ref, () => {
     return {
@@ -26,17 +27,26 @@ const Plan = forwardRef((props, ref) => {
   }
 
   const [goal, setGoal] = useState('');
-  const [plan, setPlan] = useState([]);
-  // const tmpPlan = [];
-
-  // const dispatch = useDispatch();
-  // const onGoal = () => dispatch(makeGoal(goal));
-  // const onPlan = () => dispatch(makePlan(plan));
+  const [plan1, setPlan1] = useState('');
+  const [plan2, setPlan2] = useState('');
+  const [plan3, setPlan3] = useState('');
 
   const enterPlan = () => {
-    // onGoal();
-    // setPlan(tmpPlan);
-    // onPlan();
+    // axios
+    //   .post("http://54.180.120.81:5000/goalSetup", {
+    //     goal: goal,
+    //     subgoal1: plan1,
+    //     subgoal2: plan2,
+    //     subgoal3: plan3,
+    //     userId: id
+    //   })
+    //   .then(data => {
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
     closeGoal();
   }
 
@@ -45,20 +55,14 @@ const Plan = forwardRef((props, ref) => {
   }
 
   const onChangePlan1 = e => {
-    // tmpPlan.push(e.target.value);
+    setPlan1(e.target.value);
   }
   const onChangePlan2 = e => {
-    // tmpPlan.push(e.target.value);
+    setPlan2(e.target.value);
   }
   const onChangePlan3 = e => {
-    // tmpPlan.push(e.target.value);
+    setPlan3(e.target.value);
   }
-
-  // const onKeyEnt = e => {
-  //   if (e.key === "Enter") {
-  //     onClickSignInBtn();
-  //   }
-  // }
 
   if (display) {
     return ReactDOM.createPortal(
