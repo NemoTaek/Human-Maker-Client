@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import axios from 'axios'
 import './MyGoals.css';
 import calendar from "../../../img/calendar.png"
 
 function MyGoals() {
 
-  // const id = useSelector(state => state.User.id);
-  // useEffect(() => {
-  //   axios
-  //     .post("http://54.180.120.81:5000/myTodoLists", {
-  //       params: {
-  //         userId: id
-  //       }
-  //     })
-  //     .then(data => {
-  //       if (data) {
-  //         console.log(data);
-  //       }
-  //     }).catch(err => {
-  //       console.log(err);
-  //     })
-  // })
+  const id = useSelector(state => state.User.id);
+  useEffect(() => {
+    axios
+      .post("https://humanmaker.ml/mypage/myTodoLists", {
+        params: {
+          userId: id
+        }
+      })
+      .then(data => {
+        if (data) {
+          console.log(data);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+  })
 
   return (
     <div className="my_goals_wrap">

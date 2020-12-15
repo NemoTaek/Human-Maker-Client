@@ -7,22 +7,57 @@ import ChangePassword from "./changePassword/ChangePassword"
 import MyGoals from "./myGoals/MyGoals"
 import MyCharacters from "./myCharacters/MyCharacters"
 
+import { createStore, applyMiddleware } from "redux"
+import { Provider } from "react-redux"
+import { persistStore, persistReducer } from "redux-persist"
+import { PersistGate } from 'redux-persist/integration/react';
+import storage from 'redux-persist/lib/storage'
+import rootReducer from "../../modules"
+import logger from 'redux-logger';
+
 function Mypage() {
-  const rememberId = useSelector(state => state.User.id);
-  const rememberPw = useSelector(state => state.User.password);
+  const persistConfig = {
+    key: 'root',
+    storage
+  }
+
+  const enhancedReducer = persistReducer(persistConfig, rootReducer);
+  const store = createStore(enhancedReducer, applyMiddleware(logger));
+  const persistor = persistStore(store);
+
+  const id = useSelector(state => state.User.id);
+  const pw = useSelector(state => state.User.password);
 
   const viewChangePassword = () => {
-    const viewComponent = (<ChangePassword id={rememberId} pw={rememberPw}></ChangePassword>);
+    const viewComponent = (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ChangePassword id={id} pw={pw}></ChangePassword>
+        </PersistGate>
+      </Provider>
+    );
     ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
   }
 
   const viewMyGoals = () => {
-    const viewComponent = (<MyGoals></MyGoals>);
+    const viewComponent = (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MyGoals></MyGoals>
+        </PersistGate>
+      </Provider>
+    );
     ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
   }
 
   const viewMyCharacters = () => {
-    const viewComponent = (<MyCharacters></MyCharacters>);
+    const viewComponent = (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MyCharacters></MyCharacters>
+        </PersistGate>
+      </Provider>
+    );
     ReactDOM.render(viewComponent, document.getElementsByClassName("mypage_contents")[0]);
   }
 

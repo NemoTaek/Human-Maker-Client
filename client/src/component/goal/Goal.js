@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from 'react-redux';
+import axios from "axios";
 import './Goal.css';
 import Plan from './plan/Plan'
 
@@ -9,21 +10,21 @@ function Goal() {
   // const viewGoal = useSelector(state => state.plan.goalTitle);
   // const viewPlan = useSelector(state => state.plan.planContents);
 
-  // const id = useSelector(state => state.User.id);
-  // useEffect(() => {
-  //   axios
-  //     .post("http://54.180.120.81:5000/goalAchievementTable", { userId: id })
-  //     .then(data => {
-  //       if (data) {
-  //         console.log(data);
-  //       }
-  //       else {
-  //         alert("새 목표를 만들어야 합니다.");
-  //       }
-  //     }).catch(err => {
-  //       console.log(err);
-  //     })
-  // })
+  const id = useSelector(state => state.User.id);
+  useEffect(() => {
+    axios
+      .post("https://humanmaker.ml/goal", { userId: id })
+      .then(data => {
+        if (data) {
+          console.log(data);
+        }
+        else {
+          alert("새 목표를 만들어야 합니다.");
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+  })
 
   const goalRef = useRef();
   const goalOpenModal = () => {

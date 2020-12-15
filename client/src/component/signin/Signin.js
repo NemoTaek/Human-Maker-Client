@@ -29,7 +29,7 @@ const Signin = forwardRef((props, ref) => {
 
 	const signupOpenModal = () => {
 		signupRef.current.signupOpen();
-  }
+	}
 
 
 	const openLogin = () => {
@@ -57,9 +57,9 @@ const Signin = forwardRef((props, ref) => {
 	}, [display]);
 
 	// const isLogin = useSelector(state => state.login.isLogin);
-	const [isLogInMsg, setIsLogInMsg] = useState("");
+	const [isLogInMsg, setIsLogInMsg] = useState("error");
 
-	const [id, setId] = useState(props.rememberId);
+	const [id, setId] = useState(props.rememberId || "");
 	const [password, setPassword] = useState("");
 
 	const [checkRememberId, setCheckRememberId] = useState(props.isRememberId);
@@ -97,17 +97,17 @@ const Signin = forwardRef((props, ref) => {
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
 
-		if (!id) {
+		if (!id && !password ) {
 			setIsLogInMsg("아이디를 입력해주세요.");
 		}
-		if (id && !password) {
+		else if (id && !password) {
 			setIsLogInMsg("비밀번호를 입력해주세요.");
 		}
 		else {
-			setIsLogInMsg("");
+			setIsLogInMsg("error");
 		}
 		axios
-			.post("http://54.180.120.81:5000/signIn", userData)
+			.post("https://humanmaker.ml/signin", userData)
 			.then(res => {
 				if (res) {
 					const accessToken = res.data;
@@ -201,9 +201,9 @@ const Signin = forwardRef((props, ref) => {
 				<div className="sign_in_modalBox">
 					<div className="sign_in_wrap">
 						<div className="sign_in_container">
-							
+
 							<p className="sign_in_name" >로그인</p>
-							
+
 							<div className="input_container_wrap">
 								<div className="input_container">
 									<div className="input_name">
@@ -224,7 +224,7 @@ const Signin = forwardRef((props, ref) => {
 								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} tabIndex="3" />아이디 기억하기
 										</label>
 
-							<div className="login_message">
+							<div className={isLogInMsg === "error" ? "noneLoginMsg" : (isLogInMsg !== "error" ? "falseLoginMsg" : "noneLoginMsg")}>
 								<p>{isLogInMsg}</p>
 							</div>
 							<div className="btn_wrap">
