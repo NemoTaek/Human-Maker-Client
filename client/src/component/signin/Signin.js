@@ -86,21 +86,21 @@ const Signin = forwardRef((props, ref) => {
 
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
-		// axios
-		// 	.post("http://54.180.120.81:5000/signin", userData)
-		// 	.then(data => {
-		// 		if (data) {
-		// 			onId();	// input에 있는 id를 store에 저장
-		// 			onPassword();	// input에 있는 password를 store에 저장
-		// 			onLogin();	// isLogin을 true로 변환
-		// 			document.location.replace("/");
-		// 		}
-		// 		else {
-		// 			setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
-		// 		}
-		// 	}).catch(err => {
-		// 		console.log(err);
-		// 	})
+		axios
+			.post("http://54.180.120.81:5000/signIn", userData)
+			.then(data => {
+				if (data) {
+					onId();	// input에 있는 id를 store에 저장
+					onPassword();	// input에 있는 password를 store에 저장
+					props.onLogin();	// isLogin을 true로 변환
+					document.location.replace("/");
+				}
+				else {
+					setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 
 		if (!id) {
 			setIsLogInMsg("아이디를 입력해주세요.");

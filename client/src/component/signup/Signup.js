@@ -72,7 +72,7 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idAvailable) {
 			axios
-				.post("http://54.180.120.81:5000/signup/idDoubleCheck", { id: id })
+				.post("http://54.180.120.81:5000/checkusername", { id: id })
 				.then(res => {
 					if (res.status === 200) {
 						console.log(res);
@@ -152,13 +152,12 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idCheck && pwCheck && pwDoubleCheck) {
 			axios
-				.post("http://54.180.120.81:5000/signup", userData)
-				.then(() => {
-					alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
-					document.location.replace("/");
-					//document.history.push
-					//document.location.href
-					//document.location.replace
+				.post("http://54.180.120.81:5000/signUp", userData)
+				.then((res) => {
+					if (res.status === 201) {
+						alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
+						document.location.replace("/");
+					}
 				}).catch(err => {
 					console.log(err);
 				})
