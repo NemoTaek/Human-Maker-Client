@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import axios from 'axios'
 import './MyCharacters.css';
 import bear from "../../../img/bear.png"
 import tiger from "../../../img/tiger.png"
@@ -6,22 +8,22 @@ import dangoon from "../../../img/dangoon.png"
 
 function MyCharacters() {
 
-  // const id = useSelector(state => state.User.id);
-  // useEffect(() => {
-  //   axios
-  //     .post("http://54.180.120.81:5000/myCharacterCards", {
-  //       params: {
-  //         userId: id
-  //       }
-  //     })
-  //     .then(data => {
-  //       if (data) {
-  //         console.log(data);
-  //       }
-  //     }).catch(err => {
-  //       console.log(err);
-  //     })
-  // })
+  const id = useSelector(state => state.User.id);
+  useEffect(() => {
+    axios
+      .post("https://humanmaker.ml/mypage/myCharacterCards", {
+        params: {
+          userId: id
+        }
+      })
+      .then(data => {
+        if (data) {
+          console.log(data);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+  })
 
   return (
     <div className="my_characters_wrap">

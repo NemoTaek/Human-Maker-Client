@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactDOM from "react-dom"
-import '../modal.css'
+import axios from 'axios'
 import './Signout.css'
 
 const Signout = forwardRef((props, ref) => {
@@ -20,38 +20,36 @@ const Signout = forwardRef((props, ref) => {
 
 	const closeModal = () => {
 		setDisplay(false);
-		// axios
-		// 	.get("http://54.180.120.81:5000/signOut")
-		// 	.then(res => {
-		// 		if (res.status === 205) {
-		// 			props.onLogout();
-		// 			document.location.replace("/")
-		// 		}
-		// 	}).catch(err => {
-		// 		console.log(err);
-		// 	})
-		props.onLogout();
-		document.location.replace("/")
+		axios
+			.get("https://humanmaker.ml/signout")
+			.then(res => {
+				if (res.status === 205) {
+					props.onLogout();
+					document.location.replace("/")
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 	}
+
 	const clickBg = () => {
 		setDisplay(false);
 	}
-
 
 	if (display) {
 		return ReactDOM.createPortal(
 			<div className="modalWrapper">
 				<div className="modalBg" onClick={clickBg} ></div>
-				<div className="modalBox">
-					<div className="logout_modal_wrap">
-						<button className="ok" onClick={closeModal}>X</button>
-						<div className="logout_modal_content">
-							<p><span>{props.id}</span>님이 로그아웃 되었습니다.</p>
-							<p>목표를 위해 화이팅!!</p>
-							<button className="logoutModalBtn" onClick={closeModal}>아자!</button>
+				<div className="sign_out_modalBox">
+					<div className="logoutMsg">
+						<h3>정말.. 로그아웃 합니까 Human??</h3>
+						<div className="todayMsg">
+							<p>인간이 되는 그날까지....</p>
 						</div>
-						<div className="margin"></div>
-					</div >
+						<div className="logoutBtnContainer">
+							<button className="logoutModalBtn" onClick={closeModal}>화이팅!!</button>
+						</div>
+					</div>
 				</div>
 			</div>, document.getElementById("modal_root")
 		)

@@ -1,14 +1,16 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from "react-dom"
 import axios from 'axios'
-import '../modal.css'
 import './Signin.css'
+import Signup from "../signup/Signup";
 import { useDispatch } from 'react-redux';
 import { userid, userpassword } from "../../modules/User";
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 
 const Signin = forwardRef((props, ref) => {
+
+	const signupRef = useRef();
 
 	const googleAPI = "";
 	const kakaoAPI = "";
@@ -20,9 +22,16 @@ const Signin = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => {
 		return {
 			loginOpen: () => openLogin(),
-			loginClick: () => closeLogin()
+			loginClose: () => closeLogin()
 		}
 	})
+
+
+	const signupOpenModal = () => {
+		signupRef.current.signupOpen();
+	}
+
+
 	const openLogin = () => {
 		setDisplay(true)
 	}
@@ -31,6 +40,7 @@ const Signin = forwardRef((props, ref) => {
 	}
 	const clickBg = () => {
 		setDisplay(false)
+		document.getElementsByTagName('body')[0].style.overflow = 'scroll';
 	}
 
 	useEffect(() => {
@@ -87,7 +97,7 @@ const Signin = forwardRef((props, ref) => {
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
 		axios
-			.post("http://54.180.120.81:5000/signIn", userData)
+			.post("https://humanmaker.ml/signin", userData)
 			.then(data => {
 				if (data) {
 					onId();	// input에 있는 id를 store에 저장
@@ -112,20 +122,16 @@ const Signin = forwardRef((props, ref) => {
 			setIsLogInMsg("");
 		}
 
-		onId();
-		onPassword();
-		props.onLogin();
-		closeLogin();
-	}
-
-	const onClickSignUpBtn = () => {
-		document.location.replace("/signup");
+		// onId();
+		// onPassword();
+		// props.onLogin();
+		// closeLogin();
 	}
 
 	const responseGoogle = (res) => {
 		console.log(res);
 		setId(res.profileObj.name);	// 구글아이디로 로그인하면 그 id 값을 state에 설정
-		onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
+		// onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
 	}
 
 	const responseKakao = (res) => {
@@ -171,45 +177,50 @@ const Signin = forwardRef((props, ref) => {
 		return ReactDOM.createPortal(
 			<div className="modalWrapper" >
 				<div className="modalBg" onClick={clickBg} ></div>
-				<div className="modalBox">
+				<div className="sign_in_modalBox">
 					<div className="sign_in_wrap">
 						<div className="sign_in_container">
+
 							<p className="sign_in_name" >로그인</p>
 
 							<div className="input_container_wrap">
 								<div className="input_container">
-									<span>아이디</span>
-									<input className="sign_in_idInput" type="text" onChange={onChangeId} autoFocus required />
+									<div className="input_name">
+										<span>아이디</span>
+									</div>
+									<input className="sign_in_idInput" type="text" onChange={onChangeId} tabIndex="1" autoFocus required />
 								</div>
 
 								<div className="input_container">
-									<span>비밀번호</span>
-									<input className="sign_in_pwInput" type="password" onChange={onChangePw} onKeyPress={onKeyEnt} required />
+									<div className="input_name">
+										<span> 비밀번호</span>
+									</div>
+									<input className="sign_in_pwInput" type="password" onChange={onChangePw} tabIndex="2" onKeyPress={onKeyEnt} required />
 								</div>
 							</div>
 
 							<label className="remember_id">
-								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} />아이디 기억하기
-							</label>
+								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} tabIndex="3" />아이디 기억하기
+										</label>
 
 							<div className="login_message">
 								<p>{isLogInMsg}</p>
 							</div>
-
-							<div className="sign_in_btn_wrap">
-								<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
-								<button className="sign_in_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
-
+							<div className="btn_wrap">
+								<button className="btn" onClick={onClickSignInBtn} tabIndex="4" >로그인</button>
+								<button className="btn" onClick={signupOpenModal} tabIndex="5" >간편 회원가입</button>
+								<Signup ref={signupRef} />
+							</div>
+							<div className="oauth_wrap">
 								<GoogleLogin className="google" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
 								<KakaoLogin className="kakao" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true"
 									style={{
 										width: "100%", height: "50px", lineHeight: "50px", color: "rgb(60,30,30)", backgroundColor: "rgb(255,255,0)",
 										border: "1px solid transparent", borderRadius: "3px", fontSize: "16px", textAlign: "center"
 									}} />
+
 								<div className="naver" id="naverIdLogin" onClick={naverLogin}></div>
 							</div>
-
-
 						</div>
 					</div>
 				</div>

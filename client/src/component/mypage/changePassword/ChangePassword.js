@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import './ChangePassword.css';
 import axios from 'axios'
+import { userpassword } from "../../../modules/User"
 
 function ChangePassword(props) {
 
@@ -84,6 +86,7 @@ function ChangePassword(props) {
 
 
   useEffect(() => {
+    console.log(document.getElementsByClassName("change_btn")[0].disabled);
     if (pwCheck && pwDoubleCheck) {
       if (currentPw === props.pw && password === pwDouble) {
         document.getElementsByClassName("change_btn")[0].disabled = false;
@@ -94,21 +97,23 @@ function ChangePassword(props) {
     }
   }, [currentPw, password, pwDouble, pwCheck, pwDoubleCheck])
 
-  // const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
+  const dispatch = useDispatch();
+  const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
 
-  // const changePassword = () => {
-  //   const userData = { id: props.id, password: password };
-  //   axios
-  //     .put("http://54.180.120.81:5000/ChangeMyPassword", userData)
-  //     .then(data => {
-  //       if (data) {
-  //         onPassword();
-  //         alert("비밀번호 변경이 완료되었습니다.")
-  //       }
-  //     }).catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+  const changePassword = () => {
+    const userData = { id: props.id, password: password };
+    console.log('a');
+    axios
+      .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
+      .then(data => {
+        if (data) {
+          onPassword();
+          alert("비밀번호 변경이 완료되었습니다.")
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <div className="change_pw_wrap">
@@ -134,7 +139,7 @@ function ChangePassword(props) {
       </div>
 
       <div className="change_btn_wrap">
-        <button className="change_btn" disabled>변경하기</button>
+        <button className="change_btn" onClick={changePassword} disabled>변경하기</button>
       </div>
 
     </div>
