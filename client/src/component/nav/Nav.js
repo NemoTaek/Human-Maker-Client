@@ -8,10 +8,7 @@ import SignOut from "../signout/Signout";
 import SignIn from "../signin/Signin";
 import SignUp from "../signup/Signup"
 
-function Nav({ isLogin }) {
-  // console.log(isLogin)
-  // isLogin = true;
-
+function Nav() {
   const logoutRef = useRef();
   const loginRef = useRef();
   const signupRef = useRef();
@@ -30,6 +27,7 @@ function Nav({ isLogin }) {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
+  const isLogin = useSelector(state => state.login.isLogin)
   const rememberId = useSelector(state => state.User.id);
   const isRememberId = useSelector(state => state.login.isRememberId);
   const dispatch = useDispatch();
@@ -37,7 +35,6 @@ function Nav({ isLogin }) {
   const onLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const onRememberId = useCallback(() => dispatch(rememberid()), [dispatch])
   const onForgotId = useCallback(() => dispatch(forgotid()), [dispatch])
-
 
   return (
     <nav className="nav">

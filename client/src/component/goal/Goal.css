@@ -1,0 +1,85 @@
+.goal{
+  width: 100%;
+  height: calc(100vh - 150px);
+}
+
+.goal .calendar_wrap{
+  width: 40%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+
+.goal .calendar_wrap .calendar_title{
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+
+.goal .calendar_wrap .calendar{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+/* .goal .calendar_wrap .calendar > tr{
+  
+} */
+.goal .calendar_wrap .calendar > tr > td{
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.goal .goal_wrap{
+  width: 50%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+
+.view_plan_wrap{
+  text-align: center;
+}
+
+.view_plan_wrap .view_plan_title_wrap{
+  margin-bottom: 30px;
+}
+
+.view_plan_wrap .view_plan_title_wrap .plan_title{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.view_plan_wrap .view_plan_title_wrap .view_plan_title{
+  font-size: 30px;
+}
+
+.view_plan_wrap .plan_detail_wrap{
+  margin-bottom: 30px;
+}
+
+.view_plan_wrap .plan_detail_wrap .plan_detail{
+  display: block;
+  font-size: 20px;
+}
+.view_plan_wrap .plan_detail_wrap .plan_detail > input{
+  margin-right: 10px;
+}
+
+.view_plan_wrap .completed_wrap{
+  width: 100%;
+  height: 30px;
+}
+
+.view_plan_wrap .completed_wrap .completed_btn{
+  width: 100px;
+  height: 30px;
+  float: left;
+}
+.view_plan_wrap .completed_wrap .completed_rate{
+  float: right;
+  line-height: 30px;
+  font-size: 30px;
+}

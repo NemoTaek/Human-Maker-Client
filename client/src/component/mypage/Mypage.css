@@ -1,0 +1,44 @@
+.mypage_wrap{
+  width: 100%;
+  height: calc(100vh - 150px);
+}
+
+.mypage_wrap .me{
+  width: 40%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+.mypage_wrap .me > p{
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+}
+.mypage_wrap .me > img{
+  width: 100%;
+}
+
+.mypage_wrap .mypage_contents_wrap{
+  width: 50%;
+  border: 1px solid #000000;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+.mypage_wrap .mypage_contents_wrap .mypage_menu{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mypage_wrap .mypage_contents_wrap .mypage_menu > button{
+  width: 150px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.mypage_wrap .mypage_contents_wrap .mypage_contents{
+  width: 100%;
+  margin-top: 50px;
+}

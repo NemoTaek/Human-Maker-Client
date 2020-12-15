@@ -1,24 +1,22 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.logout_modal_wrap{
+  width: 100%;
+  /* height: 50vh; */
+	display: flex;
+	flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.modalWrapper{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.logout_modal_wrap .logout_modal_content{
+  width: 100%;
+  text-align: center;
+  padding: 0 4vw;
 }
-.modalBg{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background-color: rgba(0,0,0,0.3);
+.logout_modal_wrap .ok{
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+	margin: 20px 20px 0 0;
 }
 .sign_out_modalBox{
     position: relative;

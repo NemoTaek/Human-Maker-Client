@@ -14,7 +14,8 @@ const Signin = forwardRef((props, ref) => {
 
 	const googleAPI = "";
 	const kakaoAPI = "";
-	// const naverAPI = "";
+	const naverAPI = "";
+	const { naver } = window;
 
 	const [display, setDisplay] = useState(false);
 
@@ -48,12 +49,17 @@ const Signin = forwardRef((props, ref) => {
 				document.getElementsByClassName("sign_in_idInput")[0].value = props.rememberId;
 			}
 		}
-	}, []);
+	}, [display]);
+	useEffect(() => {
+		if (display) {
+			naverLogin();
+		}
+	}, [display]);
 
 	// const isLogin = useSelector(state => state.login.isLogin);
 	const [isLogInMsg, setIsLogInMsg] = useState("");
 
-	const [id, setId] = useState("");
+	const [id, setId] = useState(props.rememberId);
 	const [password, setPassword] = useState("");
 
 	const [checkRememberId, setCheckRememberId] = useState(props.isRememberId);
@@ -90,21 +96,21 @@ const Signin = forwardRef((props, ref) => {
 
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
-		// axios
-		// 	.post("http://54.180.120.81:5000/signin", userData)
-		// 	.then(data => {
-		// 		if (data) {
-		// 			onId();	// input에 있는 id를 store에 저장
-		// 			onPassword();	// input에 있는 password를 store에 저장
-		// 			onLogin();	// isLogin을 true로 변환
-		// 			document.location.replace("/user");
-		// 		}
-		// 		else {
-		// 			setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
-		// 		}
-		// 	}).catch(err => {
-		// 		console.log(err);
-		// 	})
+		axios
+			.post("http://54.180.120.81:5000/signIn", userData)
+			.then(data => {
+				if (data) {
+					onId();	// input에 있는 id를 store에 저장
+					onPassword();	// input에 있는 password를 store에 저장
+					props.onLogin();	// isLogin을 true로 변환
+					document.location.replace("/");
+				}
+				else {
+					setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 
 		if (!id) {
 			setIsLogInMsg("아이디를 입력해주세요.");
@@ -117,7 +123,7 @@ const Signin = forwardRef((props, ref) => {
 		}
 
 		onId();
-		onPassword();
+		onPassword(); // 추후에 테스트, 현재 오류
 		props.onLogin();
 		closeLogin();
 	}
@@ -129,7 +135,7 @@ const Signin = forwardRef((props, ref) => {
 	}
 
 	const responseKakao = (res) => {
-		// console.log(res);
+		console.log(res);
 		// setId(res.profile.id);	// 구글아이디로 로그인하면 그 id 값을 state에 설정
 		// onId();	// 위에서 id값을 googleId로 했으므로 onId로 이 id를 store에 저장
 
@@ -148,16 +154,20 @@ const Signin = forwardRef((props, ref) => {
 		console.log("success")
 	}
 
-	// const responseNaver = new naver.LoginWithNaverId({
-	// 	clientId: naverAPI,
-	// 	callbackUrl: "127.0.0.1:3000",
-	// 	callbackHandle: true,
-	// 	loginButton: {
-	// 		color: "green",
-	// 		type: "3",
-	// 		height: "30"
-	// 	}
-	// });
+	const naverLogin = () => {
+		const responseNaver = new naver.LoginWithNaverId({
+			clientId: naverAPI,
+			callbackUrl: "http://localhost:3000/",
+			isPopup: false,
+			loginButton: {
+				color: "green",
+				type: "3",
+				height: "30"
+			}
+		});
+		responseNaver.init();
+	}
+
 
 	const responseFail = (err) => {
 		console.log(err);
@@ -201,10 +211,16 @@ const Signin = forwardRef((props, ref) => {
 								<button className="btn" onClick={signupOpenModal} tabIndex="5" >간편 회원가입</button>
 								<Signup ref={signupRef} />
 							</div>
-							<GoogleLogin className="oauth_btn" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
-							<KakaoLogin className="oauth_btn" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true" />
+							<div className="oauth_wrap">
+								<GoogleLogin className="google" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
+								<KakaoLogin className="kakao" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true"
+									style={{
+										width: "100%", height: "50px", lineHeight: "50px", color: "rgb(60,30,30)", backgroundColor: "rgb(255,255,0)",
+										border: "1px solid transparent", borderRadius: "3px", fontSize: "16px", textAlign: "center"
+									}} />
 
-
+								<div className="naver" id="naverIdLogin" onClick={naverLogin}></div>
+							</div>
 						</div>
 					</div>
 				</div>

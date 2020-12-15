@@ -1,9 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactDOM from "react-dom"
-// import {useSelector} from 'react-redux'
 import './Signout.css'
-
-
 
 const Signout = forwardRef((props, ref) => {
 
@@ -20,15 +17,32 @@ const Signout = forwardRef((props, ref) => {
         setDisplay(true);
     }
 
-    const closeModal = () => {
-        setDisplay(false);
-        props.onLogout();
-        document.location.replace("/")
-    }
-    const clickBg = () => {
-        setDisplay(false);
-    }
+    // const closeModal = () => {
+    //     setDisplay(false);
+    //     props.onLogout();
+    //     document.location.replace("/")
+    // }
+    // const clickBg = () => {
+    //     setDisplay(false);
+    // }
 
+		const closeModal = () => {
+			setDisplay(false);
+			// axios
+			// 	.get("http://54.180.120.81:5000/signOut")
+			// 	.then(res => {
+			// 		if (res.status === 205) {
+						props.onLogout();
+						document.location.replace("/")
+			// 		}
+			// 	}).catch(err => {
+			// 		console.log(err);
+			// 	})
+		}
+
+		const clickBg = () => {
+			setDisplay(false);
+		}
 
     if (display) {
         return ReactDOM.createPortal(

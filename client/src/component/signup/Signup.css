@@ -64,13 +64,13 @@
 	display: block;
 	width: 100%;
 	font-size: 16px;
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 }
 .sign_up_idInput_container > span{
 	display: block;
 	width: 100%;
 	font-size: 16px;
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 }
 
 .sign_up_idInput{
@@ -135,7 +135,10 @@
 	background-color: rgb(243, 171, 89);
 	color: #000
 }
-
+.signup_btn_wrap{
+	width: 100%;
+	text-align: center;
+}
 .sign_up_btn{
 	height: 45px;
 	width: 50%;
