@@ -198,7 +198,7 @@ const Signin = forwardRef((props, ref) => {
 
 							<div className="sign_in_btn_wrap">
 								<button className="sign_in_btn" onClick={onClickSignInBtn}  >로그인</button>
-								<button className="sign_up_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
+								<button className="sign_in_btn" onClick={onClickSignUpBtn} >간편 회원가입</button>
 
 								<GoogleLogin className="google" clientId={googleAPI} buttonText="Google" onSuccess={responseGoogle} onFailure={responseFail} />
 								<KakaoLogin className="kakao" clientId={kakaoAPI} buttonText="Kakao" onSuccess={responseKakao} onFailure={responseFail} getProfile="true"
