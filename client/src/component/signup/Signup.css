@@ -153,16 +153,19 @@
 	color: #000
 }
 .none_checkMsg{
+	height: 20px;
 	visibility: hidden;
-	font-size: 14px;
+	font-size: 10px;
 }
 .successMsg{
+	height: 20px;
 	visibility: visible;
-	font-size: 14px;
+	font-size: 10px;
 	color: #2ecc71;
 }
 .falseMsg{
+	height: 20px;
 	visibility: visible;
-	font-size: 14px;
+	font-size: 10px;
 	color: #e74c3c;
 }
