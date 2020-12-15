@@ -1,4 +1,6 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { login, rememberid } from "../../modules/login"
 import "./Main.css"
 import SignIn from "../signin/Signin";
 import guest from "../../img/ssook.png"
@@ -11,11 +13,24 @@ import cloud2 from "../../img/middlecloud.png"
 import cloud3 from "../../img/bigcloud.png"
 
 function Main() {
-  
+
   const loginRef = useRef();
-  const loginOpenModal = () => {
-    loginRef.current.loginOpen();
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+
+  const isLogin = useSelector(state => state.login.isLogin)
+  const rememberId = useSelector(state => state.User.id);
+  const isRememberId = useSelector(state => state.login.isRememberId);
+  const dispatch = useDispatch();
+  const onLogin = useCallback(() => dispatch(login()), [dispatch])
+  const onRememberId = useCallback(() => dispatch(rememberid()), [dispatch])
+
+  const startBtn = () => {
+    if (isLogin) {
+      document.location.replace("/goal")
+    }
+    else {
+      loginRef.current.loginOpen();
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    }
   }
 
   return (
@@ -28,14 +43,14 @@ function Main() {
           </div>
           <div className="main_info_container">
             <div className="main_info_wrap">
-              <p>계속되는 <strong>집콕!</strong> <strong>방콕!</strong></p>  
+              <p>계속되는 <strong>집콕!</strong> <strong>방콕!</strong></p>
               <p>게을러진 바로 당신을 위한 맟춤형 서비스!!</p>
               <p><strong>'단군신화'</strong>를 모티브로한 <strong>Human Maker</strong>를 통해서</p>
               <p>조금씩 변하는 나를 느껴보세요!</p>
               <p>인간이 되는 그날을 꿈꾸며...</p>
             </div>
           </div>
-        </div>  
+        </div>
 
         <div className="main_btn_wrap">
           <button className="guest_btn">
@@ -44,47 +59,48 @@ function Main() {
               <span>체험해보기</span>
             </div>
           </button>
-          <button className="start_btn" onClick={loginOpenModal}>
+          <button className="start_btn" onClick={startBtn}>
             <img className="main_btn_img" src={start} alt=""></img>
             <div className="guest_start">
               <span>시작하기</span>
             </div>
           </button>
-            <SignIn ref={loginRef} />
+          <SignIn rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId}
+            onRememberId={onRememberId} ref={loginRef} />
         </div>
-        
+
         <div className="main_img_container">
           <div className="main_img_wrap">
-            <div className="danGoon_img"><img className="danGoon" src={danGoon} alt=""/></div>
-            <div className="tiger_img"><img className="tiger" src={tiger} alt=""/></div>
-            <div className="bear_img"><img className="bear" src={bear} alt=""/></div>
-            <div className="cloud1_img"><img className="cloud1" src={cloud1} alt=""/></div>
-            <div className="cloud2_img"><img className="cloud2" src={cloud2} alt=""/></div>
-            <div className="cloud3_img"><img className="cloud3" src={cloud3} alt=""/></div>
-            
-          </div>  
+            <div className="danGoon_img"><img className="danGoon" src={danGoon} alt="" /></div>
+            <div className="tiger_img"><img className="tiger" src={tiger} alt="" /></div>
+            <div className="bear_img"><img className="bear" src={bear} alt="" /></div>
+            <div className="cloud1_img"><img className="cloud1" src={cloud1} alt="" /></div>
+            <div className="cloud2_img"><img className="cloud2" src={cloud2} alt="" /></div>
+            <div className="cloud3_img"><img className="cloud3" src={cloud3} alt="" /></div>
+
+          </div>
         </div>
 
-      </div>  
+      </div>
 
-        <div className="maim_2">
-          <div className="main_2_char">
-            <img src={bear} alt=""></img>
-          </div>
+      <div className="maim_2">
+        <div className="main_2_char">
+          <img src={bear} alt=""></img>
+        </div>
 
-          <div className="maim_2_string">
-            <p>
-              우선 이루고자 하는 목표를 설정해보세요!
+        <div className="maim_2_string">
+          <p>
+            우선 이루고자 하는 목표를 설정해보세요!
             </p>
-          </div>
         </div>
+      </div>
 
-        <div className="main_3">웹서비스 기능소개</div>
+      <div className="main_3">웹서비스 기능소개</div>
 
-        <footer className="footer_container" >
-          <div className="copyright">&copy;DanGoon</div>
-        </footer>
-      
+      <footer className="footer_container" >
+        <div className="copyright">&copy;DanGoon</div>
+      </footer>
+
     </div>
   );
 }
