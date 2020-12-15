@@ -5,38 +5,64 @@
   align-items: center;
 }
 .nav .logo{
-  width: 100px;
+  width: 120px;
   height: 100px;
 }
 .nav .logo img{
-  width: 100%;
-  height: 100%;
+  position: relative;
+  top: 12px;
+  width: 125%;
+  height: 70%;
 }
 
-.nav a{
-  font-size: 24px;
-}
-
-.nav .login_menu{
+.login_menu{
   text-align: center;
+  display: flex;
+  width: 300px;
 }
-.nav .login_menu > div{
-  display: inline-block;
-  width: 150px;
-  height: 100%;
-}
-.nav .login_menu > div > button{
+
+.menu{
+  position: relative;
+  top: 3px;
+  height: 32px;
+  width: 100px;
+  font-size: 16px;
   border: none;
-  background: none;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 24px;
+  border-radius: 10px;
 }
-.nav .login_menu .logout_btn{
-  border: none;
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 24px;
-  text-decoration: none;
+.menu > a {
+  text-align: center;
+  padding: 7px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+.menu >a:hover{
   cursor: pointer;
+  color: white;
+  background-color: #000;
+}
+.nav_btn_container{
+  width: 120px;
+}
+
+
+.nav_btn{
+  border: none;
+  background-color: white;
+  height: 32px;
+  width: 64px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+/* .nav_btn::after{
+  padding-left: 10px;
+  content: "|";
+}
+button:last-child::after{
+  content: "";
+} */
+.nav_btn:hover{
+  cursor: pointer;
+  color: white;
+  background-color: #000;
 }

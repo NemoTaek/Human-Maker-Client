@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import { login, logout, rememberid, forgotid } from "../../modules/login"
 import { useSelector, useDispatch } from 'react-redux';
 import "./Nav.css"
-import logo from "../../img/dangoon.png"
-import Signout from "../signout/Signout";
-import Signin from "../signin/Signin";
-import Signup from "../signup/Signup"
+import logo from "../../img/mainlogo.png"
+import SignOut from "../signout/Signout";
+import SignIn from "../signin/Signin";
+import SignUp from "../signup/Signup"
 
 function Nav() {
   const logoutRef = useRef();
@@ -15,12 +15,16 @@ function Nav() {
 
   const loginOpenModal = () => {
     loginRef.current.loginOpen();
+    signupRef.current.signupClose();
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
   const logoutOpenModal = () => {
     logoutRef.current.modalOpen();
   }
   const signupOpenModal = () => {
     signupRef.current.signupOpen();
+    loginRef.current.loginClose();
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
   const isLogin = useSelector(state => state.login.isLogin)
@@ -42,9 +46,10 @@ function Nav() {
 
       {isLogin ? (
         <div className="login_menu">
-          <div className="logout_btn">
-            <button onClick={logoutOpenModal} >로그아웃</button>
-            <Signout id={rememberId} onLogout={onLogout} ref={logoutRef} />
+
+          <div className="nav_btn_container">
+            <button className="nav_btn" onClick={logoutOpenModal} >로그아웃</button>
+            <SignOut onLogout={onLogout} ref={logoutRef} />
           </div>
 
           <div className="menu">
@@ -53,14 +58,16 @@ function Nav() {
         </div>
       ) : (
           <div className="login_menu">
-            <div className="logout_btn">
-              <button onClick={loginOpenModal} >로그인</button>
-              <Signin rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId} onRememberId={onRememberId} onForgotId={onForgotId} ref={loginRef} />
+
+            <div className="nav_btn_container">
+              <button className="nav_btn" onClick={loginOpenModal} >로그인</button>
+              <SignIn rememberId={rememberId} onLogin={onLogin} isRememberId={isRememberId} 
+                      onRememberId={onRememberId} onForgotId={onForgotId} ref={loginRef} />
             </div>
 
-            <div className="signupBtnContainerWrap">
-              <button onClick={signupOpenModal} >회원가입</button>
-              <Signup ref={signupRef} />
+            <div className="nav_btn_container">
+              <button className="nav_btn" onClick={signupOpenModal} >회원가입</button>
+              <SignUp ref={signupRef} />
             </div>
           </div>
         )}
