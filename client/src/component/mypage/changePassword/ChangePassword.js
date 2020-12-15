@@ -63,7 +63,7 @@ function ChangePassword(props) {
   }, [password])
 
   const [pwDouble, setPwDouble] = useState("");
-  const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
+  const [pwDoubleMsg, setPwDoubleMsg] = useState("");
   const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
   const onChangePwDoubleCk = e => {
     setPwDouble(e.target.value);
@@ -84,35 +84,41 @@ function ChangePassword(props) {
 
   }, [password, pwDouble])
 
-
-  useEffect(() => {
-    console.log(document.getElementsByClassName("change_btn")[0].disabled);
-    if (pwCheck && pwDoubleCheck) {
-      if (currentPw === props.pw && password === pwDouble) {
-        document.getElementsByClassName("change_btn")[0].disabled = false;
-      }
-      else {
-        document.getElementsByClassName("change_btn")[0].disabled = true;
-      }
-    }
-  }, [currentPw, password, pwDouble, pwCheck, pwDoubleCheck])
-
   const dispatch = useDispatch();
   const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
 
   const changePassword = () => {
     const userData = { id: props.id, password: password };
-    console.log('a');
-    axios
-      .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
-      .then(data => {
-        if (data) {
-          onPassword();
-          alert("비밀번호 변경이 완료되었습니다.")
-        }
-      }).catch(err => {
-        console.log(err);
-      })
+
+    if (pwCheck && pwDoubleCheck) {
+      if (currentPw === props.pw && password === pwDouble) {
+        axios
+          .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
+          .then(data => {
+            if (data) {
+              onPassword();
+              alert("비밀번호 변경이 완료되었습니다.")
+              setCurrentPw('');
+              document.getElementsByClassName('current_pw')[0].value = '';
+              setCurrentPwMsg('');
+              setPassword('');
+              document.getElementsByClassName('change_pw')[0].value = '';
+              setPwCheckMsg('');
+              setPwDouble('');
+              document.getElementsByClassName('change_pw_check')[0].value = '';
+              setPwDoubleMsg('');
+            }
+          }).catch(err => {
+            console.log(err);
+          })
+      }
+      else {
+        alert("아직 비밀번호를 변경하실 수 없습니다. 정보를 확인해주세요.")
+      }
+    }
+    else {
+      alert("아직 비밀번호를 변경하실 수 없습니다. 정보를 확인해주세요.")
+    }
   }
 
   return (
@@ -139,7 +145,7 @@ function ChangePassword(props) {
       </div>
 
       <div className="change_btn_wrap">
-        <button className="change_btn" onClick={changePassword} disabled>변경하기</button>
+        <button className="change_btn" onClick={changePassword}>변경하기</button>
       </div>
 
     </div>

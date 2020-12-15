@@ -115,7 +115,7 @@ const Signin = forwardRef((props, ref) => {
 		if (!id) {
 			setIsLogInMsg("아이디를 입력해주세요.");
 		}
-		if (id && !password) {
+		else if (id && !password) {
 			setIsLogInMsg("비밀번호를 입력해주세요.");
 		}
 		else {
