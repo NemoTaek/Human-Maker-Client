@@ -72,7 +72,7 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idAvailable) {
 			axios
-				.post("http://54.180.120.81:5000/checkusername", { id: id })
+				.post("https://humanmaker.ml/signup/idDoubleCheck", { id: id })
 				.then(res => {
 					if (res.status === 200) {
 						console.log(res);
@@ -152,7 +152,7 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idCheck && pwCheck && pwDoubleCheck) {
 			axios
-				.post("http://54.180.120.81:5000/signUp", userData)
+				.post("https://humanmaker.ml/signup", userData)
 				.then((res) => {
 					if (res.status === 201) {
 						alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
@@ -187,32 +187,32 @@ const Signup = forwardRef((props, ref) => {
 							<p className="sign_up_name" >회원가입</p>
 
 							<div className="input_container_wrap">
-								
+
 								<div className="sign_up_idInput_container">
 									<span>아이디</span>
-									<input className={idCheckMsg==="error" ? "sign_up_idInput" : (idCheck ? "successInput" :"falseInput")} 
-													type="text" onChange={onChangeId} autoFocus required />
+									<input className={idCheckMsg === "error" ? "sign_up_idInput" : (idCheck ? "successInput" : "falseInput")}
+										type="text" onChange={onChangeId} autoFocus required />
 									<button className="idCheck_btn" onClick={onClickDoubleBtn}>중복확인</button>
-									<div className={idCheckMsg==="error" ? "none_checkMsg" :(idCheckMsg === "사용 가능한 아이디 입니다." ? "successMsg" : "falseMsg")}>
+									<div className={idCheckMsg === "error" ? "none_checkMsg" : (idCheckMsg === "사용 가능한 아이디 입니다." ? "successMsg" : "falseMsg")}>
 										<p>{idCheckMsg}</p>
 									</div>
 								</div>
-							
-		
+
+
 								<div className="sign_up_input_container">
 									<span>비밀번호</span>
-									<input className={pwCheckMsg==="error" ? "sign_up_pwInput" : (pwCheck ? "successPwInput" : "falsePwInput")} 
-													type="password" onChange={onChangePw} required />
-									<div className={pwCheckMsg==="error" ? "none_checkMsg" :(pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg" : "falseMsg")}>
+									<input className={pwCheckMsg === "error" ? "sign_up_pwInput" : (pwCheck ? "successPwInput" : "falsePwInput")}
+										type="password" onChange={onChangePw} required />
+									<div className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg" : "falseMsg")}>
 										<p>{pwCheckMsg}</p>
 									</div>
 								</div>
-			
+
 								<div className="sign_up_input_container">
 									<span>비밀번호 확인</span>
-									<input className={pwDoubleMsg==="error" ? "sign_up_pwInput" : (pwDoubleCheck ? "successPwInput" :"falsePwInput")}
-													type="password" onChange={onChangePwDoubleCk} required />
-									<div className={pwDoubleMsg==="error" ? "none_checkMsg" :(pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg" : "falseMsg")}>
+									<input className={pwDoubleMsg === "error" ? "sign_up_pwInput" : (pwDoubleCheck ? "successPwInput" : "falsePwInput")}
+										type="password" onChange={onChangePwDoubleCk} required />
+									<div className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg" : "falseMsg")}>
 										<p>{pwDoubleMsg}</p>
 									</div>
 								</div>
@@ -225,7 +225,7 @@ const Signup = forwardRef((props, ref) => {
 								</div>
 							</div>
 
-							
+
 						</div>
 					</div>
 

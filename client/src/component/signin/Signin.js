@@ -29,7 +29,7 @@ const Signin = forwardRef((props, ref) => {
 
 	const signupOpenModal = () => {
 		signupRef.current.signupOpen();
-  }
+	}
 
 
 	const openLogin = () => {
@@ -97,7 +97,7 @@ const Signin = forwardRef((props, ref) => {
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
 		axios
-			.post("http://54.180.120.81:5000/signIn", userData)
+			.post("https://humanmaker.ml/signin", userData)
 			.then(data => {
 				if (data) {
 					onId();	// input에 있는 id를 store에 저장
@@ -122,10 +122,10 @@ const Signin = forwardRef((props, ref) => {
 			setIsLogInMsg("");
 		}
 
-		onId();
-		onPassword(); // 추후에 테스트, 현재 오류
-		props.onLogin();
-		closeLogin();
+		// onId();
+		// onPassword();
+		// props.onLogin();
+		// closeLogin();
 	}
 
 	const responseGoogle = (res) => {
@@ -180,9 +180,9 @@ const Signin = forwardRef((props, ref) => {
 				<div className="sign_in_modalBox">
 					<div className="sign_in_wrap">
 						<div className="sign_in_container">
-							
+
 							<p className="sign_in_name" >로그인</p>
-							
+
 							<div className="input_container_wrap">
 								<div className="input_container">
 									<div className="input_name">
