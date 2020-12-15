@@ -26,7 +26,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 50%;
-  height: 55%;
+  height: 60%;
   width: 30%;
   background-color: white;
   border-radius: 10px;
@@ -100,10 +100,17 @@
 	width: 100%;
 	margin-top: 5px;
 }
-.login_message > p{
-	width: 100%;
-	font-size: 20px;
-	color: red;
+.noneLoginMsg > p{
+  width: 100%;
+  margin-top: 5px;
+	font-size: 14px;
+	visibility: hidden;
+}
+.falseLoginMsg >p {
+  width: 100%;
+  margin-top: 5px;
+  visibility: visible;
+  color:  #e74c3c;;
 }
 /* .btn_wrap{
   text-align: center;
