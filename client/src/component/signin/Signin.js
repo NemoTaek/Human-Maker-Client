@@ -29,7 +29,7 @@ const Signin = forwardRef((props, ref) => {
 
 	const signupOpenModal = () => {
 		signupRef.current.signupOpen();
-  }
+	}
 
 
 	const openLogin = () => {
@@ -57,9 +57,9 @@ const Signin = forwardRef((props, ref) => {
 	}, [display]);
 
 	// const isLogin = useSelector(state => state.login.isLogin);
-	const [isLogInMsg, setIsLogInMsg] = useState("");
+	const [isLogInMsg, setIsLogInMsg] = useState("error");
 
-	const [id, setId] = useState(props.rememberId);
+	const [id, setId] = useState(props.rememberId || "");
 	const [password, setPassword] = useState("");
 
 	const [checkRememberId, setCheckRememberId] = useState(props.isRememberId);
@@ -96,36 +96,55 @@ const Signin = forwardRef((props, ref) => {
 
 	const onClickSignInBtn = () => {
 		const userData = { id: id, password: password };
-		axios
-			.post("http://54.180.120.81:5000/signIn", userData)
-			.then(data => {
-				if (data) {
-					onId();	// input에 있는 id를 store에 저장
-					onPassword();	// input에 있는 password를 store에 저장
-					props.onLogin();	// isLogin을 true로 변환
-					document.location.replace("/");
-				}
-				else {
-					setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
-				}
-			}).catch(err => {
-				console.log(err);
-			})
 
-		if (!id) {
+		if (!id && !password) {
 			setIsLogInMsg("아이디를 입력해주세요.");
 		}
-		if (id && !password) {
+		else if (id && !password) {
 			setIsLogInMsg("비밀번호를 입력해주세요.");
 		}
 		else {
-			setIsLogInMsg("");
+			setIsLogInMsg("error");
 		}
+		// axios
+		// 	.post("https://humanmaker.ml/signin", userData)
+		// 	.then(res => {
+		// 		if (res) {
+		// 			const accessToken = res.data;
+
+		// 			if (document.cookie === "") {
+		// 				document.cookie = `sid=${accessToken.token}`;
+		// 			} else {
+		// 				const compareToken = document.cookie.split("=");
+		// 				if (accessToken.token !== compareToken[1]) {
+		// 					document.cookie = `sid=${accessToken.token}`;
+		// 					console.log("로그인후토큰", accessToken.token);
+		// 					console.log("쿠키저장토큰", compareToken[1]);
+		// 				} else {
+		// 					// console.log("로그인후토큰", accessToken.token);
+		// 					// console.log("쿠키저장토큰", compareToken[1]);
+		// 					console.log("토큰 값이 동일하여 갱신하지 않습니다.");
+		// 				}
+		// 			}
+		// 			onLogin();
+		// 		}
+		// 		else {
+		// 			setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
+		// 		}
+		// 	}).catch(err => {
+		// 		console.log(err);
+		// 	})
 
 		onId();
 		onPassword(); // 추후에 테스트, 현재 오류
 		props.onLogin();
 		closeLogin();
+	}
+	const onLogin = () => {
+		onId();	// input에 있는 id를 store에 저장
+		onPassword();	// input에 있는 password를 store에 저장
+		props.onLogin();	// isLogin을 true로 변환
+		document.location.replace("/goal");
 	}
 
 	const responseGoogle = (res) => {
@@ -180,9 +199,9 @@ const Signin = forwardRef((props, ref) => {
 				<div className="sign_in_modalBox">
 					<div className="sign_in_wrap">
 						<div className="sign_in_container">
-							
+
 							<p className="sign_in_name" >로그인</p>
-							
+
 							<div className="input_container_wrap">
 								<div className="input_container">
 									<div className="input_name">
@@ -203,7 +222,7 @@ const Signin = forwardRef((props, ref) => {
 								<input type="checkbox" checked={checkRememberId} onChange={e => onCheckboxChangeHandler(e)} tabIndex="3" />아이디 기억하기
 										</label>
 
-							<div className="login_message">
+							<div className={isLogInMsg === "error" ? "noneLoginMsg" : (isLogInMsg !== "error" ? "falseLoginMsg" : "noneLoginMsg")}>
 								<p>{isLogInMsg}</p>
 							</div>
 							<div className="btn_wrap">

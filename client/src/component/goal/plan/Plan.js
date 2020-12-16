@@ -1,5 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from "axios";
 import ReactDOM from "react-dom"
 import './Plan.css'
 
@@ -30,21 +31,21 @@ const Plan = forwardRef((props, ref) => {
   const [plan3, setPlan3] = useState('');
 
   const enterPlan = () => {
-    // axios
-    //   .post("http://54.180.120.81:5000/goalSetup", {
-    //     goal: goal,
-    //     subgoal1: plan1,
-    //     subgoal2: plan2,
-    //     subgoal3: plan3,
-    //     userId: id
-    //   })
-    //   .then(data => {
-    //     if (data) {
-    //       console.log(data);
-    //     }
-    //   }).catch(err => {
-    //     console.log(err);
-    //   })
+    axios
+      .post("https://humanmaker.ml/goal/make", {
+        goal: goal,
+        subgoal1: plan1,
+        subgoal2: plan2,
+        subgoal3: plan3,
+        userId: id
+      })
+      .then(data => {
+        if (data) {
+          console.log(data);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
     closeGoal();
   }
 

@@ -1,3 +1,32 @@
+.modalWrapper{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.modalBg{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.3);
+}
+.modalBox{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 50%;
+  height: 55%;
+  width: 30%;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 100;
+}
+
 .input_plan_wrap{
   width: 100%;
   height: 50vh;

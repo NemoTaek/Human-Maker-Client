@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import './ChangePassword.css';
 import axios from 'axios'
+import { userpassword } from "../../../modules/User"
 
 function ChangePassword(props) {
 
@@ -61,7 +63,7 @@ function ChangePassword(props) {
   }, [password])
 
   const [pwDouble, setPwDouble] = useState("");
-  const [pwDoubleMsg, setPwDoubleMsg] = useState(" ");
+  const [pwDoubleMsg, setPwDoubleMsg] = useState("");
   const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
   const onChangePwDoubleCk = e => {
     setPwDouble(e.target.value);
@@ -82,33 +84,42 @@ function ChangePassword(props) {
 
   }, [password, pwDouble])
 
+  const dispatch = useDispatch();
+  const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
 
-  useEffect(() => {
+  const changePassword = () => {
+    const userData = { id: props.id, password: password };
+
     if (pwCheck && pwDoubleCheck) {
       if (currentPw === props.pw && password === pwDouble) {
-        document.getElementsByClassName("change_btn")[0].disabled = false;
+        axios
+          .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
+          .then(data => {
+            if (data) {
+              onPassword();
+              alert("비밀번호 변경이 완료되었습니다.")
+              setCurrentPw('');
+              document.getElementsByClassName('current_pw')[0].value = '';
+              setCurrentPwMsg('');
+              setPassword('');
+              document.getElementsByClassName('change_pw')[0].value = '';
+              setPwCheckMsg('');
+              setPwDouble('');
+              document.getElementsByClassName('change_pw_check')[0].value = '';
+              setPwDoubleMsg('');
+            }
+          }).catch(err => {
+            console.log(err);
+          })
       }
       else {
-        document.getElementsByClassName("change_btn")[0].disabled = true;
+        alert("아직 비밀번호를 변경하실 수 없습니다. 정보를 확인해주세요.")
       }
     }
-  }, [currentPw, password, pwDouble, pwCheck, pwDoubleCheck])
-
-  // const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
-
-  // const changePassword = () => {
-  //   const userData = { id: props.id, password: password };
-  //   axios
-  //     .put("http://54.180.120.81:5000/ChangeMyPassword", userData)
-  //     .then(data => {
-  //       if (data) {
-  //         onPassword();
-  //         alert("비밀번호 변경이 완료되었습니다.")
-  //       }
-  //     }).catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+    else {
+      alert("아직 비밀번호를 변경하실 수 없습니다. 정보를 확인해주세요.")
+    }
+  }
 
   return (
     <div className="change_pw_wrap">
@@ -134,7 +145,7 @@ function ChangePassword(props) {
       </div>
 
       <div className="change_btn_wrap">
-        <button className="change_btn" disabled>변경하기</button>
+        <button className="change_btn" onClick={changePassword}>변경하기</button>
       </div>
 
     </div>
