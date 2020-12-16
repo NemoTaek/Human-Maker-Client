@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import './Goal.css';
 import Plan from './plan/Plan'
+import calendar from "../../img/calendar1.png"
 
 
 function Goal() {
@@ -12,18 +13,18 @@ function Goal() {
 
   const id = useSelector(state => state.User.id);
   useEffect(() => {
-    axios
-      .post("https://humanmaker.ml/goal", { userId: id })
-      .then(data => {
-        if (data) {
-          console.log(data);
-        }
-        else {
-          alert("새 목표를 만들어야 합니다.");
-        }
-      }).catch(err => {
-        console.log(err);
-      })
+    // axios
+    //   .post("https://humanmaker.ml/goal", { id: id })
+    //   .then(data => {
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //     else {
+    //       alert("새 목표를 만들어야 합니다.");
+    //     }
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
   })
 
   const goalRef = useRef();
@@ -70,7 +71,8 @@ function Goal() {
     <div className="goal">
       <div className="calendar_wrap">
         <div className="calendar_title">내 계획표</div>
-        <table className="calendar" border="1">
+        <img src={calendar} alt=""></img>
+        <table className="calendar" frame="void">
           <tr>
             <td>1</td>
             <td>2</td>
