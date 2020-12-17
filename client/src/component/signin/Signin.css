@@ -26,25 +26,25 @@
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 50%;
-  height: 60%;
-  width: 30%;
+  min-width: 20%;
+  height: auto;
+  width: 25%;
   background-color: white;
   border-radius: 10px;
   z-index: 100;
 }
 .sign_in_wrap{
-  margin: auto;
+  height: auto;
   width: 100%;
   padding: 5%;
  	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
 }
 
 .sign_in_container{
+  height: auto;
 	width: 90%;
   padding: 1vw;
-
 }
 
 .sign_in_name{
