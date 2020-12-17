@@ -7,51 +7,62 @@
 
 .goal .calendar_wrap{
   width: 45%;
-  border: 1px solid #000000;
-  padding: 20px;
-  margin: 20px;
+  margin: 2%;
+  position: relative;
 }
 .goal .calendar_wrap > img{
   width: 100%;
   height: 100%;
 }
 
-.goal .calendar_wrap .calendar_title{
-  width: 100%;
-  text-align: center;
-  font-size: 30px;
-}
-
 .goal .calendar_wrap .calendar{
-  width: 100%;
+  width: 82%;
   text-align: center;
   margin-top: 20px;
   border-collapse: collapse;
   border: none;
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 22%;
+  left: 8%;
 }
-/* .goal .calendar_wrap .calendar > tr{
-  
-} */
-.goal .calendar_wrap .calendar > tr > td{
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
+
+.goal .calendar_wrap .calendar > tbody > tr > td{
+  width: 13px;
+  height: 32px;
+  font-size: 15px;
+}
+.goal .calendar_wrap .calendar > tbody > tr > td > img{
+  width: 100%;
+  height: 100%;
 }
 
 .goal .goal_wrap{
   width: 45%;
-  border: 1px solid #000000;
-  padding: 20px;
-  margin: 20px;
+  /* border: 1px solid #000000; */
+  padding: 2%;
+  margin: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goal .goal_wrap .goal_btn{
+  width: 70%;
+  height: 100px;
+  font-size: 40px;
 }
 
 .view_plan_wrap{
+  width: 80%;
   text-align: center;
+  border: 1px solid #000000;
+  padding: 5%;
 }
 
 .view_plan_wrap .view_plan_title_wrap{
   margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #000000;
 }
 
 .view_plan_wrap .view_plan_title_wrap .plan_title{
@@ -63,15 +74,28 @@
 }
 
 .view_plan_wrap .plan_detail_wrap{
+  text-align: left;
   margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #000000;
 }
 
 .view_plan_wrap .plan_detail_wrap .plan_detail{
-  display: block;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  /* height: 30px; */
+  margin-bottom: 10px;
 }
 .view_plan_wrap .plan_detail_wrap .plan_detail > input{
+  width: 20px;
+  /* height: 20px; */
   margin-right: 10px;
+}
+.view_plan_wrap .plan_detail_wrap .plan_detail > span{
+  width: 90%;
+  font-size: 20px;
+  /* height: 30px; */
+  line-height: 30px;
 }
 
 .view_plan_wrap .completed_wrap{
@@ -83,9 +107,10 @@
   width: 100px;
   height: 30px;
   float: left;
+  font-size: 20px;
 }
 .view_plan_wrap .completed_wrap .completed_rate{
   float: right;
   line-height: 30px;
-  font-size: 30px;
+  font-size: 20px;
 }

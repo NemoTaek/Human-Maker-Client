@@ -9,7 +9,7 @@ function MyGoals() {
   const id = useSelector(state => state.User.id);
   useEffect(() => {
     axios
-      .post("https://humanmaker.ml/mypage/myTodoLists", { id: id })
+      .post("http://localhost:5000/mypage/myTodoLists", { id: id })
       .then(data => {
         if (data) {
           console.log(data);

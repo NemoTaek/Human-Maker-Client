@@ -12,11 +12,6 @@ function ChangePassword(props) {
     setCurrentPw(e.target.value);
   }
   useEffect(() => {
-    // let num = password.search(/[0-9]/g);
-    // let eng = password.search(/[a-z]/ig);
-    let spe = /[~!@#$%^&*()_+|<>?:{}]/gi;
-    let test = spe.test(password)
-
     if (!currentPw) {
       setCurrentPwMsg("")
     }
@@ -93,7 +88,7 @@ function ChangePassword(props) {
     if (pwCheck && pwDoubleCheck) {
       if (currentPw === props.pw && password === pwDouble) {
         axios
-          .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
+          .put("http://localhost:5000/mypage/ChangeMyPassword", userData)
           .then(data => {
             if (data) {
               onPassword();

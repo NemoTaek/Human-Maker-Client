@@ -11,7 +11,7 @@ function MyCharacters() {
   const id = useSelector(state => state.User.id);
   useEffect(() => {
     axios
-      .post("https://humanmaker.ml/mypage/myCharacterCards", { id: id })
+      .post("http://localhost:5000/mypage/myCharacterCards", { id: id })
       .then(data => {
         if (data) {
           console.log(data);

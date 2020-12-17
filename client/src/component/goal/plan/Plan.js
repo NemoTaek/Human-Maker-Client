@@ -1,5 +1,5 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import ReactDOM from "react-dom"
 import './Plan.css'
@@ -32,12 +32,12 @@ const Plan = forwardRef((props, ref) => {
 
   const enterPlan = () => {
     axios
-      .post("https://humanmaker.ml/goal/make", {
+      .post("http://localhost:5000/goal/make", {
         goal: goal,
         subgoal1: plan1,
         subgoal2: plan2,
         subgoal3: plan3,
-        userId: id
+        id: id
       })
       .then(data => {
         if (data) {
@@ -47,6 +47,7 @@ const Plan = forwardRef((props, ref) => {
         console.log(err);
       })
     closeGoal();
+    window.location.reload();
   }
 
   const onChangeGoal = e => {
@@ -71,7 +72,7 @@ const Plan = forwardRef((props, ref) => {
 
           <div className="input_plan_wrap">
             <div className="plan_title_wrap">
-              <p className="plan_title">&lt; 오늘의 목표 &gt;</p>
+              <p className="plan_title">&lt; 100일의 목표 &gt;</p>
               <input className="input_plan_title" onChange={onChangeGoal}></input>
             </div>
 
