@@ -5,6 +5,9 @@ import Main from './component/main/Main'
 import Goal from './component/goal/Goal'
 import Nav from './component/nav/Nav'
 import Mypage from './component/mypage/Mypage'
+import ChangePassword from "./component/mypage/changePassword/ChangePassword";
+import Chronicles from "./component/mypage/chronicles/Chronicles"
+
 
 function App() {
   return (
@@ -14,11 +17,19 @@ function App() {
       </header>
       <div className="contents">
         <Switch>
+          <Route path="/myPage/passwordChange">
+            <ChangePassword/>
+          </Route>
+
+          <Route path="/myPage/chronicles">
+            <Chronicles/>
+          </Route>
+
           <Route path="/goal" >
             <Goal />
           </Route>
 
-          <Route path="/mypage" >
+          <Route path="/myPage" >
             <Mypage />
           </Route>
 

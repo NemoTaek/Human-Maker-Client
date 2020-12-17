@@ -15,7 +15,7 @@ import storage from 'redux-persist/lib/storage'
 import rootReducer from "../../modules"
 import logger from 'redux-logger';
 
-function Mypage() {
+function Mypage(props) {
   const persistConfig = {
     key: 'root',
     storage
@@ -64,8 +64,11 @@ function Mypage() {
   return (
     <div className="mypage_wrap">
       <div className="me">
-        <p>마이페이지</p>
-        <img src={bear} alt=""></img>
+        <p>현재 상태 : {props.completed < 90 || props.completed >= 0  ? "진화중.." : "진화 완료"} </p>
+        
+      </div>
+      <div>
+      <img src={bear} alt=""></img>
       </div>
 
       <div className="mypage_contents_wrap">
