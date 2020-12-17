@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './Mypage.css';
 import bear from "../../img/bear.png"
 import ChangePassword from "./changePassword/ChangePassword"
