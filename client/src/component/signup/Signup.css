@@ -27,8 +27,8 @@
 	left: 50%;
 	transform: translate(-50%,-50%);
 	min-height: 30%;
-	height: 50%;
-	width: 30%;
+	height: auto;
+	width: 25%;
 	background-color: white;
 	border-radius: 10px;
 	z-index: 100;
@@ -38,8 +38,7 @@
   width: 100%;
   padding: 5%;
  	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
 }
 .sign_up_container{
 	width: 90%;

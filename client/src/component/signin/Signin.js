@@ -106,45 +106,54 @@ const Signin = forwardRef((props, ref) => {
 		else {
 			setIsLogInMsg("error");
 		}
-		// axios
-		// 	.post("https://humanmaker.ml/signin", userData)
-		// 	.then(res => {
-		// 		if (res) {
-		// 			const accessToken = res.data;
+		axios
+			.post("https://humanmaker.ml/signin", userData)
+			.then(res => {
+				if (res) {
+					const accessToken = res.data;
+					console.log(accessToken)
+					if (document.cookie === "") {
+						document.cookie = `sid=${accessToken.token}`;
+						console.log(accessToken.token)
+					}
+					else {
+						const compareToken = document.cookie.split("=");
+						if (accessToken.token !== compareToken[1]) {
+							document.cookie = `sid=${accessToken.token}`;
+							// console.log("로그인후토큰", accessToken.token);
+							// console.log("쿠키저장토큰", compareToken[1]);
+						} 
+						else {
+							// console.log("로그인후토큰", accessToken.token);
+							// console.log("쿠키저장토큰", compareToken[1]);
+							console.log("토큰 값이 동일하여 갱신하지 않습니다.");
+						}
+					}
+					login(accessToken);
+				}
+				else {
+					setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 
-		// 			if (document.cookie === "") {
-		// 				document.cookie = `sid=${accessToken.token}`;
-		// 			} else {
-		// 				const compareToken = document.cookie.split("=");
-		// 				if (accessToken.token !== compareToken[1]) {
-		// 					document.cookie = `sid=${accessToken.token}`;
-		// 					console.log("로그인후토큰", accessToken.token);
-		// 					console.log("쿠키저장토큰", compareToken[1]);
-		// 				} else {
-		// 					// console.log("로그인후토큰", accessToken.token);
-		// 					// console.log("쿠키저장토큰", compareToken[1]);
-		// 					console.log("토큰 값이 동일하여 갱신하지 않습니다.");
-		// 				}
-		// 			}
-		// 			onLogin();
-		// 		}
-		// 		else {
-		// 			setIsLogInMsg("등록되지 않은 아이디 또는 잘못 된 비밀번호 입니다.");
-		// 		}
-		// 	}).catch(err => {
-		// 		console.log(err);
-		// 	})
-
-		onId();
-		onPassword(); // 추후에 테스트, 현재 오류
-		props.onLogin();
-		closeLogin();
+		// onId();
+		// onPassword(); // 추후에 테스트, 현재 오류
+		// props.onLogin();
+		// closeLogin();
 	}
-	const onLogin = () => {
+	const login = (accessToken) => {
+		axios.
+				defaults.headers.common[
+					"Authorization"
+				] = `Bearer ${accessToken.token}`;
+				console.log("axiosHeaders : ", axios.defaults.headers.common.Authorization);
+
 		onId();	// input에 있는 id를 store에 저장
 		onPassword();	// input에 있는 password를 store에 저장
 		props.onLogin();	// isLogin을 true로 변환
-		document.location.replace("/goal");
+		// document.location.replace("/goal");
 	}
 
 	const responseGoogle = (res) => {
