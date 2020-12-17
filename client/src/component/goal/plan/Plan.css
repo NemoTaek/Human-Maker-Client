@@ -20,8 +20,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 50%;
-  height: 55%;
-  width: 30%;
+  /* height: 55%; */
+  width: 35%;
   background-color: white;
   border-radius: 10px;
   z-index: 100;
@@ -46,22 +46,26 @@
   margin-bottom: 20px;
 }
 .input_plan_wrap .plan_title_wrap > input{
-  height: 30px;
-  font-size: 20px;
+  height: 50px;
+  font-size: 30px;
   text-align: center;
 }
 
 .input_plan_wrap .plan_detail_wrap{
+  width: 100%;
   margin-top: 10px;
   text-align: center;
 }
 .input_plan_wrap .plan_detail_wrap > span{
-  margin: 20px 20px 0 0;
+  width: 28%;
+  margin-right: 2%;
   font-size: 15px;
 }
 .input_plan_wrap .plan_detail_wrap > input{
+  width: 70%;
   height: 30px;
   font-size: 20px;
+  padding-left: 2%;
 }
 
 .input_plan_wrap .plan_btn{

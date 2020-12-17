@@ -72,7 +72,7 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idAvailable) {
 			axios
-				.post("https://humanmaker.ml/signup/idDoubleCheck", { id: id })
+				.post("http://localhost:5000/signup/idDoubleCheck", { id: id })
 				.then(res => {
 					if (res.status === 200) {
 						console.log(res);
@@ -83,7 +83,6 @@ const Signup = forwardRef((props, ref) => {
 						console.log(res);
 						setIdCheckMsg("사용 가능한 아이디 입니다.");
 						setIdCheck(true);
-						console.log(idCheck);
 					}
 				}).catch(err => {
 					console.log(err);
@@ -152,7 +151,7 @@ const Signup = forwardRef((props, ref) => {
 		e.preventDefault();
 		if (idCheck && pwCheck && pwDoubleCheck) {
 			axios
-				.post("https://humanmaker.ml/signup", userData)
+				.post("http://localhost:5000/signup", userData)
 				.then((res) => {
 					if (res.status === 201) {
 						alert("가입 되었습니다. 로그인 후 사용 가능합니다.");
