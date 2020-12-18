@@ -21,7 +21,7 @@ const Signout = forwardRef((props, ref) => {
 	const closeModal = () => {
 		setDisplay(false);
 		axios
-			.get("http://localhost:5000/signout")
+			.get("https://humanmaker.ml/signout")
 			.then(res => {
 				if (res.status === 205) {
 					props.onLogout();

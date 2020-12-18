@@ -153,7 +153,7 @@ const Signin = forwardRef((props, ref) => {
 		onId();	// input에 있는 id를 store에 저장
 		onPassword();	// input에 있는 password를 store에 저장
 		props.onLogin();	// isLogin을 true로 변환
-		// document.location.replace("/goal");
+		document.location.replace("/goal");
 	}
 
 	const responseGoogle = (res) => {
@@ -185,7 +185,7 @@ const Signin = forwardRef((props, ref) => {
 	const naverLogin = () => {
 		const responseNaver = new naver.LoginWithNaverId({
 			clientId: naverAPI,
-			callbackUrl: "http://localhost:3000/",
+			callbackUrl: "https://humanmaker.ml/",
 			isPopup: false,
 			loginButton: {
 				color: "green",

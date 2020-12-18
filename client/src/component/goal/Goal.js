@@ -18,7 +18,7 @@ function Goal() {
   const id = useSelector(state => state.User.id);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/goal", {
+      .get("https://humanmaker.ml/goal", {
         params: {
           id: id
         }
@@ -104,7 +104,7 @@ function Goal() {
     if (count === input.length) {
       // document.getElementsByClassName("completed_btn")[0].disabled = false;
       axios
-        .post("http://localhost:5000/goal", {
+        .post("https://humanmaker.ml/goal", {
           id: id
         })
         .then(data => {

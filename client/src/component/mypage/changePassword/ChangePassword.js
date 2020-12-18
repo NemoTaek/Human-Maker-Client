@@ -3,17 +3,20 @@ import { useDispatch } from 'react-redux';
 import './ChangePassword.css';
 import axios from 'axios'
 import { userpassword } from "../../../modules/User"
+import cloud1 from "../../../img/cloud1.png"
+import middleCloud from "../../../img/middlecloud.png"
 
 function ChangePassword(props) {
 
   const [currentPw, setCurrentPw] = useState("");
-  const [currentPwMsg, setCurrentPwMsg] = useState("");
+  const [currentPwMsg, setCurrentPwMsg] = useState("error");
+
   const onChangeCurrentPw = e => {
     setCurrentPw(e.target.value);
   }
   useEffect(() => {
     if (!currentPw) {
-      setCurrentPwMsg("")
+      setCurrentPwMsg("error")
     }
     else if (currentPw === props.pw) {
       setCurrentPwMsg("현재 비밀번호와 일치합니다.");
@@ -24,8 +27,9 @@ function ChangePassword(props) {
   }, [currentPw])
 
   const [password, setPassword] = useState("");
-  const [pwCheckMsg, setPwCheckMsg] = useState("");
+  const [pwCheckMsg, setPwCheckMsg] = useState("error");
   const [pwCheck, setPwCheck] = useState(false);
+
   const onChangePw = e => {
     setPassword(e.target.value);
   }
@@ -36,7 +40,7 @@ function ChangePassword(props) {
     let test = spe.test(password)
 
     if (!password) {
-      setPwCheckMsg("");
+      setPwCheckMsg("error");
       setPwCheck(false);
     }
     else if (password.length < 8) {
@@ -58,14 +62,15 @@ function ChangePassword(props) {
   }, [password])
 
   const [pwDouble, setPwDouble] = useState("");
-  const [pwDoubleMsg, setPwDoubleMsg] = useState("");
+  const [pwDoubleMsg, setPwDoubleMsg] = useState("error");
   const [pwDoubleCheck, setPwDoubleCheck] = useState(false);
+
   const onChangePwDoubleCk = e => {
     setPwDouble(e.target.value);
   }
   useEffect(() => {
     if (!password || !pwDouble) {
-      setPwDoubleMsg("");
+      setPwDoubleMsg("error");
       setPwDoubleCheck(false);
     }
     else if (pwDouble === password) {
@@ -93,15 +98,15 @@ function ChangePassword(props) {
             if (data) {
               onPassword();
               alert("비밀번호 변경이 완료되었습니다.")
-              setCurrentPw('');
-              document.getElementsByClassName('current_pw')[0].value = '';
-              setCurrentPwMsg('');
-              setPassword('');
-              document.getElementsByClassName('change_pw')[0].value = '';
-              setPwCheckMsg('');
-              setPwDouble('');
-              document.getElementsByClassName('change_pw_check')[0].value = '';
-              setPwDoubleMsg('');
+              setCurrentPw("");
+              document.getElementsByClassName('current_pw')[0].value = "";
+              setCurrentPwMsg("");
+              setPassword("");
+              document.getElementsByClassName('change_pw')[0].value = "";
+              setPwCheckMsg("");
+              setPwDouble("");
+              document.getElementsByClassName('change_pw_check')[0].value = "";
+              setPwDoubleMsg("");
             }
           }).catch(err => {
             console.log(err);
@@ -117,32 +122,51 @@ function ChangePassword(props) {
   }
 
   return (
-    <div className="change_pw_wrap">
-
-      <div className="input_wrap">
-        <span>아이디: </span>
-        <input className="id" type="text" defaultValue={props.id} autoFocus required readOnly></input>
-      </div>
-      <div className="input_wrap">
-        <span>현재 비밀번호: </span>
-        <input className="current_pw" type="password" onChange={onChangeCurrentPw} required></input>
-        <p className="checkMsg">{currentPwMsg}</p>
-      </div>
-      <div className="input_wrap">
-        <span>변경할 비밀번호: </span>
-        <input className="change_pw" type="password" onChange={onChangePw} required></input>
-        <p className="checkMsg">{pwCheckMsg}</p>
-      </div>
-      <div className="input_wrap">
-        <span>비밀번호 확인: </span>
-        <input className="change_pw_check" type="password" onChange={onChangePwDoubleCk} required></input>
-        <p className="checkMsg">{pwDoubleMsg}</p>
+    <div className="change_pw_container">
+      
+      <div className="middlecloud_wrap">
+        <img className="middlecloud" src={middleCloud} alt="" />
       </div>
 
-      <div className="change_btn_wrap">
-        <button className="change_btn" onClick={changePassword}>변경하기</button>
-      </div>
+      <div className="change_pw_height">
+        <div className="change_pw_wrap">
 
+          <div className="change_name">
+            <p>비밀번호 변경</p>
+          </div>
+          
+          <div className="input_wrap">
+            <label>아이디: </label>
+            <div className="id" >{props.id}</div>
+          </div>
+
+          <div className="input_wrap">
+            <label>현재 비밀번호: </label>
+            <input className="current_pw" type="password" onChange={onChangeCurrentPw} required></input>
+            <p className={currentPwMsg === "error" ? "none_checkMsg" : (currentPwMsg === "현재 비밀번호와 일치합니다." ? "successMsg": "falseMsg")} >{currentPwMsg}</p>
+          </div>
+
+          <div className="input_wrap">
+            <label>새 비밀번호: </label>
+            <input className="change_pw" type="password" onChange={onChangePw} required></input>
+            <p className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg": "falseMsg")}>{pwCheckMsg}</p>
+          </div>
+
+          <div className="input_wrap">
+            <label>새 비밀번호 확인: </label>
+            <input className="change_pw_check" type="password" onChange={onChangePwDoubleCk} required></input>
+            <p className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg": "falseMsg")}>{pwDoubleMsg}</p>
+          </div>
+
+          <div className="change_btn_wrap">
+            <button className="change_btn" onClick={changePassword}>변경하기</button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="cloud1_wrap">
+        <img className="cloud" src={cloud1} alt="" />
+      </div>
     </div>
   );
 }
