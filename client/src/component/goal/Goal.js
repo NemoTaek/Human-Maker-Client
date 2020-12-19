@@ -8,8 +8,6 @@ import calendar from "../../img/calendar7.png"
 
 function Goal() {
 
-  // const viewGoal = useSelector(state => state.plan.goalTitle);
-  // const viewPlan = useSelector(state => state.plan.planContents);
   let goal = "";
   let subgoal1 = "";
   let subgoal2 = "";
@@ -272,7 +270,7 @@ function Goal() {
 
         <div className="view_plan_wrap">
           <div className="view_plan_title_wrap">
-            <p className="plan_title">&lt; 오늘의 목표 &gt;</p>
+            <p className="plan_title">오늘의 목표</p>
             <p className="view_plan_title"></p>
           </div>
 

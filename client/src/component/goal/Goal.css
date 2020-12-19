@@ -9,6 +9,7 @@
   width: 45%;
   margin: 2%;
   position: relative;
+  box-shadow: 8px 10px 16px #afafaf;
 }
 .goal .calendar_wrap > img{
   width: 100%;
@@ -38,7 +39,6 @@
 
 .goal .goal_wrap{
   width: 45%;
-  /* border: 1px solid #000000; */
   padding: 2%;
   margin: 2%;
   display: flex;
@@ -50,13 +50,26 @@
   width: 70%;
   height: 100px;
   font-size: 40px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+.goal .goal_wrap .goal_btn:hover{
+  color: #000;
+  background-color: rgb(190, 231, 238);
+}
+.goal .goal_wrap .goal_btn:active{
+  color: #000;
+  background-color: rgb(243, 171, 89);
 }
 
 .view_plan_wrap{
+  display: none;
   width: 80%;
-  text-align: center;
   border: 1px solid #000000;
   padding: 5%;
+  box-shadow: 8px 10px 16px #afafaf;
 }
 
 .view_plan_wrap .view_plan_title_wrap{
@@ -66,11 +79,14 @@
 }
 
 .view_plan_wrap .view_plan_title_wrap .plan_title{
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  border-bottom: 2px solid black;
   margin-bottom: 20px;
 }
 .view_plan_wrap .view_plan_title_wrap .view_plan_title{
-  font-size: 30px;
+  font-size: 40px;
+  font-weight: 800;
 }
 
 .view_plan_wrap .plan_detail_wrap{
@@ -104,13 +120,26 @@
 }
 
 .view_plan_wrap .completed_wrap .completed_btn{
-  width: 100px;
-  height: 30px;
+  width: 150px;
+  height: 50px;
   float: left;
   font-size: 20px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
 }
+.view_plan_wrap .completed_wrap .completed_btn:hover{
+  color: #000;
+  background-color: rgb(190, 231, 238);
+}
+.view_plan_wrap .completed_wrap .completed_btn:active{
+  color: #000;
+  background-color: rgb(243, 171, 89);
+}
+
 .view_plan_wrap .completed_wrap .completed_rate{
   float: right;
-  line-height: 30px;
+  line-height: 50px;
   font-size: 20px;
 }

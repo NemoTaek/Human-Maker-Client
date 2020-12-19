@@ -93,7 +93,7 @@ function ChangePassword(props) {
     if (pwCheck && pwDoubleCheck) {
       if (currentPw === props.pw && password === pwDouble) {
         axios
-          .put("http://localhost:5000/mypage/ChangeMyPassword", userData)
+          .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
           .then(data => {
             if (data) {
               onPassword();
@@ -123,7 +123,7 @@ function ChangePassword(props) {
 
   return (
     <div className="change_pw_container">
-      
+
       <div className="middlecloud_wrap">
         <img className="middlecloud" src={middleCloud} alt="" />
       </div>
@@ -134,7 +134,7 @@ function ChangePassword(props) {
           <div className="change_name">
             <p>비밀번호 변경</p>
           </div>
-          
+
           <div className="input_wrap">
             <label>아이디: </label>
             <div className="id" >{props.id}</div>
@@ -143,19 +143,19 @@ function ChangePassword(props) {
           <div className="input_wrap">
             <label>현재 비밀번호: </label>
             <input className="current_pw" type="password" onChange={onChangeCurrentPw} required></input>
-            <p className={currentPwMsg === "error" ? "none_checkMsg" : (currentPwMsg === "현재 비밀번호와 일치합니다." ? "successMsg": "falseMsg")} >{currentPwMsg}</p>
+            <p className={currentPwMsg === "error" ? "none_checkMsg" : (currentPwMsg === "현재 비밀번호와 일치합니다." ? "successMsg" : "falseMsg")} >{currentPwMsg}</p>
           </div>
 
           <div className="input_wrap">
             <label>새 비밀번호: </label>
             <input className="change_pw" type="password" onChange={onChangePw} required></input>
-            <p className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg": "falseMsg")}>{pwCheckMsg}</p>
+            <p className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg" : "falseMsg")}>{pwCheckMsg}</p>
           </div>
 
           <div className="input_wrap">
             <label>새 비밀번호 확인: </label>
             <input className="change_pw_check" type="password" onChange={onChangePwDoubleCk} required></input>
-            <p className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg": "falseMsg")}>{pwDoubleMsg}</p>
+            <p className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg" : "falseMsg")}>{pwDoubleMsg}</p>
           </div>
 
           <div className="change_btn_wrap">
@@ -163,7 +163,7 @@ function ChangePassword(props) {
           </div>
         </div>
       </div>
-      
+
       <div className="cloud1_wrap">
         <img className="cloud" src={cloud1} alt="" />
       </div>
