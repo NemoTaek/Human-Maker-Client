@@ -9,6 +9,9 @@ import SignIn from "../signin/Signin";
 import SignUp from "../signup/Signup"
 
 function Nav() {
+  
+
+
   const logoutRef = useRef();
   const loginRef = useRef();
   const signupRef = useRef();
@@ -30,11 +33,14 @@ function Nav() {
   const isLogin = useSelector(state => state.login.isLogin)
   const rememberId = useSelector(state => state.User.id);
   const isRememberId = useSelector(state => state.login.isRememberId);
+  
   const dispatch = useDispatch();
   const onLogin = useCallback(() => dispatch(login()), [dispatch])
   const onLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const onRememberId = useCallback(() => dispatch(rememberid()), [dispatch])
   const onForgotId = useCallback(() => dispatch(forgotid()), [dispatch])
+
+  // onLogout()
 
   return (
     <nav className="nav">
@@ -52,8 +58,13 @@ function Nav() {
             <SignOut onLogout={onLogout} ref={logoutRef} />
           </div>
 
-          <div className="menu">
-            <NavLink to="/mypage">마이페이지</NavLink>
+          <div>
+            <div className="menu" >마이페이지
+              <ul className="mypage_list">
+                <li className="list"><NavLink to="/mypage/passwordChange">비밀번호변경</NavLink> </li>
+                <li className="list"><NavLink to="/mypage/chronicles">나의 연대기</NavLink></li>
+              </ul>
+            </div>
           </div>
         </div>
       ) : (

@@ -8,8 +8,6 @@ import calendar from "../../img/calendar7.png"
 
 function Goal() {
 
-  // const viewGoal = useSelector(state => state.plan.goalTitle);
-  // const viewPlan = useSelector(state => state.plan.planContents);
   let goal = "";
   let subgoal1 = "";
   let subgoal2 = "";
@@ -18,7 +16,7 @@ function Goal() {
   const id = useSelector(state => state.User.id);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/goal", {
+      .get("https://humanmaker.ml/goal", {
         params: {
           id: id
         }
@@ -104,7 +102,7 @@ function Goal() {
     if (count === input.length) {
       // document.getElementsByClassName("completed_btn")[0].disabled = false;
       axios
-        .post("http://localhost:5000/goal", {
+        .post("https://humanmaker.ml/goal", {
           id: id
         })
         .then(data => {
@@ -272,7 +270,7 @@ function Goal() {
 
         <div className="view_plan_wrap">
           <div className="view_plan_title_wrap">
-            <p className="plan_title">&lt; 오늘의 목표 &gt;</p>
+            <p className="plan_title">오늘의 목표</p>
             <p className="view_plan_title"></p>
           </div>
 
