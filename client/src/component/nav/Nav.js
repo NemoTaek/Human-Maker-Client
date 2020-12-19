@@ -30,7 +30,7 @@ function Nav() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
-  const isLogin = useSelector(state => state.login.isLogin)
+  const isLogin = useSelector(state => state.login.isLogin);
   const rememberId = useSelector(state => state.User.id);
   const isRememberId = useSelector(state => state.login.isRememberId);
   
@@ -61,7 +61,7 @@ function Nav() {
           <div>
             <div className="menu" >마이페이지
               <ul className="mypage_list">
-                <li className="list"><NavLink to="/mypage/passwordChange">비밀번호변경</NavLink> </li>
+                <li className="list"><NavLink to="/mypage/passwordChange" >비밀번호변경</NavLink> </li>
                 <li className="list"><NavLink to="/mypage/chronicles">나의 연대기</NavLink></li>
               </ul>
             </div>
