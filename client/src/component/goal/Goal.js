@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import './Goal.css';
 import Plan from './plan/Plan'
-import calendar from "../../img/calendar7.png"
+import calendar from "../../img/calendar9.png"
 
 
 function Goal() {

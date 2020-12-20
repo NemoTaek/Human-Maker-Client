@@ -22,7 +22,6 @@ function Chronicles() {
     })
   }, [])
 
-  console.log(userData);
   return (
 
     <div className="chron_container" >
@@ -41,12 +40,12 @@ function Chronicles() {
           {userData !== '완료된 todo 리스트가 없음' ? (
             <table className="chron_table">
 
-              <thead>
-                <tr>
-                  <th>시작일</th>
-                  <th>종료일</th>
-                  <th>목표</th>
-                  <th>달성률(%)</th>
+              <thead className="thead">
+                <tr className="tr">
+                  <th className="th">시작일</th>
+                  <th className="th">종료일</th>
+                  <th className="th">목표</th>
+                  <th className="th">달성률(%)</th>
                 </tr>
               </thead>
 

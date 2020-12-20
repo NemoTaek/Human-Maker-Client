@@ -6,7 +6,7 @@
 }
 
 .goal .calendar_wrap{
-  width: 45%;
+  width: 32%;
   margin: 2%;
   position: relative;
   box-shadow: 8px 10px 16px #afafaf;
@@ -23,15 +23,15 @@
   border-collapse: collapse;
   border: none;
   position: absolute;
-  top: 22%;
+  top: 22.5%;
   left: 8%;
-  table-layout: fixed;
 }
 
 .goal .calendar_wrap .calendar > tbody > tr > td{
   width: 3vw;
-  height: 3.5vh;
+  height: 3.3vh;
   font-size: 15px;
+  padding: 0;
 }
 .goal .calendar_wrap .calendar > tbody > tr > td > img{
   width: 100%;
