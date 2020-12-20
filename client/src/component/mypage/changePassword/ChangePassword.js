@@ -129,7 +129,7 @@ function ChangePassword() {
 
   return (
     <div className="change_pw_container">
-      
+
       <div className="middlecloud_wrap">
         <img className="middlecloud" src={middleCloud} alt="" />
       </div>
@@ -169,7 +169,7 @@ function ChangePassword() {
           </div>
         </div>
       </div>
-      
+
       <div className="cloud1_wrap">
         <img className="cloud" src={cloud1} alt="" />
       </div>
