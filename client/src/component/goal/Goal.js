@@ -23,7 +23,6 @@ function Goal() {
       })
       .then(data => {
         if (data) {
-
           // 목표 및 세부 목표 출력
           goal = data.data.goal;
           subgoal1 = data.data.subgoal1;
