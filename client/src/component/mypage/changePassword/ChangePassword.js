@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './ChangePassword.css';
 import axios from 'axios'
 import { userpassword } from "../../../modules/User"
 import cloud1 from "../../../img/cloud1.png"
 import middleCloud from "../../../img/middlecloud.png"
 
-function ChangePassword(props) {
+function ChangePassword() {
+  const rememberId = useSelector(state => state.User.id);
+  const rememberPw = useSelector(state => state.User.password);
 
   const [currentPw, setCurrentPw] = useState("");
   const [currentPwMsg, setCurrentPwMsg] = useState("error");
@@ -18,11 +20,11 @@ function ChangePassword(props) {
     if (!currentPw) {
       setCurrentPwMsg("error")
     }
-    else if (currentPw === props.pw) {
-      setCurrentPwMsg("현재 비밀번호와 일치합니다.");
+    else if (currentPw === rememberPw) {
+      setCurrentPwMsg("비밀번호가 일치합니다.");
     }
     else {
-      setCurrentPwMsg("현재 비밀번호와 일치하지 않습니다.");
+      setCurrentPwMsg("비밀번호를 다시 확인해주세요.");
     }
   }, [currentPw])
 
@@ -88,25 +90,29 @@ function ChangePassword(props) {
   const onPassword = () => dispatch(userpassword(password));	// input에 있는 password를 store에 저장
 
   const changePassword = () => {
-    const userData = { id: props.id, password: password };
+    const userData = { id: rememberId, password: password };
 
     if (pwCheck && pwDoubleCheck) {
-      if (currentPw === props.pw && password === pwDouble) {
+      if (currentPw === rememberPw && password === pwDouble) {
         axios
           .put("https://humanmaker.ml/mypage/ChangeMyPassword", userData)
           .then(data => {
             if (data) {
               onPassword();
+
               alert("비밀번호 변경이 완료되었습니다.")
-              setCurrentPw("");
-              document.getElementsByClassName('current_pw')[0].value = "";
-              setCurrentPwMsg("");
-              setPassword("");
-              document.getElementsByClassName('change_pw')[0].value = "";
-              setPwCheckMsg("");
-              setPwDouble("");
-              document.getElementsByClassName('change_pw_check')[0].value = "";
-              setPwDoubleMsg("");
+              // setCurrentPw("");
+              // document.getElementsByClassName('change_pw_input')[0].value = "";
+              // setCurrentPwMsg("error");
+
+              // setPassword("");
+              // document.getElementsByClassName('change_pw_input')[1].value = "";
+              // setPwCheckMsg("error");
+
+              // setPwDouble("");
+              // document.getElementsByClassName('change_pw_input')[2].value = "";
+              // setPwDoubleMsg("error");
+              document.location.replace("/goal");
             }
           }).catch(err => {
             console.log(err);
@@ -134,28 +140,28 @@ function ChangePassword(props) {
           <div className="change_name">
             <p>비밀번호 변경</p>
           </div>
-
-          <div className="input_wrap">
+          
+          <div className="userId_value">
             <label>아이디: </label>
-            <div className="id" >{props.id}</div>
+            <div className="id" >{rememberId}</div>
           </div>
 
           <div className="input_wrap">
             <label>현재 비밀번호: </label>
-            <input className="current_pw" type="password" onChange={onChangeCurrentPw} required></input>
-            <p className={currentPwMsg === "error" ? "none_checkMsg" : (currentPwMsg === "현재 비밀번호와 일치합니다." ? "successMsg" : "falseMsg")} >{currentPwMsg}</p>
+            <input className="change_pw_input" type="password" onChange={onChangeCurrentPw} required autoFocus></input>
+            <p className={currentPwMsg === "error" ? "none_checkMsg" : (currentPwMsg === "비밀번호가 일치합니다." ? "successMsg": "falseMsg")} >{currentPwMsg}</p>
           </div>
 
           <div className="input_wrap">
             <label>새 비밀번호: </label>
-            <input className="change_pw" type="password" onChange={onChangePw} required></input>
-            <p className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg" : "falseMsg")}>{pwCheckMsg}</p>
+            <input className="change_pw_input" type="password" onChange={onChangePw} required></input>
+            <p className={pwCheckMsg === "error" ? "none_checkMsg" : (pwCheckMsg === "사용가능한 비밀번호 입니다." ? "successMsg": "falseMsg")}>{pwCheckMsg}</p>
           </div>
 
           <div className="input_wrap">
             <label>새 비밀번호 확인: </label>
-            <input className="change_pw_check" type="password" onChange={onChangePwDoubleCk} required></input>
-            <p className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg" : "falseMsg")}>{pwDoubleMsg}</p>
+            <input className="change_pw_input" type="password" onChange={onChangePwDoubleCk} required></input>
+            <p className={pwDoubleMsg === "error" ? "none_checkMsg" : (pwDoubleMsg === "비밀번호가 일치합니다." ? "successMsg": "falseMsg")}>{pwDoubleMsg}</p>
           </div>
 
           <div className="change_btn_wrap">
