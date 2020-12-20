@@ -25,11 +25,12 @@
   position: absolute;
   top: 22%;
   left: 8%;
+  table-layout: fixed;
 }
 
 .goal .calendar_wrap .calendar > tbody > tr > td{
-  width: 13px;
-  height: 32px;
+  width: 4vw;
+  height: 4vh;
   font-size: 15px;
 }
 .goal .calendar_wrap .calendar > tbody > tr > td > img{
