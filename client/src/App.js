@@ -21,9 +21,9 @@ function App() {
             <ChangePassword/>
           </Route>
 
-          {/* <Route path="/myPage/chronicles">
+          <Route path="/mypage/myTodoLists">
             <Chronicles/>
-          </Route> */}
+          </Route>
 
           <Route path="/goal" >
             <Goal />
