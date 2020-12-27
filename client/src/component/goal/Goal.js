@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import './Goal.css';
 import Plan from './plan/Plan'
-import calendar from "../../img/calendar7.png"
+import calendar from "../../img/calendar9.png"
 
 
 function Goal() {
@@ -23,8 +23,6 @@ function Goal() {
       })
       .then(data => {
         if (data) {
-          console.log(data);
-
           // 목표 및 세부 목표 출력
           goal = data.data.goal;
           subgoal1 = data.data.subgoal1;
