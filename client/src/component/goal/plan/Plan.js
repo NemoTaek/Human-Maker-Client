@@ -30,9 +30,13 @@ const Plan = forwardRef((props, ref) => {
   const [plan2, setPlan2] = useState('');
   const [plan3, setPlan3] = useState('');
 
-  const enterPlan = () => {
-    axios
-      .post("http://localhost:5000/goal/make", {
+  const enterPlan = async() => {
+    console.log(goal)
+    console.log(plan1)
+    console.log(plan2)
+    console.log(plan3)
+    await axios
+      .post("https://humanmaker.ml/goal/make", {
         goal: goal,
         subgoal1: plan1,
         subgoal2: plan2,
